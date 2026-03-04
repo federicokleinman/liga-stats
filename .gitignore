@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# cache
-.cache/
+# cache — NO ignorar, los datos se commitean para que el deploy no tenga que reingestar
+# .cache/
