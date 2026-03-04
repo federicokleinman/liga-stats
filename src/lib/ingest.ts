@@ -125,11 +125,39 @@ function extractDivisional(serieName: string, useNumbers: boolean): string {
     const m = serieName.match(/SERIE\s*"(\d+)"/i);
     return m ? m[1] : '';
   }
-  // Letter-based
-  const m = serieName.match(/(?:DIVISIONAL|DIVISIONAL|DIV\.?|CLASIFICATORIO)\s*"?\s*([A-I])\s*"?/i);
+  // Letter-based — ordered from most specific to least specific to avoid false positives.
+  // IMPORTANT: "DIV\.?" (bare) is intentionally NOT used as an alternation because inside
+  // misspelled "DIVISONAL" it matches "DIV" at position 0 and then greedily captures the
+  // following "I" as the divisional letter (false positive).
+
+  // 1. DIVISIONAL / DIVISONAL / DIViSIONAL — full-word match, handles common API typos.
+  //    Pattern: DIVIS + 1-2 chars from [IO] + NAL, then optional non-quote chars, then quoted letter.
+  let m = serieName.match(/DIVIS[IO]{1,2}NAL[^"]*"(?:PS)?\s*([A-I])/i);
   if (m) return m[1].toUpperCase();
+
+  // 2. DIV.X (no quotes around letter) — e.g. "S20DIV.C.SERIE" where C is the divisional.
+  //    Must come before the SERIE check so that DIV.C.SERIE"A" returns C, not A.
+  //    No \b here: "S20DIV" has a digit before DIV so \b wouldn't fire.
+  m = serieName.match(/DIV\.([A-I])[\s".]/i);
+  if (m) return m[1].toUpperCase();
+
+  // 3. DIV."X" — abbreviated with mandatory period + quotes — e.g. 'DIV."C" COPA'.
+  m = serieName.match(/\bDIV\.\s*"([A-I])/i);
+  if (m) return m[1].toUpperCase();
+
+  // 4. CLASIFICATORIO "PSX" (Pre Senior format) or CLASIFICATORIO "X" (Mayores).
+  m = serieName.match(/CLASIFICATORIO[^"]*"(?:PS)?\s*([A-I])/i);
+  if (m) return m[1].toUpperCase();
+
+  // 5. Serie " A " / Pre-Senior Serie " A " (early seasons T94-T95).
+  //    Only reached when none of the DIVISIONAL/DIV patterns matched above.
+  m = serieName.match(/\bSERIE\s*"\s*([A-I])\s*"/i);
+  if (m) return m[1].toUpperCase();
+
+  // 6. Simple "A-" format (very early seasons).
   const simple = serieName.match(/^([A-I])-$/i);
   if (simple) return simple[1].toUpperCase();
+
   return '';
 }
 

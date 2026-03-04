@@ -1239,12 +1239,12 @@
         "teamId": "salesianos-de-las-piedras",
         "nombre": "Salesianos De Las Piedras",
         "campeonatos": 3,
-        "temporadas": 24,
+        "temporadas": 23,
         "totalPuntos": 488,
         "totalPJ": 344,
         "totalGF": 557,
         "totalGC": 539,
-        "promedioPuntos": 20.333333333333332,
+        "promedioPuntos": 21.217391304347824,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -1375,7 +1375,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 2,
             "puntos": 33
           },
@@ -3657,12 +3657,12 @@
         "teamId": "club-estudiantes-ingenieria",
         "nombre": "Club Estudiantes Ingenieria",
         "campeonatos": 0,
-        "temporadas": 23,
+        "temporadas": 22,
         "totalPuntos": 344,
         "totalPJ": 316,
         "totalGF": 426,
         "totalGC": 573,
-        "promedioPuntos": 14.956521739130435,
+        "promedioPuntos": 15.636363636363637,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -3787,7 +3787,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 7,
             "puntos": 24
           },
@@ -4841,7 +4841,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 15,
             "puntos": 5
           },
@@ -6423,12 +6423,12 @@
         "teamId": "flores-universitario",
         "nombre": "Flores Universitario",
         "campeonatos": 1,
-        "temporadas": 24,
+        "temporadas": 23,
         "totalPuntos": 406,
         "totalPJ": 344,
         "totalGF": 562,
         "totalGC": 698,
-        "promedioPuntos": 16.916666666666668,
+        "promedioPuntos": 17.652173913043477,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -6559,7 +6559,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 4,
             "puntos": 30
           },
@@ -6581,12 +6581,12 @@
         "teamId": "latino-futbol-club",
         "nombre": "Latino Futbol Club",
         "campeonatos": 1,
-        "temporadas": 22,
+        "temporadas": 21,
         "totalPuntos": 400,
         "totalPJ": 304,
         "totalGF": 484,
         "totalGC": 522,
-        "promedioPuntos": 18.181818181818183,
+        "promedioPuntos": 19.047619047619047,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -6705,7 +6705,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 5,
             "puntos": 29
           },
@@ -7295,7 +7295,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 13,
             "puntos": 10
           },
@@ -9885,7 +9885,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 10,
             "puntos": 21
           },
@@ -12357,7 +12357,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 16,
             "puntos": 2
           }
@@ -12513,12 +12513,12 @@
         "teamId": "universidad-de-montevideo",
         "nombre": "Universidad De Montevideo",
         "campeonatos": 0,
-        "temporadas": 13,
+        "temporadas": 12,
         "totalPuntos": 209,
         "totalPJ": 168,
         "totalGF": 304,
         "totalGC": 349,
-        "promedioPuntos": 16.076923076923077,
+        "promedioPuntos": 17.416666666666668,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -12583,7 +12583,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 6,
             "puntos": 29
           },
@@ -14301,12 +14301,12 @@
         "teamId": "deportivo-salto",
         "nombre": "Deportivo Salto",
         "campeonatos": 0,
-        "temporadas": 21,
+        "temporadas": 20,
         "totalPuntos": 444,
         "totalPJ": 307,
         "totalGF": 495,
         "totalGC": 474,
-        "promedioPuntos": 21.142857142857142,
+        "promedioPuntos": 22.2,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -14419,7 +14419,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 3,
             "puntos": 30
           },
@@ -15231,12 +15231,12 @@
         "teamId": "nuestra-senora-de-lourdes",
         "nombre": "Nuestra Señora De Lourdes",
         "campeonatos": 0,
-        "temporadas": 22,
+        "temporadas": 21,
         "totalPuntos": 475,
         "totalPJ": 334,
         "totalGF": 553,
         "totalGC": 521,
-        "promedioPuntos": 21.59090909090909,
+        "promedioPuntos": 22.61904761904762,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -15355,7 +15355,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 8,
             "puntos": 23
           },
@@ -19123,7 +19123,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 14,
             "puntos": 5
           },
@@ -19523,7 +19523,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 9,
             "puntos": 22
           },
@@ -19709,7 +19709,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 11,
             "puntos": 19
           },
@@ -20487,7 +20487,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 12,
             "puntos": 16
           },
@@ -20502,13 +20502,13 @@
       "deportivo-ls-universitario": {
         "teamId": "deportivo-ls-universitario",
         "nombre": "Deportivo Ls Universitario",
-        "campeonatos": 3,
-        "temporadas": 4,
+        "campeonatos": 2,
+        "temporadas": 3,
         "totalPuntos": 109,
         "totalPJ": 46,
         "totalGF": 126,
         "totalGC": 50,
-        "promedioPuntos": 27.25,
+        "promedioPuntos": 36.333333333333336,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -20519,7 +20519,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "F",
             "posicion": 1,
             "puntos": 40
           },
@@ -21643,6 +21643,14 @@
         "divisional": "A",
         "fromTemporada": 108,
         "toTemporada": 109
+      },
+      {
+        "teamId": "la-blanqueada",
+        "nombre": "La Blanqueada",
+        "streak": 2,
+        "divisional": "A",
+        "fromTemporada": 110,
+        "toTemporada": 111
       }
     ],
     "bestSeasons": [
@@ -22025,6 +22033,34 @@
     ],
     "promotionStreaks": [
       {
+        "teamId": "estudiantil-salteno",
+        "nombre": "Estudiantil Salteño",
+        "streak": 4,
+        "fromTemporada": 108,
+        "toTemporada": 112,
+        "path": [
+          "F",
+          "E",
+          "D",
+          "C",
+          "B"
+        ]
+      },
+      {
+        "teamId": "pallotti-universitario",
+        "nombre": "Pallotti Universitario",
+        "streak": 4,
+        "fromTemporada": 108,
+        "toTemporada": 112,
+        "path": [
+          "F",
+          "E",
+          "D",
+          "C",
+          "B"
+        ]
+      },
+      {
         "teamId": "deportivo-matadero",
         "nombre": "Deportivo Matadero",
         "streak": 3,
@@ -22048,6 +22084,45 @@
           "C",
           "B",
           "A"
+        ]
+      },
+      {
+        "teamId": "club-atletico-brazo-oriental",
+        "nombre": "Club Atletico Brazo Oriental",
+        "streak": 3,
+        "fromTemporada": 107,
+        "toTemporada": 110,
+        "path": [
+          "D",
+          "C",
+          "B",
+          "A"
+        ]
+      },
+      {
+        "teamId": "aston-universitario",
+        "nombre": "Aston Universitario",
+        "streak": 3,
+        "fromTemporada": 108,
+        "toTemporada": 111,
+        "path": [
+          "F",
+          "E",
+          "D",
+          "C"
+        ]
+      },
+      {
+        "teamId": "maturana-universitario",
+        "nombre": "Maturana Universitario",
+        "streak": 3,
+        "fromTemporada": 108,
+        "toTemporada": 111,
+        "path": [
+          "F",
+          "E",
+          "D",
+          "C"
         ]
       },
       {
@@ -22075,18 +22150,6 @@
         ]
       },
       {
-        "teamId": "circulo-de-tenis-montevideo",
-        "nombre": "Circulo De Tenis Montevideo",
-        "streak": 2,
-        "fromTemporada": 110,
-        "toTemporada": 112,
-        "path": [
-          "I",
-          "B",
-          "A"
-        ]
-      },
-      {
         "teamId": "olimar",
         "nombre": "Olimar",
         "streak": 2,
@@ -22096,54 +22159,6 @@
           "C",
           "B",
           "A"
-        ]
-      },
-      {
-        "teamId": "ut-serviam",
-        "nombre": "Ut Serviam",
-        "streak": 2,
-        "fromTemporada": 108,
-        "toTemporada": 110,
-        "path": [
-          "F",
-          "E",
-          "D"
-        ]
-      },
-      {
-        "teamId": "perry-sexta-jrs",
-        "nombre": "Perry Sexta Jrs.",
-        "streak": 2,
-        "fromTemporada": 98,
-        "toTemporada": 100,
-        "path": [
-          "C",
-          "B",
-          "A"
-        ]
-      },
-      {
-        "teamId": "argos",
-        "nombre": "Argos",
-        "streak": 2,
-        "fromTemporada": 98,
-        "toTemporada": 100,
-        "path": [
-          "C",
-          "B",
-          "A"
-        ]
-      },
-      {
-        "teamId": "numa-turcatti",
-        "nombre": "Numa Turcatti",
-        "streak": 2,
-        "fromTemporada": 108,
-        "toTemporada": 110,
-        "path": [
-          "D",
-          "C",
-          "B"
         ]
       }
     ],
@@ -22228,7 +22243,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 10,
             "puntos": 19
           },
@@ -22462,7 +22477,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 4,
             "puntos": 28
           },
@@ -22652,7 +22667,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 2,
             "puntos": 35
           },
@@ -23014,7 +23029,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 5,
             "puntos": 27
           },
@@ -23192,7 +23207,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 15,
             "puntos": 9
           }
@@ -23738,7 +23753,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 14,
             "puntos": 14
           },
@@ -23922,7 +23937,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 16,
             "puntos": 1
           },
@@ -24290,7 +24305,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 3,
             "puntos": 34
           },
@@ -24654,7 +24669,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 6,
             "puntos": 23
           },
@@ -25062,7 +25077,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 12,
             "puntos": 17
           },
@@ -25148,7 +25163,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 5,
             "puntos": 26
           },
@@ -25550,7 +25565,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 15,
             "puntos": 5
           },
@@ -25686,7 +25701,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 12,
             "puntos": 17
           },
@@ -26318,7 +26333,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 1,
             "puntos": 35
           },
@@ -26398,7 +26413,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 11,
             "puntos": 18
           },
@@ -26540,7 +26555,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 14,
             "puntos": 15
           },
@@ -26614,7 +26629,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 8,
             "puntos": 21
           },
@@ -26688,7 +26703,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 13,
             "puntos": 17
           },
@@ -27462,7 +27477,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 16,
             "puntos": 4
           },
@@ -27810,7 +27825,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 4,
             "puntos": 30
           },
@@ -27910,7 +27925,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 6,
             "puntos": 26
           },
@@ -27966,7 +27981,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 11,
             "puntos": 18
           },
@@ -28130,7 +28145,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 13,
             "puntos": 15
           },
@@ -28180,7 +28195,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 9,
             "puntos": 22
           }
@@ -28276,7 +28291,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 3,
             "puntos": 30
           },
@@ -28314,7 +28329,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 7,
             "puntos": 24
           },
@@ -28358,7 +28373,7 @@
           },
           {
             "temporadaId": 110,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 8,
             "puntos": 22
           },
@@ -28408,7 +28423,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 7,
             "puntos": 22
           },
@@ -28580,7 +28595,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 9,
             "puntos": 20
           },
@@ -28624,7 +28639,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 1,
             "puntos": 36
           },
@@ -28712,7 +28727,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 2,
             "puntos": 34
           },
@@ -28788,7 +28803,7 @@
           },
           {
             "temporadaId": 111,
-            "divisional": "I",
+            "divisional": "C",
             "posicion": 10,
             "puntos": 19
           },
@@ -29698,8 +29713,7 @@
       "C",
       "D",
       "E",
-      "F",
-      "I"
+      "F"
     ],
     "torneos": [
       "PRE SENIOR"
@@ -30076,7 +30090,7 @@
         "teamId": "old-boys-club",
         "nombre": "Old Boys Club",
         "temporadaId": 95,
-        "divisional": "I",
+        "divisional": "A",
         "pj": 15,
         "value": 0.6,
         "gc": 9
@@ -30559,7 +30573,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 12,
             "puntos": 15
           },
@@ -30675,7 +30689,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 15,
             "puntos": 11
           },
@@ -30725,7 +30739,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 14,
             "puntos": 12
           },
@@ -30945,7 +30959,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 4,
             "puntos": 31
           },
@@ -31055,7 +31069,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 6,
             "puntos": 21
           },
@@ -31257,7 +31271,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 2,
             "puntos": 34
           },
@@ -31361,7 +31375,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 1,
             "puntos": 35
           },
@@ -31411,7 +31425,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 9,
             "puntos": 20
           },
@@ -31725,7 +31739,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 8,
             "puntos": 20
           },
@@ -31885,7 +31899,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 3,
             "puntos": 33
           },
@@ -31995,7 +32009,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 11,
             "puntos": 18
           },
@@ -32373,7 +32387,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 5,
             "puntos": 27
           },
@@ -32931,7 +32945,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 10,
             "puntos": 18
           },
@@ -32981,7 +32995,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 7,
             "puntos": 21
           },
@@ -33085,7 +33099,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 13,
             "puntos": 13
           },
@@ -33117,7 +33131,7 @@
           },
           {
             "temporadaId": 95,
-            "divisional": "I",
+            "divisional": "A",
             "posicion": 16,
             "puntos": 4
           },
@@ -36256,8 +36270,7 @@
     "divisionales": [
       "A",
       "B",
-      "C",
-      "I"
+      "C"
     ],
     "torneos": [
       "Sub - 20"
