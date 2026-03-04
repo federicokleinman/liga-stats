@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Liga Universitaria Stats
 
-## Getting Started
+Métricas históricas de la **Liga Universitaria de Deportes** (Uruguay) — Fútbol, torneo **Mayores Masculino**.
 
-First, run the development server:
+## Cómo correr
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+La primera vez no habrá datos. Hacer click en **"Refrescar Cache"** en el Dashboard para iniciar la ingesta.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuración
 
-## Learn More
+Variables de entorno (opcionales, se pueden poner en `.env.local`):
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Default | Descripción |
+|---|---|---|
+| `TEMPORADA_MIN` | `80` | ID de temporada mínima a consultar |
+| `TEMPORADA_MAX` | `120` | ID de temporada máxima a consultar |
+| `DIVISIONALES` | `A,B,C,D,E,F,G` | Letras de divisionales separadas por coma |
+| `MIN_CONSISTENCY_SEASONS` | `5` | Mínimo de temporadas para métrica de consistencia |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Cambiar rango de temporadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Crear un archivo `.env.local`:
 
-## Deploy on Vercel
+```env
+TEMPORADA_MIN=90
+TEMPORADA_MAX=110
+DIVISIONALES=A,B,C
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Luego refrescar cache desde el Dashboard.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Alias de equipos
+
+Editar `aliases.json` en la raíz del proyecto para mapear variantes de nombres:
+
+```json
+{
+  "NOMBRE ORIGINAL": "Nombre Canónico"
+}
+```
+
+Los alias se aplican durante la ingesta.
+
+## Arquitectura
+
+```
+src/
+  app/
+    page.tsx              # Dashboard con KPIs y rankings
+    equipos/              # Buscador y detalle de equipos
+    temporadas/           # Tablas de posiciones por temporada
+    metodologia/          # Explicación de supuestos
+    api/
+      ingest/route.ts     # POST: trigger ingesta; GET: status
+      data/route.ts       # GET: métricas y standings
+  lib/
+    types.ts              # Tipos TypeScript
+    ingest.ts             # Fetch + rate limit + parse + normalize
+    metrics.ts            # Cálculo de métricas
+    storage.ts            # Cache en disco y memoria
+    normalize.ts          # Normalización de nombres
+    hooks.ts              # React hooks para fetch de datos
+  components/
+    Navigation.tsx        # Nav bar
+    SortableTable.tsx     # Tabla ordenable
+    Card.tsx              # Card de KPI
+    RefreshButton.tsx     # Botón de ingesta
+    TrajectoryChart.tsx   # Gráfico de trayectoria (Recharts)
+```
+
+## Rate Limiting
+
+Se aplica un rate limit de **máximo 2 requests/segundo** al servidor de la Liga Universitaria.
+La ingesta completa del rango default (41 temporadas × 7 divisionales = 287 combinaciones) tarda ~2.5 minutos.
+
+## Advertencias
+
+- Los datos se obtienen del endpoint público de la Liga Universitaria. Usá esta herramienta con responsabilidad.
+- La definición de "campeón" es por puntos en tabla, lo cual puede no coincidir con el formato real (playoffs, etc.).
+- Los ascensos se infieren por cambio de letra de divisional entre temporadas consecutivas.
+- Ver la página **Metodología** en la app para más detalles.
