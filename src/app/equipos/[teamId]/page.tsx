@@ -1,10 +1,13 @@
 'use client';
 
-import { useTeam } from '@/lib/hooks';
+import { Suspense } from 'react';
+import { useTeam, useTorneo } from '@/lib/hooks';
 import { Card } from '@/components/Card';
 import { SortableTable, Column } from '@/components/SortableTable';
 import { TrajectoryChart } from '@/components/TrajectoryChart';
 import { WhatsAppShare } from '@/components/WhatsAppShare';
+import { TorneoSelector } from '@/components/TorneoSelector';
+import { TORNEO_DISPLAY } from '@/lib/types';
 import Link from 'next/link';
 
 interface HistoryRow {
@@ -15,53 +18,54 @@ interface HistoryRow {
   [key: string]: unknown;
 }
 
-export default function TeamDetailPage({ params }: { params: { teamId: string } }) {
-  const { teamId } = params;
-  const { team, loading, error } = useTeam(teamId);
+function TeamDetailContent({ teamId }: { teamId: string }) {
+  const [torneo] = useTorneo();
+  const { team, loading, error } = useTeam(teamId, torneo);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[40vh]">
-        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" />
-      </div>
-    );
+    return <div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>;
   }
 
   if (error || !team) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-400">{error || 'Equipo no encontrado.'}</p>
-        <Link href="/equipos" className="text-blue-400 hover:underline mt-4 inline-block">
-          ← Volver a Equipos
-        </Link>
+      <div className="space-y-6">
+        <div className="flex items-center gap-4">
+          <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
+        </div>
+        <TorneoSelector />
+        <div className="text-center py-12">
+          <p className="text-gray-400">{error || 'Equipo no encontrado en esta categoría.'}</p>
+          <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:underline mt-4 inline-block">← Volver a Equipos</Link>
+        </div>
       </div>
     );
   }
 
   const historyCols: Column<HistoryRow>[] = [
     { key: 'temporadaId', label: 'Temporada', align: 'center' },
-    { key: 'divisional', label: 'Divisional', align: 'center' },
+    { key: 'divisional', label: 'Div.', align: 'center' },
     { key: 'posicion', label: 'Posición', align: 'center' },
     { key: 'puntos', label: 'Puntos', align: 'right' },
   ];
 
   const gfpj = team.totalPJ > 0 ? (team.totalGF / team.totalPJ).toFixed(2) : 'N/A';
   const gcpj = team.totalPJ > 0 ? (team.totalGC / team.totalPJ).toFixed(2) : 'N/A';
+  const displayName = TORNEO_DISPLAY[torneo] ?? torneo;
 
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-4">
-        <Link href="/equipos" className="text-gray-400 hover:text-white transition-colors">
-          ← Equipos
-        </Link>
+        <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
       </div>
+
+      <TorneoSelector />
 
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h1 className="text-3xl font-bold">{team.nombre}</h1>
-          <p className="text-gray-400 mt-1">{team.temporadas} temporadas en la Liga</p>
+          <p className="text-gray-400 mt-1">{team.temporadas} temporadas en {displayName}</p>
         </div>
-        <WhatsAppShare text={`Mirá las estadísticas de ${team.nombre} en la Liga Universitaria`} />
+        <WhatsAppShare text={`Mirá las estadísticas de ${team.nombre} en ${displayName} — Liga Universitaria`} />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -92,11 +96,18 @@ export default function TeamDetailPage({ params }: { params: { teamId: string } 
       <div className="text-center pt-4 border-t border-[#1e293b]">
         <p className="text-gray-500 text-sm">
           Ves algo incorrecto?{' '}
-          <Link href="/contacto" className="text-blue-400 hover:underline">
-            Reportar un error
-          </Link>
+          <Link href="/contacto" className="text-blue-400 hover:underline">Reportar un error</Link>
         </p>
       </div>
     </div>
+  );
+}
+
+export default function TeamDetailPage({ params }: { params: { teamId: string } }) {
+  const { teamId } = params;
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>}>
+      <TeamDetailContent teamId={teamId} />
+    </Suspense>
   );
 }

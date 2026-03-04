@@ -1,6 +1,7 @@
 export interface StandingRow {
   temporadaId: number;
-  divisionalLetra: string;
+  torneo: string;
+  divisional: string; // letter (A-I) for most torneos; number (1-4) for SUB 18 / MÁS 40
   equipoNombre: string;
   equipoNombreNormalizado: string;
   teamId: string;
@@ -22,6 +23,7 @@ export interface CachedData {
   temporadaMin: number;
   temporadaMax: number;
   divisionales: string[];
+  torneos: string[];
 }
 
 export interface TeamSummary {
@@ -100,6 +102,7 @@ export interface ComputedMetrics {
   allTeams: { teamId: string; nombre: string }[];
   allTemporadas: number[];
   divisionales: string[];
+  torneos: string[];
 }
 
 export interface IngestStatus {
@@ -108,3 +111,24 @@ export interface IngestStatus {
   progress?: number;
   total?: number;
 }
+
+// Canonical torneo names as used in the API
+export const TORNEO_NAMES = {
+  MAYORES: 'Mayores Masculino',
+  PRE_SENIOR: 'PRE SENIOR',
+  SUB_20: 'Sub - 20',
+  SUB_18: 'SUB 18 ',
+  MAS_40: 'MÁS 40',
+} as const;
+
+export type TorneoName = (typeof TORNEO_NAMES)[keyof typeof TORNEO_NAMES];
+
+export const TORNEO_DISPLAY: Record<string, string> = {
+  'Mayores Masculino': 'Mayores',
+  'PRE SENIOR': 'Pre Senior',
+  'Sub - 20': 'Sub 20',
+  'SUB 18 ': 'Sub 18',
+  'MÁS 40': 'Más 40',
+};
+
+export const ALL_TORNEOS = Object.values(TORNEO_NAMES);

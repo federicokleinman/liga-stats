@@ -10,11 +10,14 @@ import type {
   PromotionStreak,
 } from './types';
 
-const DIV_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const DIV_ORDER = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
-function divRank(letra: string): number {
-  const idx = DIV_ORDER.indexOf(letra.toUpperCase());
-  return idx === -1 ? 99 : idx;
+// Works for both letter (A→0) and numeric (1→0, 2→1) divisionals. Lower = better.
+function divRank(div: string): number {
+  const letterIdx = DIV_ORDER.indexOf(div.toUpperCase());
+  if (letterIdx !== -1) return letterIdx;
+  const num = parseInt(div, 10);
+  return isNaN(num) ? 99 : num - 1;
 }
 
 function groupBy<T>(arr: T[], keyFn: (item: T) => string): Record<string, T[]> {
@@ -28,7 +31,7 @@ function groupBy<T>(arr: T[], keyFn: (item: T) => string): Record<string, T[]> {
 }
 
 function getChampions(rows: StandingRow[]): Map<string, { teamId: string; nombre: string; temporadaId: number; divisional: string }[]> {
-  const byTD = groupBy(rows, (r) => `${r.temporadaId}|${r.divisionalLetra}`);
+  const byTD = groupBy(rows, (r) => `${r.temporadaId}|${r.divisional}`);
   const champMap = new Map<string, { teamId: string; nombre: string; temporadaId: number; divisional: string }[]>();
 
   for (const [key, group] of Object.entries(byTD)) {
@@ -61,45 +64,23 @@ function computeChampionshipStreaks(
   champMap: Map<string, { teamId: string; nombre: string; temporadaId: number; divisional: string }[]>,
 ): ChampionshipStreak[] {
   const allStreaks: ChampionshipStreak[] = [];
-  const entries = Array.from(champMap.entries());
-
-  for (const [teamId, wins] of entries) {
+  for (const [teamId, wins] of Array.from(champMap.entries())) {
     const byDiv = groupBy(wins, (w) => w.divisional);
     for (const [div, divWins] of Object.entries(byDiv)) {
       const seasons = divWins.map((w) => w.temporadaId).sort((a, b) => a - b);
-      let streak = 1;
-      let start = seasons[0];
-      let bestStreak = 1;
-      let bestStart = seasons[0];
-      let bestEnd = seasons[0];
-
+      let streak = 1, start = seasons[0];
+      let bestStreak = 1, bestStart = seasons[0], bestEnd = seasons[0];
       for (let i = 1; i < seasons.length; i++) {
         if (seasons[i] === seasons[i - 1] + 1) {
           streak++;
-          if (streak > bestStreak) {
-            bestStreak = streak;
-            bestStart = start;
-            bestEnd = seasons[i];
-          }
-        } else {
-          streak = 1;
-          start = seasons[i];
-        }
+          if (streak > bestStreak) { bestStreak = streak; bestStart = start; bestEnd = seasons[i]; }
+        } else { streak = 1; start = seasons[i]; }
       }
-
       if (bestStreak >= 2) {
-        allStreaks.push({
-          teamId,
-          nombre: divWins[0].nombre,
-          streak: bestStreak,
-          divisional: div,
-          fromTemporada: bestStart,
-          toTemporada: bestEnd,
-        });
+        allStreaks.push({ teamId, nombre: divWins[0].nombre, streak: bestStreak, divisional: div, fromTemporada: bestStart, toTemporada: bestEnd });
       }
     }
   }
-
   allStreaks.sort((a, b) => b.streak - a.streak);
   return allStreaks.slice(0, 10);
 }
@@ -109,26 +90,20 @@ function computeBestSeasons(rows: StandingRow[]): BestSeason[] {
     teamId: r.teamId,
     nombre: r.equipoNombreNormalizado,
     temporadaId: r.temporadaId,
-    divisional: r.divisionalLetra,
+    divisional: r.divisional,
     puntos: r.puntos,
-    pj: r.pj,
-    pg: r.pg,
-    pe: r.pe,
-    pp: r.pp,
-    gf: r.gf,
-    gc: r.gc,
+    pj: r.pj, pg: r.pg, pe: r.pe, pp: r.pp, gf: r.gf, gc: r.gc,
   }));
   list.sort((a, b) => b.puntos - a.puntos);
   return list.slice(0, 10);
 }
 
 function computeBestAttack(rows: StandingRow[]): AttackDefenseRecord[] {
-  const valid = rows.filter((r) => r.pj > 0);
-  const mapped = valid.map((r) => ({
+  const mapped = rows.filter((r) => r.pj > 0).map((r) => ({
     teamId: r.teamId,
     nombre: r.equipoNombreNormalizado,
     temporadaId: r.temporadaId,
-    divisional: r.divisionalLetra,
+    divisional: r.divisional,
     pj: r.pj,
     value: r.gf / r.pj,
     gf: r.gf,
@@ -138,12 +113,11 @@ function computeBestAttack(rows: StandingRow[]): AttackDefenseRecord[] {
 }
 
 function computeBestDefense(rows: StandingRow[]): AttackDefenseRecord[] {
-  const valid = rows.filter((r) => r.pj > 0);
-  const mapped = valid.map((r) => ({
+  const mapped = rows.filter((r) => r.pj > 0).map((r) => ({
     teamId: r.teamId,
     nombre: r.equipoNombreNormalizado,
     temporadaId: r.temporadaId,
-    divisional: r.divisionalLetra,
+    divisional: r.divisional,
     pj: r.pj,
     value: r.gc / r.pj,
     gc: r.gc,
@@ -155,9 +129,8 @@ function computeBestDefense(rows: StandingRow[]): AttackDefenseRecord[] {
 function computeConsistency(rows: StandingRow[], minSeasons: number): ConsistencyRecord[] {
   const byTeam = groupBy(rows, (r) => r.teamId);
   const list: ConsistencyRecord[] = [];
-
   for (const [teamId, teamRows] of Object.entries(byTeam)) {
-    const uniqueSeasons = new Set(teamRows.map((r) => `${r.temporadaId}|${r.divisionalLetra}`));
+    const uniqueSeasons = new Set(teamRows.map((r) => `${r.temporadaId}|${r.divisional}`));
     if (uniqueSeasons.size < minSeasons) continue;
     const totalPts = teamRows.reduce((s, r) => s + r.puntos, 0);
     list.push({
@@ -167,7 +140,6 @@ function computeConsistency(rows: StandingRow[], minSeasons: number): Consistenc
       promedioPuntos: totalPts / uniqueSeasons.size,
     });
   }
-
   list.sort((a, b) => b.promedioPuntos - a.promedioPuntos);
   return list.slice(0, 10);
 }
@@ -175,40 +147,28 @@ function computeConsistency(rows: StandingRow[], minSeasons: number): Consistenc
 function computeTeamSummaries(rows: StandingRow[], champMap: Map<string, { temporadaId: number; divisional: string }[]>): Record<string, TeamSummary> {
   const byTeam = groupBy(rows, (r) => r.teamId);
   const summaries: Record<string, TeamSummary> = {};
-
   for (const [teamId, teamRows] of Object.entries(byTeam)) {
     const campeonatos = champMap.get(teamId)?.length || 0;
-    const uniqueSeasons = new Set(teamRows.map((r) => `${r.temporadaId}|${r.divisionalLetra}`));
+    const uniqueSeasons = new Set(teamRows.map((r) => `${r.temporadaId}|${r.divisional}`));
     const totalPuntos = teamRows.reduce((s, r) => s + r.puntos, 0);
     const totalPJ = teamRows.reduce((s, r) => s + r.pj, 0);
     const totalGF = teamRows.reduce((s, r) => s + r.gf, 0);
     const totalGC = teamRows.reduce((s, r) => s + r.gc, 0);
     const mejorPosicion = Math.min(...teamRows.map((r) => r.posicion));
-
     const history = teamRows
-      .map((r) => ({
-        temporadaId: r.temporadaId,
-        divisional: r.divisionalLetra,
-        posicion: r.posicion,
-        puntos: r.puntos,
-      }))
+      .map((r) => ({ temporadaId: r.temporadaId, divisional: r.divisional, posicion: r.posicion, puntos: r.puntos }))
       .sort((a, b) => a.temporadaId - b.temporadaId);
-
     summaries[teamId] = {
       teamId,
       nombre: teamRows[0].equipoNombreNormalizado,
       campeonatos,
       temporadas: uniqueSeasons.size,
-      totalPuntos,
-      totalPJ,
-      totalGF,
-      totalGC,
+      totalPuntos, totalPJ, totalGF, totalGC,
       promedioPuntos: uniqueSeasons.size > 0 ? totalPuntos / uniqueSeasons.size : 0,
       mejorPosicion,
       divisionalHistory: history,
     };
   }
-
   return summaries;
 }
 
@@ -218,48 +178,28 @@ function computePromotionStreaks(rows: StandingRow[]): PromotionStreak[] {
 
   for (const [teamId, teamRows] of Object.entries(byTeam)) {
     const byTemporada = groupBy(teamRows, (r) => String(r.temporadaId));
-    const seasons = Object.keys(byTemporada)
-      .map(Number)
-      .sort((a, b) => a - b);
-
+    const seasons = Object.keys(byTemporada).map(Number).sort((a, b) => a - b);
     if (seasons.length < 2) continue;
 
     const seasonBestDiv = new Map<number, string>();
     for (const s of seasons) {
-      const divs = byTemporada[String(s)].map((r) => r.divisionalLetra);
+      const divs = byTemporada[String(s)].map((r) => r.divisional);
       divs.sort((a, b) => divRank(a) - divRank(b));
       seasonBestDiv.set(s, divs[0]);
     }
 
-    let streak = 0;
-    let start = seasons[0];
+    let streak = 0, start = seasons[0];
     let path: string[] = [];
-    let bestStreak = 0;
-    let bestStart = seasons[0];
-    let bestPath: string[] = [];
+    let bestStreak = 0, bestStart = seasons[0], bestPath: string[] = [];
 
     for (let i = 1; i < seasons.length; i++) {
       const prev = seasonBestDiv.get(seasons[i - 1])!;
       const curr = seasonBestDiv.get(seasons[i])!;
-
       if (seasons[i] === seasons[i - 1] + 1 && divRank(curr) < divRank(prev)) {
-        if (streak === 0) {
-          streak = 1;
-          start = seasons[i - 1];
-          path = [prev, curr];
-        } else {
-          streak++;
-          path.push(curr);
-        }
-        if (streak > bestStreak) {
-          bestStreak = streak;
-          bestStart = start;
-          bestPath = [...path];
-        }
-      } else {
-        streak = 0;
-        path = [];
-      }
+        if (streak === 0) { streak = 1; start = seasons[i - 1]; path = [prev, curr]; }
+        else { streak++; path.push(curr); }
+        if (streak > bestStreak) { bestStreak = streak; bestStart = start; bestPath = [...path]; }
+      } else { streak = 0; path = []; }
     }
 
     if (bestStreak >= 1) {
@@ -278,8 +218,8 @@ function computePromotionStreaks(rows: StandingRow[]): PromotionStreak[] {
   return allStreaks.slice(0, 10);
 }
 
-export function computeAllMetrics(data: CachedData): ComputedMetrics {
-  const { rows } = data;
+export function computeAllMetrics(data: CachedData, torneo: string): ComputedMetrics {
+  const rows = data.rows.filter((r) => r.torneo === torneo);
   const minConsistencySeasons = parseInt(process.env.MIN_CONSISTENCY_SEASONS || '5', 10);
 
   const champMap = getChampions(rows);
@@ -301,19 +241,11 @@ export function computeAllMetrics(data: CachedData): ComputedMetrics {
     .sort((a, b) => a.nombre.localeCompare(b.nombre));
 
   const allTemporadas = Array.from(new Set(rows.map((r) => r.temporadaId))).sort((a, b) => a - b);
-  const divisionales = Array.from(new Set(rows.map((r) => r.divisionalLetra))).sort();
+  const divisionales = Array.from(new Set(rows.map((r) => r.divisional))).sort((a, b) => divRank(a) - divRank(b));
+  const torneos = [torneo];
 
   return {
-    topChampions,
-    championshipStreaks,
-    bestSeasons,
-    bestAttack,
-    bestDefense,
-    consistency,
-    promotionStreaks,
-    teamSummaries,
-    allTeams,
-    allTemporadas,
-    divisionales,
+    topChampions, championshipStreaks, bestSeasons, bestAttack, bestDefense,
+    consistency, promotionStreaks, teamSummaries, allTeams, allTemporadas, divisionales, torneos,
   };
 }

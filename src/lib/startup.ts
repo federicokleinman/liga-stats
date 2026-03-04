@@ -1,13 +1,14 @@
 import {
   loadCachedData,
-  loadMetrics,
+  loadAllMetrics,
   setMemoryCache,
   getMemoryCache,
-  saveMetrics,
+  saveAllMetrics,
 } from './storage';
 import { computeAllMetrics } from './metrics';
 import { ingestAll } from './ingest';
 import type { ComputedMetrics, CachedData } from './types';
+import { TORNEO_NAMES } from './types';
 
 export interface IngestProgress {
   status: 'idle' | 'loading_cache' | 'ingesting' | 'ready' | 'error';
@@ -34,8 +35,20 @@ export function isReady(): boolean {
   return progress.status === 'ready';
 }
 
-export function getData(): { data: CachedData | null; metrics: ComputedMetrics | null } {
+export function getData(): { data: CachedData | null; allMetrics: Record<string, ComputedMetrics> | null } {
   return getMemoryCache();
+}
+
+export function getMetricsForTorneo(torneo: string): ComputedMetrics | null {
+  const { allMetrics } = getMemoryCache();
+  if (!allMetrics) return null;
+  return allMetrics[torneo] ?? null;
+}
+
+export function getAllTorneos(): string[] {
+  const { allMetrics } = getMemoryCache();
+  if (!allMetrics) return [];
+  return Object.keys(allMetrics);
 }
 
 async function tryLoadFromDisk(): Promise<boolean> {
@@ -45,16 +58,22 @@ async function tryLoadFromDisk(): Promise<boolean> {
   const data = await loadCachedData();
   if (!data || data.rows.length === 0) return false;
 
-  let metrics = await loadMetrics();
-  if (!metrics) {
+  let allMetrics = await loadAllMetrics();
+  if (!allMetrics) {
     progress.message = 'Recalculando métricas...';
-    metrics = computeAllMetrics(data);
-    await saveMetrics(metrics);
+    allMetrics = {};
+    const torneos = data.torneos?.length ? data.torneos : [TORNEO_NAMES.MAYORES];
+    for (const torneo of torneos) {
+      allMetrics[torneo] = computeAllMetrics(data, torneo);
+    }
+    await saveAllMetrics(allMetrics);
   }
 
-  setMemoryCache(data, metrics);
+  setMemoryCache(data, allMetrics);
   progress.status = 'ready';
-  progress.message = `Datos cargados: ${data.rows.length} filas, ${metrics.allTeams.length} equipos, ${metrics.allTemporadas.length} temporadas. Cache del ${new Date(data.fetchedAt).toLocaleString('es-UY')}.`;
+  const torneoCount = Object.keys(allMetrics).length;
+  const teamCount = Object.values(allMetrics).reduce((sum, m) => sum + m.allTeams.length, 0);
+  progress.message = `Datos cargados: ${data.rows.length} filas, ${torneoCount} categorías, ~${teamCount} equipos. Cache del ${new Date(data.fetchedAt).toLocaleString('es-UY')}.`;
   return true;
 }
 
@@ -73,7 +92,7 @@ async function runIngestion(): Promise<void> {
     });
 
     progress.status = 'ready';
-    progress.message = `Ingesta completa: ${data.rows.length} filas. ${new Date().toLocaleString('es-UY')}.`;
+    progress.message = `Ingesta completa: ${data.rows.length} filas, ${data.torneos.length} categorías. ${new Date().toLocaleString('es-UY')}.`;
     progress.done = progress.total;
   } catch (err) {
     progress.status = 'error';

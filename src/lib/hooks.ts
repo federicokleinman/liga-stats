@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import type { ComputedMetrics, TeamSummary, StandingRow } from './types';
+import { TORNEO_NAMES } from './types';
 
 export interface IngestProgress {
   status: 'idle' | 'loading_cache' | 'ingesting' | 'ready' | 'error';
@@ -10,7 +12,23 @@ export interface IngestProgress {
   total: number;
 }
 
-export function useMetrics() {
+export function useTorneo(): [string, (t: string) => void] {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const torneo = searchParams.get('torneo') || TORNEO_NAMES.MAYORES;
+
+  const setTorneo = useCallback((t: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('torneo', t);
+    router.push(`${pathname}?${params.toString()}`);
+  }, [searchParams, router, pathname]);
+
+  return [torneo, setTorneo];
+}
+
+export function useMetrics(torneo?: string) {
   const [metrics, setMetrics] = useState<ComputedMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState<IngestProgress | null>(null);
@@ -27,8 +45,11 @@ export function useMetrics() {
   const fetchMetrics = useCallback(async () => {
     setLoading(true);
     setError(null);
+    const params = new URLSearchParams({ view: 'metrics' });
+    if (torneo) params.set('torneo', torneo);
+
     try {
-      const res = await fetch('/api/data?view=metrics');
+      const res = await fetch(`/api/data?${params}`);
 
       if (res.status === 202) {
         const body = await res.json();
@@ -45,7 +66,7 @@ export function useMetrics() {
 
               if (prog.status === 'ready') {
                 stopPolling();
-                const dataRes = await fetch('/api/data?view=metrics');
+                const dataRes = await fetch(`/api/data?${params}`);
                 if (dataRes.ok) {
                   setMetrics(await dataRes.json());
                   setProgress(null);
@@ -69,8 +90,7 @@ export function useMetrics() {
         return;
       }
 
-      const data = await res.json();
-      setMetrics(data);
+      setMetrics(await res.json());
       setProgress(null);
       stopPolling();
     } catch (err) {
@@ -78,7 +98,7 @@ export function useMetrics() {
     } finally {
       setLoading(false);
     }
-  }, [stopPolling]);
+  }, [torneo, stopPolling]);
 
   useEffect(() => {
     fetchMetrics();
@@ -88,7 +108,7 @@ export function useMetrics() {
   return { metrics, loading, error, progress, refetch: fetchMetrics };
 }
 
-export function useTeam(teamId: string) {
+export function useTeam(teamId: string, torneo?: string) {
   const [team, setTeam] = useState<TeamSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -96,8 +116,10 @@ export function useTeam(teamId: string) {
   useEffect(() => {
     async function load() {
       setLoading(true);
+      const params = new URLSearchParams({ view: 'team', teamId });
+      if (torneo) params.set('torneo', torneo);
       try {
-        const res = await fetch(`/api/data?view=team&teamId=${encodeURIComponent(teamId)}`);
+        const res = await fetch(`/api/data?${params}`);
         if (res.status === 202) {
           setError('Los datos se están cargando. Volvé en unos momentos.');
           return;
@@ -115,12 +137,12 @@ export function useTeam(teamId: string) {
       }
     }
     load();
-  }, [teamId]);
+  }, [teamId, torneo]);
 
   return { team, loading, error };
 }
 
-export function useStandings(temporada: number | null, divisional: string | null) {
+export function useStandings(temporada: number | null, divisional: string | null, torneo?: string) {
   const [rows, setRows] = useState<StandingRow[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -129,6 +151,7 @@ export function useStandings(temporada: number | null, divisional: string | null
     setLoading(true);
     const params = new URLSearchParams({ view: 'standings', temporada: String(temporada) });
     if (divisional) params.set('divisional', divisional);
+    if (torneo) params.set('torneo', torneo);
     fetch(`/api/data?${params}`)
       .then((r) => {
         if (r.status === 202) return { rows: [] };
@@ -137,7 +160,7 @@ export function useStandings(temporada: number | null, divisional: string | null
       .then((d) => setRows(d.rows || []))
       .catch(() => setRows([]))
       .finally(() => setLoading(false));
-  }, [temporada, divisional]);
+  }, [temporada, divisional, torneo]);
 
   return { rows, loading };
 }
