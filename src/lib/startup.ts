@@ -1,6 +1,5 @@
 import {
   loadCachedData,
-  loadAllMetrics,
   setMemoryCache,
   getMemoryCache,
   saveAllMetrics,
