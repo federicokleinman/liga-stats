@@ -7,19 +7,14 @@
         "campeonatos": 8
       },
       {
+        "teamId": "old-woodlands-club",
+        "nombre": "Old Woodlands Club",
+        "campeonatos": 7
+      },
+      {
         "teamId": "malvin-59",
         "nombre": "Malvin 59",
         "campeonatos": 6
-      },
-      {
-        "teamId": "old-woodlands-club",
-        "nombre": "Old Woodlands Club",
-        "campeonatos": 6
-      },
-      {
-        "teamId": "racing-universitario",
-        "nombre": "Racing Universitario",
-        "campeonatos": 5
       },
       {
         "teamId": "hebraica-universitario",
@@ -27,8 +22,8 @@
         "campeonatos": 4
       },
       {
-        "teamId": "old-ivy",
-        "nombre": "Old Ivy",
+        "teamId": "racing-universitario",
+        "nombre": "Racing Universitario",
         "campeonatos": 4
       },
       {
@@ -37,18 +32,23 @@
         "campeonatos": 4
       },
       {
+        "teamId": "colegio-santa-elena",
+        "nombre": "Colegio Santa Elena",
+        "campeonatos": 4
+      },
+      {
         "teamId": "santa-elena-lagomar",
         "nombre": "Santa Elena Lagomar",
         "campeonatos": 4
       },
       {
-        "teamId": "club-universidad-catolica",
-        "nombre": "Club Universidad Catolica",
-        "campeonatos": 3
+        "teamId": "old-ivy",
+        "nombre": "Old Ivy",
+        "campeonatos": 4
       },
       {
-        "teamId": "j-m-l-m",
-        "nombre": "J.m.l.m",
+        "teamId": "club-universidad-catolica",
+        "nombre": "Club Universidad Catolica",
         "campeonatos": 3
       }
     ],
@@ -161,6 +161,19 @@
         "gc": 24
       },
       {
+        "teamId": "escuela-militar",
+        "nombre": "Escuela Militar",
+        "temporadaId": 101,
+        "divisional": "G",
+        "puntos": 59,
+        "pj": 22,
+        "pg": 19,
+        "pe": 2,
+        "pp": 1,
+        "gf": 82,
+        "gc": 11
+      },
+      {
         "teamId": "old-woodlands-club",
         "nombre": "Old Woodlands Club",
         "temporadaId": 105,
@@ -211,22 +224,18 @@
         "pp": 1,
         "gf": 49,
         "gc": 22
-      },
-      {
-        "teamId": "tenis-el-pinar",
-        "nombre": "Tenis El Pinar",
-        "temporadaId": 109,
-        "divisional": "A",
-        "puntos": 55,
-        "pj": 22,
-        "pg": 17,
-        "pe": 4,
-        "pp": 1,
-        "gf": 46,
-        "gc": 12
       }
     ],
     "bestAttack": [
+      {
+        "teamId": "old-woodlands-club",
+        "nombre": "Old Woodlands Club",
+        "temporadaId": 98,
+        "divisional": "I",
+        "pj": 11,
+        "value": 5.090909090909091,
+        "gf": 56
+      },
       {
         "teamId": "racing-universitario",
         "nombre": "Racing Universitario",
@@ -253,6 +262,24 @@
         "pj": 7,
         "value": 3.857142857142857,
         "gf": 27
+      },
+      {
+        "teamId": "deportivo-naval",
+        "nombre": "Deportivo Naval",
+        "temporadaId": 98,
+        "divisional": "I",
+        "pj": 11,
+        "value": 3.8181818181818183,
+        "gf": 42
+      },
+      {
+        "teamId": "escuela-militar",
+        "nombre": "Escuela Militar",
+        "temporadaId": 101,
+        "divisional": "G",
+        "pj": 22,
+        "value": 3.727272727272727,
+        "gf": 82
       },
       {
         "teamId": "club-richard-anderson-univ",
@@ -289,33 +316,6 @@
         "pj": 24,
         "value": 3.6666666666666665,
         "gf": 88
-      },
-      {
-        "teamId": "old-woodlands-club",
-        "nombre": "Old Woodlands Club",
-        "temporadaId": 102,
-        "divisional": "G",
-        "pj": 7,
-        "value": 3.4285714285714284,
-        "gf": 24
-      },
-      {
-        "teamId": "cienfar-f-c",
-        "nombre": "Cienfar F.c.",
-        "temporadaId": 102,
-        "divisional": "H",
-        "pj": 7,
-        "value": 3.4285714285714284,
-        "gf": 24
-      },
-      {
-        "teamId": "independiente",
-        "nombre": "Independiente",
-        "temporadaId": 95,
-        "divisional": "G",
-        "pj": 15,
-        "value": 3.4,
-        "gf": 51
       }
     ],
     "bestDefense": [
@@ -374,6 +374,15 @@
         "gc": 11
       },
       {
+        "teamId": "escuela-militar",
+        "nombre": "Escuela Militar",
+        "temporadaId": 101,
+        "divisional": "G",
+        "pj": 22,
+        "value": 0.5,
+        "gc": 11
+      },
+      {
         "teamId": "malvin-59",
         "nombre": "Malvin 59",
         "temporadaId": 95,
@@ -395,15 +404,6 @@
         "teamId": "nacional-universitario",
         "nombre": "Nacional Universitario",
         "temporadaId": 104,
-        "divisional": "A",
-        "pj": 22,
-        "value": 0.5454545454545454,
-        "gc": 12
-      },
-      {
-        "teamId": "tenis-el-pinar",
-        "nombre": "Tenis El Pinar",
-        "temporadaId": 109,
         "divisional": "A",
         "pj": 22,
         "value": 0.5454545454545454,
@@ -448,31 +448,49 @@
         "promedioPuntos": 36.2
       },
       {
+        "teamId": "old-woodlands-club",
+        "nombre": "Old Woodlands Club",
+        "temporadas": 15,
+        "promedioPuntos": 36
+      },
+      {
         "teamId": "young-universitario",
         "nombre": "Young Universitario",
         "temporadas": 9,
         "promedioPuntos": 35.55555555555556
       },
       {
+        "teamId": "casa-armenia",
+        "nombre": "Casa Armenia",
+        "temporadas": 9,
+        "promedioPuntos": 34.55555555555556
+      },
+      {
         "teamId": "hebraica-universitario",
         "nombre": "Hebraica Universitario",
         "temporadas": 20,
         "promedioPuntos": 34.5
-      },
-      {
-        "teamId": "old-woodlands-club",
-        "nombre": "Old Woodlands Club",
-        "temporadas": 14,
-        "promedioPuntos": 34.285714285714285
-      },
-      {
-        "teamId": "central-espanol-f-c",
-        "nombre": "Central Español F.c.",
-        "temporadas": 5,
-        "promedioPuntos": 34.2
       }
     ],
     "promotionStreaks": [
+      {
+        "teamId": "old-woodlands-club",
+        "nombre": "Old Woodlands Club",
+        "streak": 8,
+        "fromTemporada": 100,
+        "toTemporada": 108,
+        "path": [
+          "I",
+          "H",
+          "G",
+          "F",
+          "E",
+          "D",
+          "C",
+          "B",
+          "A"
+        ]
+      },
       {
         "teamId": "santa-elena-lagomar",
         "nombre": "Santa Elena Lagomar",
@@ -499,22 +517,6 @@
         "toTemporada": 101,
         "path": [
           "H",
-          "G",
-          "F",
-          "E",
-          "D",
-          "C",
-          "B",
-          "A"
-        ]
-      },
-      {
-        "teamId": "old-woodlands-club",
-        "nombre": "Old Woodlands Club",
-        "streak": 6,
-        "fromTemporada": 102,
-        "toTemporada": 108,
-        "path": [
           "G",
           "F",
           "E",
@@ -1076,11 +1078,11 @@
         "nombre": "Gomensoro",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 516,
-        "totalPJ": 433,
-        "totalGF": 599,
-        "totalGC": 784,
-        "promedioPuntos": 23.454545454545453,
+        "totalPuntos": 527,
+        "totalPJ": 440,
+        "totalGF": 610,
+        "totalGC": 794,
+        "promedioPuntos": 23.954545454545453,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -1153,7 +1155,7 @@
             "temporadaId": 101,
             "divisional": "D",
             "posicion": 11,
-            "puntos": 17
+            "puntos": 28
           },
           {
             "temporadaId": 103,
@@ -1519,12 +1521,12 @@
         "teamId": "penarol-universitario",
         "nombre": "Peñarol Universitario",
         "campeonatos": 1,
-        "temporadas": 21,
-        "totalPuntos": 590,
-        "totalPJ": 426,
-        "totalGF": 614,
-        "totalGC": 627,
-        "promedioPuntos": 28.095238095238095,
+        "temporadas": 18,
+        "totalPuntos": 483,
+        "totalPJ": 360,
+        "totalGF": 518,
+        "totalGC": 557,
+        "promedioPuntos": 26.833333333333332,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -1564,25 +1566,7 @@
             "puntos": 30
           },
           {
-            "temporadaId": 98,
-            "divisional": "A",
-            "posicion": 2,
-            "puntos": 40
-          },
-          {
-            "temporadaId": 99,
-            "divisional": "A",
-            "posicion": 4,
-            "puntos": 38
-          },
-          {
             "temporadaId": 100,
-            "divisional": "A",
-            "posicion": 8,
-            "puntos": 29
-          },
-          {
-            "temporadaId": 101,
             "divisional": "A",
             "posicion": 8,
             "puntos": 29
@@ -2858,11 +2842,11 @@
         "nombre": "O.c.c Jrs.",
         "campeonatos": 0,
         "temporadas": 12,
-        "totalPuntos": 254,
-        "totalPJ": 228,
-        "totalGF": 303,
-        "totalGC": 404,
-        "promedioPuntos": 21.166666666666668,
+        "totalPuntos": 255,
+        "totalPJ": 235,
+        "totalGF": 311,
+        "totalGC": 424,
+        "promedioPuntos": 21.25,
         "mejorPosicion": 4,
         "divisionalHistory": [
           {
@@ -2934,8 +2918,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 14,
-            "puntos": 10
+            "posicion": 16,
+            "puntos": 11
           }
         ]
       },
@@ -3194,11 +3178,11 @@
         "nombre": "Familiar Universitario",
         "campeonatos": 0,
         "temporadas": 22,
-        "totalPuntos": 520,
-        "totalPJ": 426,
-        "totalGF": 625,
-        "totalGC": 712,
-        "promedioPuntos": 23.636363636363637,
+        "totalPuntos": 524,
+        "totalPJ": 433,
+        "totalGF": 629,
+        "totalGC": 722,
+        "promedioPuntos": 23.818181818181817,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -3270,8 +3254,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 10,
-            "puntos": 17
+            "posicion": 14,
+            "puntos": 21
           },
           {
             "temporadaId": 103,
@@ -3943,12 +3927,12 @@
         "teamId": "estudiantes-espanoles",
         "nombre": "Estudiantes Españoles",
         "campeonatos": 0,
-        "temporadas": 20,
-        "totalPuntos": 471,
-        "totalPJ": 391,
-        "totalGF": 672,
-        "totalGC": 760,
-        "promedioPuntos": 23.55,
+        "temporadas": 18,
+        "totalPuntos": 437,
+        "totalPJ": 347,
+        "totalGF": 620,
+        "totalGC": 669,
+        "promedioPuntos": 24.27777777777778,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -3986,18 +3970,6 @@
             "divisional": "D",
             "posicion": 13,
             "puntos": 24
-          },
-          {
-            "temporadaId": 98,
-            "divisional": "D",
-            "posicion": 15,
-            "puntos": 15
-          },
-          {
-            "temporadaId": 99,
-            "divisional": "E",
-            "posicion": 14,
-            "puntos": 19
           },
           {
             "temporadaId": 100,
@@ -4516,11 +4488,11 @@
         "nombre": "Mossens",
         "campeonatos": 0,
         "temporadas": 22,
-        "totalPuntos": 561,
-        "totalPJ": 439,
-        "totalGF": 656,
-        "totalGC": 731,
-        "promedioPuntos": 25.5,
+        "totalPuntos": 573,
+        "totalPJ": 446,
+        "totalGF": 669,
+        "totalGC": 736,
+        "promedioPuntos": 26.045454545454547,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -4592,8 +4564,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 13,
-            "puntos": 16
+            "posicion": 10,
+            "puntos": 28
           },
           {
             "temporadaId": 103,
@@ -4814,11 +4786,11 @@
         "nombre": "Rangers",
         "campeonatos": 0,
         "temporadas": 12,
-        "totalPuntos": 262,
-        "totalPJ": 228,
-        "totalGF": 329,
-        "totalGC": 399,
-        "promedioPuntos": 21.833333333333332,
+        "totalPuntos": 266,
+        "totalPJ": 235,
+        "totalGF": 334,
+        "totalGC": 414,
+        "promedioPuntos": 22.166666666666668,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -4891,7 +4863,7 @@
             "temporadaId": 101,
             "divisional": "D",
             "posicion": 16,
-            "puntos": 9
+            "puntos": 13
           }
         ]
       },
@@ -4900,11 +4872,11 @@
         "nombre": "Champagnat",
         "campeonatos": 0,
         "temporadas": 15,
-        "totalPuntos": 334,
-        "totalPJ": 291,
-        "totalGF": 394,
-        "totalGC": 487,
-        "promedioPuntos": 22.266666666666666,
+        "totalPuntos": 343,
+        "totalPJ": 298,
+        "totalGF": 403,
+        "totalGC": 498,
+        "promedioPuntos": 22.866666666666667,
         "mejorPosicion": 4,
         "divisionalHistory": [
           {
@@ -4976,8 +4948,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 9,
-            "puntos": 23
+            "posicion": 6,
+            "puntos": 32
           },
           {
             "temporadaId": 103,
@@ -5790,11 +5762,11 @@
         "nombre": "Tacuarembo Universitario",
         "campeonatos": 0,
         "temporadas": 22,
-        "totalPuntos": 576,
-        "totalPJ": 439,
-        "totalGF": 643,
-        "totalGC": 633,
-        "promedioPuntos": 26.181818181818183,
+        "totalPuntos": 585,
+        "totalPJ": 446,
+        "totalGF": 654,
+        "totalGC": 647,
+        "promedioPuntos": 26.59090909090909,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -5866,8 +5838,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 16,
-            "puntos": 8
+            "posicion": 15,
+            "puntos": 17
           },
           {
             "temporadaId": 103,
@@ -6424,11 +6396,11 @@
         "nombre": "Olimar",
         "campeonatos": 2,
         "temporadas": 22,
-        "totalPuntos": 638,
-        "totalPJ": 440,
-        "totalGF": 748,
-        "totalGC": 652,
-        "promedioPuntos": 29,
+        "totalPuntos": 654,
+        "totalPJ": 447,
+        "totalGF": 766,
+        "totalGC": 660,
+        "promedioPuntos": 29.727272727272727,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -6500,8 +6472,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 4,
-            "puntos": 28
+            "posicion": 2,
+            "puntos": 44
           },
           {
             "temporadaId": 103,
@@ -6570,11 +6542,11 @@
         "nombre": "E.l.f.",
         "campeonatos": 0,
         "temporadas": 23,
-        "totalPuntos": 630,
-        "totalPJ": 450,
-        "totalGF": 742,
-        "totalGC": 735,
-        "promedioPuntos": 27.391304347826086,
+        "totalPuntos": 638,
+        "totalPJ": 455,
+        "totalGF": 753,
+        "totalGC": 744,
+        "promedioPuntos": 27.73913043478261,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -6646,8 +6618,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 4,
-            "puntos": 28
+            "posicion": 3,
+            "puntos": 36
           },
           {
             "temporadaId": 102,
@@ -6807,12 +6779,12 @@
         "teamId": "club-estudiantes-ingenieria",
         "nombre": "Club Estudiantes Ingenieria",
         "campeonatos": 0,
-        "temporadas": 22,
-        "totalPuntos": 495,
-        "totalPJ": 427,
-        "totalGF": 620,
-        "totalGC": 780,
-        "promedioPuntos": 22.5,
+        "temporadas": 23,
+        "totalPuntos": 530,
+        "totalPJ": 450,
+        "totalGF": 666,
+        "totalGC": 820,
+        "promedioPuntos": 23.043478260869566,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -6880,6 +6852,12 @@
             "divisional": "H",
             "posicion": 14,
             "puntos": 22
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 9,
+            "puntos": 35
           },
           {
             "temporadaId": 102,
@@ -6952,13 +6930,13 @@
       "racing-universitario": {
         "teamId": "racing-universitario",
         "nombre": "Racing Universitario",
-        "campeonatos": 5,
+        "campeonatos": 4,
         "temporadas": 15,
-        "totalPuntos": 416,
-        "totalPJ": 266,
-        "totalGF": 531,
-        "totalGC": 440,
-        "promedioPuntos": 27.733333333333334,
+        "totalPuntos": 424,
+        "totalPJ": 273,
+        "totalGF": 543,
+        "totalGC": 452,
+        "promedioPuntos": 28.266666666666666,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -7024,8 +7002,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 1,
-            "puntos": 36
+            "posicion": 3,
+            "puntos": 44
           },
           {
             "temporadaId": 103,
@@ -7058,11 +7036,11 @@
         "nombre": "Pre.universitario",
         "campeonatos": 1,
         "temporadas": 14,
-        "totalPuntos": 291,
-        "totalPJ": 257,
-        "totalGF": 347,
-        "totalGC": 509,
-        "promedioPuntos": 20.785714285714285,
+        "totalPuntos": 292,
+        "totalPJ": 264,
+        "totalGF": 350,
+        "totalGC": 530,
+        "promedioPuntos": 20.857142857142858,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -7135,7 +7113,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 16,
-            "puntos": 6
+            "puntos": 7
           },
           {
             "temporadaId": 102,
@@ -7156,11 +7134,11 @@
         "nombre": "Sudamerica Universitario",
         "campeonatos": 0,
         "temporadas": 22,
-        "totalPuntos": 542,
-        "totalPJ": 438,
-        "totalGF": 732,
-        "totalGC": 816,
-        "promedioPuntos": 24.636363636363637,
+        "totalPuntos": 553,
+        "totalPJ": 445,
+        "totalGF": 741,
+        "totalGC": 823,
+        "promedioPuntos": 25.136363636363637,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -7233,7 +7211,7 @@
             "temporadaId": 101,
             "divisional": "E",
             "posicion": 13,
-            "puntos": 13
+            "puntos": 24
           },
           {
             "temporadaId": 103,
@@ -7960,11 +7938,11 @@
         "nombre": "Yaguari",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 591,
-        "totalPJ": 442,
-        "totalGF": 612,
-        "totalGC": 611,
-        "promedioPuntos": 26.863636363636363,
+        "totalPuntos": 596,
+        "totalPJ": 446,
+        "totalGF": 618,
+        "totalGC": 615,
+        "promedioPuntos": 27.09090909090909,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -8036,8 +8014,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 8,
-            "puntos": 22
+            "posicion": 12,
+            "puntos": 27
           },
           {
             "temporadaId": 103,
@@ -8106,11 +8084,11 @@
         "nombre": "Club Seminario",
         "campeonatos": 0,
         "temporadas": 22,
-        "totalPuntos": 651,
-        "totalPJ": 437,
-        "totalGF": 699,
-        "totalGC": 617,
-        "promedioPuntos": 29.59090909090909,
+        "totalPuntos": 661,
+        "totalPJ": 444,
+        "totalGF": 710,
+        "totalGC": 622,
+        "promedioPuntos": 30.045454545454547,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -8182,8 +8160,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 11,
-            "puntos": 17
+            "posicion": 12,
+            "puntos": 27
           },
           {
             "temporadaId": 103,
@@ -8404,11 +8382,11 @@
         "nombre": "X - 13 Universitario",
         "campeonatos": 1,
         "temporadas": 16,
-        "totalPuntos": 340,
-        "totalPJ": 305,
-        "totalGF": 426,
-        "totalGC": 605,
-        "promedioPuntos": 21.25,
+        "totalPuntos": 354,
+        "totalPJ": 312,
+        "totalGF": 445,
+        "totalGC": 612,
+        "promedioPuntos": 22.125,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -8480,8 +8458,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 12,
-            "puntos": 13
+            "posicion": 10,
+            "puntos": 27
           },
           {
             "temporadaId": 103,
@@ -8514,11 +8492,11 @@
         "nombre": "Numa Turcatti",
         "campeonatos": 0,
         "temporadas": 23,
-        "totalPuntos": 602,
-        "totalPJ": 443,
-        "totalGF": 682,
-        "totalGC": 685,
-        "promedioPuntos": 26.17391304347826,
+        "totalPuntos": 611,
+        "totalPJ": 450,
+        "totalGF": 687,
+        "totalGC": 696,
+        "promedioPuntos": 26.565217391304348,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -8590,8 +8568,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 13,
-            "puntos": 11
+            "posicion": 14,
+            "puntos": 20
           },
           {
             "temporadaId": 102,
@@ -8665,12 +8643,12 @@
         "teamId": "juventud-de-las-piedras",
         "nombre": "Juventud De Las Piedras",
         "campeonatos": 0,
-        "temporadas": 14,
-        "totalPuntos": 300,
-        "totalPJ": 277,
-        "totalGF": 400,
-        "totalGC": 558,
-        "promedioPuntos": 21.428571428571427,
+        "temporadas": 15,
+        "totalPuntos": 340,
+        "totalPJ": 299,
+        "totalGF": 441,
+        "totalGC": 583,
+        "promedioPuntos": 22.666666666666668,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -8740,6 +8718,12 @@
             "puntos": 40
           },
           {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 5,
+            "puntos": 40
+          },
+          {
             "temporadaId": 103,
             "divisional": "F",
             "posicion": 7,
@@ -8764,11 +8748,11 @@
         "nombre": "Argos",
         "campeonatos": 0,
         "temporadas": 17,
-        "totalPuntos": 361,
-        "totalPJ": 330,
-        "totalGF": 463,
-        "totalGC": 652,
-        "promedioPuntos": 21.235294117647058,
+        "totalPuntos": 362,
+        "totalPJ": 337,
+        "totalGF": 468,
+        "totalGC": 671,
+        "promedioPuntos": 21.294117647058822,
         "mejorPosicion": 5,
         "divisionalHistory": [
           {
@@ -8840,8 +8824,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 8,
-            "puntos": 25
+            "posicion": 11,
+            "puntos": 26
           },
           {
             "temporadaId": 103,
@@ -8880,11 +8864,11 @@
         "nombre": "Cafu",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 644,
-        "totalPJ": 441,
-        "totalGF": 783,
-        "totalGC": 706,
-        "promedioPuntos": 29.272727272727273,
+        "totalPuntos": 650,
+        "totalPJ": 448,
+        "totalGF": 789,
+        "totalGC": 721,
+        "promedioPuntos": 29.545454545454547,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -8956,8 +8940,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 6,
-            "puntos": 25
+            "posicion": 8,
+            "puntos": 31
           },
           {
             "temporadaId": 103,
@@ -9025,12 +9009,12 @@
         "teamId": "e-m-a",
         "nombre": "E.m.a.",
         "campeonatos": 0,
-        "temporadas": 14,
-        "totalPuntos": 238,
-        "totalPJ": 252,
-        "totalGF": 337,
-        "totalGC": 498,
-        "promedioPuntos": 17,
+        "temporadas": 15,
+        "totalPuntos": 271,
+        "totalPJ": 274,
+        "totalGF": 369,
+        "totalGC": 522,
+        "promedioPuntos": 18.066666666666666,
         "mejorPosicion": 7,
         "divisionalHistory": [
           {
@@ -9100,6 +9084,12 @@
             "puntos": 33
           },
           {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 7,
+            "puntos": 33
+          },
+          {
             "temporadaId": 102,
             "divisional": "G",
             "posicion": 9,
@@ -9124,11 +9114,11 @@
         "nombre": "Esparta Universitario",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 567,
-        "totalPJ": 439,
-        "totalGF": 671,
-        "totalGC": 762,
-        "promedioPuntos": 25.772727272727273,
+        "totalPuntos": 581,
+        "totalPJ": 446,
+        "totalGF": 684,
+        "totalGC": 769,
+        "promedioPuntos": 26.40909090909091,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -9200,8 +9190,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 15,
-            "puntos": 13
+            "posicion": 13,
+            "puntos": 27
           },
           {
             "temporadaId": 103,
@@ -9422,11 +9412,11 @@
         "nombre": "Sirio Futbol Club",
         "campeonatos": 0,
         "temporadas": 13,
-        "totalPuntos": 289,
-        "totalPJ": 246,
-        "totalGF": 310,
-        "totalGC": 420,
-        "promedioPuntos": 22.23076923076923,
+        "totalPuntos": 299,
+        "totalPJ": 253,
+        "totalGF": 320,
+        "totalGC": 424,
+        "promedioPuntos": 23,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -9499,7 +9489,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 9,
-            "puntos": 18
+            "puntos": 28
           },
           {
             "temporadaId": 103,
@@ -9514,11 +9504,11 @@
         "nombre": "Arquitectura Jrs.",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 653,
-        "totalPJ": 440,
-        "totalGF": 682,
-        "totalGC": 582,
-        "promedioPuntos": 29.681818181818183,
+        "totalPuntos": 664,
+        "totalPJ": 447,
+        "totalGF": 694,
+        "totalGC": 594,
+        "promedioPuntos": 30.181818181818183,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -9590,8 +9580,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 9,
-            "puntos": 21
+            "posicion": 7,
+            "puntos": 32
           },
           {
             "temporadaId": 103,
@@ -9810,13 +9800,13 @@
       "city-park": {
         "teamId": "city-park",
         "nombre": "City Park",
-        "campeonatos": 1,
+        "campeonatos": 2,
         "temporadas": 22,
-        "totalPuntos": 693,
-        "totalPJ": 442,
-        "totalGF": 751,
-        "totalGC": 581,
-        "promedioPuntos": 31.5,
+        "totalPuntos": 708,
+        "totalPJ": 449,
+        "totalGF": 769,
+        "totalGC": 589,
+        "promedioPuntos": 32.18181818181818,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -9888,8 +9878,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 2,
-            "puntos": 30
+            "posicion": 1,
+            "puntos": 45
           },
           {
             "temporadaId": 103,
@@ -9958,11 +9948,11 @@
         "nombre": "Mariscal Nasazzi",
         "campeonatos": 1,
         "temporadas": 22,
-        "totalPuntos": 525,
-        "totalPJ": 415,
-        "totalGF": 674,
-        "totalGC": 823,
-        "promedioPuntos": 23.863636363636363,
+        "totalPuntos": 539,
+        "totalPJ": 422,
+        "totalGF": 687,
+        "totalGC": 832,
+        "promedioPuntos": 24.5,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -10034,8 +10024,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 15,
-            "puntos": 9
+            "posicion": 14,
+            "puntos": 23
           },
           {
             "temporadaId": 103,
@@ -10103,12 +10093,12 @@
         "teamId": "escuela-naval",
         "nombre": "Escuela Naval",
         "campeonatos": 0,
-        "temporadas": 22,
-        "totalPuntos": 475,
-        "totalPJ": 412,
-        "totalGF": 658,
-        "totalGC": 795,
-        "promedioPuntos": 21.59090909090909,
+        "temporadas": 23,
+        "totalPuntos": 507,
+        "totalPJ": 434,
+        "totalGF": 705,
+        "totalGC": 838,
+        "promedioPuntos": 22.043478260869566,
         "mejorPosicion": 5,
         "divisionalHistory": [
           {
@@ -10176,6 +10166,12 @@
             "divisional": "G",
             "posicion": 15,
             "puntos": 19
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 8,
+            "puntos": 32
           },
           {
             "temporadaId": 102,
@@ -10250,11 +10246,11 @@
         "nombre": "Wanderers",
         "campeonatos": 2,
         "temporadas": 22,
-        "totalPuntos": 665,
-        "totalPJ": 437,
-        "totalGF": 638,
-        "totalGC": 564,
-        "promedioPuntos": 30.227272727272727,
+        "totalPuntos": 669,
+        "totalPJ": 444,
+        "totalGF": 644,
+        "totalGC": 577,
+        "promedioPuntos": 30.40909090909091,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -10326,8 +10322,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 12,
-            "puntos": 17
+            "posicion": 15,
+            "puntos": 21
           },
           {
             "temporadaId": 103,
@@ -10396,11 +10392,11 @@
         "nombre": "Rampla Universitario",
         "campeonatos": 0,
         "temporadas": 16,
-        "totalPuntos": 422,
-        "totalPJ": 316,
-        "totalGF": 564,
-        "totalGC": 572,
-        "promedioPuntos": 26.375,
+        "totalPuntos": 428,
+        "totalPJ": 320,
+        "totalGF": 570,
+        "totalGC": 580,
+        "promedioPuntos": 26.75,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -10472,8 +10468,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 6,
-            "puntos": 27
+            "posicion": 5,
+            "puntos": 33
           },
           {
             "temporadaId": 103,
@@ -10684,11 +10680,11 @@
         "nombre": "Kennedy Universitario",
         "campeonatos": 2,
         "temporadas": 21,
-        "totalPuntos": 630,
-        "totalPJ": 419,
-        "totalGF": 734,
-        "totalGC": 667,
-        "promedioPuntos": 30,
+        "totalPuntos": 644,
+        "totalPJ": 426,
+        "totalGF": 746,
+        "totalGC": 674,
+        "promedioPuntos": 30.666666666666668,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -10760,8 +10756,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 12,
-            "puntos": 15
+            "posicion": 9,
+            "puntos": 29
           },
           {
             "temporadaId": 103,
@@ -10823,12 +10819,12 @@
         "teamId": "p-w-montevideo",
         "nombre": "P.w. Montevideo",
         "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 274,
-        "totalPJ": 212,
-        "totalGF": 357,
-        "totalGC": 433,
-        "promedioPuntos": 24.90909090909091,
+        "temporadas": 12,
+        "totalPuntos": 284,
+        "totalPJ": 233,
+        "totalGF": 377,
+        "totalGC": 492,
+        "promedioPuntos": 23.666666666666668,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -10896,6 +10892,12 @@
             "divisional": "F",
             "posicion": 13,
             "puntos": 25
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 15,
+            "puntos": 10
           }
         ]
       },
@@ -10929,12 +10931,12 @@
         "teamId": "america-universitario",
         "nombre": "America Universitario",
         "campeonatos": 1,
-        "temporadas": 19,
-        "totalPuntos": 305,
-        "totalPJ": 302,
-        "totalGF": 426,
-        "totalGC": 607,
-        "promedioPuntos": 16.05263157894737,
+        "temporadas": 22,
+        "totalPuntos": 335,
+        "totalPJ": 349,
+        "totalGF": 474,
+        "totalGC": 741,
+        "promedioPuntos": 15.227272727272727,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -10986,10 +10988,28 @@
             "puntos": 10
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 22,
+            "puntos": 4
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 7,
+            "puntos": 19
+          },
+          {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 20,
             "puntos": 4
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 22,
+            "puntos": 7
           },
           {
             "temporadaId": 103,
@@ -11056,13 +11076,13 @@
       "madrugada-f-c": {
         "teamId": "madrugada-f-c",
         "nombre": "Madrugada F.c",
-        "campeonatos": 1,
+        "campeonatos": 2,
         "temporadas": 22,
-        "totalPuntos": 557,
-        "totalPJ": 416,
-        "totalGF": 648,
-        "totalGC": 691,
-        "promedioPuntos": 25.318181818181817,
+        "totalPuntos": 567,
+        "totalPJ": 420,
+        "totalGF": 660,
+        "totalGC": 694,
+        "promedioPuntos": 25.772727272727273,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -11134,8 +11154,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 2,
-            "puntos": 34
+            "posicion": 1,
+            "puntos": 44
           },
           {
             "temporadaId": 102,
@@ -11437,9 +11457,9 @@
         "campeonatos": 1,
         "temporadas": 12,
         "totalPuntos": 346,
-        "totalPJ": 230,
-        "totalGF": 407,
-        "totalGC": 354,
+        "totalPJ": 234,
+        "totalGF": 410,
+        "totalGC": 367,
         "promedioPuntos": 28.833333333333332,
         "mejorPosicion": 1,
         "divisionalHistory": [
@@ -11512,7 +11532,7 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 3,
+            "posicion": 9,
             "puntos": 29
           }
         ]
@@ -11559,12 +11579,12 @@
         "teamId": "estudiantil-salteno",
         "nombre": "Estudiantil Salteño",
         "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 314,
-        "totalPJ": 226,
-        "totalGF": 384,
-        "totalGC": 377,
-        "promedioPuntos": 28.545454545454547,
+        "temporadas": 8,
+        "totalPuntos": 253,
+        "totalPJ": 160,
+        "totalGF": 299,
+        "totalGC": 239,
+        "promedioPuntos": 31.625,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -11604,28 +11624,10 @@
             "puntos": 44
           },
           {
-            "temporadaId": 98,
-            "divisional": "B",
-            "posicion": 10,
-            "puntos": 26
-          },
-          {
-            "temporadaId": 99,
-            "divisional": "B",
-            "posicion": 13,
-            "puntos": 24
-          },
-          {
             "temporadaId": 100,
             "divisional": "C",
             "posicion": 9,
             "puntos": 33
-          },
-          {
-            "temporadaId": 101,
-            "divisional": "C",
-            "posicion": 16,
-            "puntos": 11
           },
           {
             "temporadaId": 103,
@@ -11639,12 +11641,12 @@
         "teamId": "fenix-universitario",
         "nombre": "Fenix Universitario",
         "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 272,
-        "totalPJ": 212,
-        "totalGF": 291,
-        "totalGC": 361,
-        "promedioPuntos": 24.727272727272727,
+        "temporadas": 12,
+        "totalPuntos": 285,
+        "totalPJ": 234,
+        "totalGF": 313,
+        "totalGC": 422,
+        "promedioPuntos": 23.75,
         "mejorPosicion": 4,
         "divisionalHistory": [
           {
@@ -11712,6 +11714,12 @@
             "divisional": "F",
             "posicion": 15,
             "puntos": 21
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 14,
+            "puntos": 13
           }
         ]
       },
@@ -11793,12 +11801,12 @@
         "teamId": "anglo",
         "nombre": "Anglo",
         "campeonatos": 1,
-        "temporadas": 19,
-        "totalPuntos": 503,
-        "totalPJ": 359,
-        "totalGF": 611,
-        "totalGC": 601,
-        "promedioPuntos": 26.473684210526315,
+        "temporadas": 20,
+        "totalPuntos": 532,
+        "totalPJ": 381,
+        "totalGF": 646,
+        "totalGC": 636,
+        "promedioPuntos": 26.6,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -11868,6 +11876,12 @@
             "puntos": 20
           },
           {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 10,
+            "puntos": 29
+          },
+          {
             "temporadaId": 102,
             "divisional": "G",
             "posicion": 11,
@@ -11922,11 +11936,11 @@
         "nombre": "Wolframio",
         "campeonatos": 2,
         "temporadas": 22,
-        "totalPuntos": 640,
-        "totalPJ": 442,
-        "totalGF": 762,
-        "totalGC": 739,
-        "promedioPuntos": 29.09090909090909,
+        "totalPuntos": 649,
+        "totalPJ": 449,
+        "totalGF": 773,
+        "totalGC": 757,
+        "promedioPuntos": 29.5,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -11998,8 +12012,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 8,
-            "puntos": 23
+            "posicion": 7,
+            "puntos": 32
           },
           {
             "temporadaId": 103,
@@ -12213,12 +12227,12 @@
         "teamId": "sa-fe-ma",
         "nombre": "Sa.fe.ma",
         "campeonatos": 0,
-        "temporadas": 7,
-        "totalPuntos": 120,
-        "totalPJ": 137,
-        "totalGF": 185,
-        "totalGC": 374,
-        "promedioPuntos": 17.142857142857142,
+        "temporadas": 8,
+        "totalPuntos": 128,
+        "totalPJ": 147,
+        "totalGF": 197,
+        "totalGC": 398,
+        "promedioPuntos": 16,
         "mejorPosicion": 12,
         "divisionalHistory": [
           {
@@ -12262,6 +12276,12 @@
             "divisional": "I",
             "posicion": 18,
             "puntos": 6
+          },
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 18,
+            "puntos": 8
           }
         ]
       },
@@ -12269,12 +12289,12 @@
         "teamId": "flores-universitario",
         "nombre": "Flores Universitario",
         "campeonatos": 0,
-        "temporadas": 22,
-        "totalPuntos": 539,
-        "totalPJ": 432,
-        "totalGF": 717,
-        "totalGC": 847,
-        "promedioPuntos": 24.5,
+        "temporadas": 23,
+        "totalPuntos": 570,
+        "totalPJ": 454,
+        "totalGF": 760,
+        "totalGC": 885,
+        "promedioPuntos": 24.782608695652176,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -12342,6 +12362,12 @@
             "divisional": "G",
             "posicion": 13,
             "puntos": 22
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 8,
+            "puntos": 31
           },
           {
             "temporadaId": 102,
@@ -12415,12 +12441,12 @@
         "teamId": "club-richard-anderson-univ",
         "nombre": "Club Richard Anderson Univ.",
         "campeonatos": 0,
-        "temporadas": 22,
-        "totalPuntos": 582,
-        "totalPJ": 431,
-        "totalGF": 675,
-        "totalGC": 666,
-        "promedioPuntos": 26.454545454545453,
+        "temporadas": 23,
+        "totalPuntos": 607,
+        "totalPJ": 453,
+        "totalGF": 701,
+        "totalGC": 712,
+        "promedioPuntos": 26.391304347826086,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -12488,6 +12514,12 @@
             "divisional": "G",
             "posicion": 14,
             "puntos": 21
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 12,
+            "puntos": 25
           },
           {
             "temporadaId": 102,
@@ -12561,12 +12593,12 @@
         "teamId": "deportivo-naval",
         "nombre": "Deportivo Naval",
         "campeonatos": 0,
-        "temporadas": 21,
-        "totalPuntos": 420,
-        "totalPJ": 371,
-        "totalGF": 615,
-        "totalGC": 762,
-        "promedioPuntos": 20,
+        "temporadas": 22,
+        "totalPuntos": 450,
+        "totalPJ": 394,
+        "totalGF": 674,
+        "totalGC": 820,
+        "promedioPuntos": 20.454545454545453,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -12621,7 +12653,7 @@
             "temporadaId": 98,
             "divisional": "I",
             "posicion": 2,
-            "puntos": 24
+            "puntos": 27
           },
           {
             "temporadaId": 99,
@@ -12634,6 +12666,12 @@
             "divisional": "G",
             "posicion": 7,
             "puntos": 33
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 11,
+            "puntos": 27
           },
           {
             "temporadaId": 103,
@@ -12702,11 +12740,11 @@
         "nombre": "Poco Sitio Playa Verde",
         "campeonatos": 2,
         "temporadas": 23,
-        "totalPuntos": 658,
-        "totalPJ": 445,
-        "totalGF": 820,
-        "totalGC": 771,
-        "promedioPuntos": 28.608695652173914,
+        "totalPuntos": 663,
+        "totalPJ": 452,
+        "totalGF": 829,
+        "totalGC": 786,
+        "promedioPuntos": 28.82608695652174,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -12778,8 +12816,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 14,
-            "puntos": 9
+            "posicion": 15,
+            "puntos": 14
           },
           {
             "temporadaId": 102,
@@ -12988,11 +13026,11 @@
         "nombre": "La Chacra",
         "campeonatos": 3,
         "temporadas": 14,
-        "totalPuntos": 401,
-        "totalPJ": 282,
-        "totalGF": 405,
-        "totalGC": 393,
-        "promedioPuntos": 28.642857142857142,
+        "totalPuntos": 406,
+        "totalPJ": 286,
+        "totalGF": 410,
+        "totalGC": 399,
+        "promedioPuntos": 29,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -13052,8 +13090,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 5,
-            "puntos": 27
+            "posicion": 6,
+            "puntos": 32
           },
           {
             "temporadaId": 102,
@@ -13226,11 +13264,11 @@
         "nombre": "Deportivo Matadero",
         "campeonatos": 0,
         "temporadas": 16,
-        "totalPuntos": 449,
-        "totalPJ": 330,
-        "totalGF": 542,
-        "totalGC": 533,
-        "promedioPuntos": 28.0625,
+        "totalPuntos": 457,
+        "totalPJ": 337,
+        "totalGF": 552,
+        "totalGC": 543,
+        "promedioPuntos": 28.5625,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -13290,8 +13328,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 10,
-            "puntos": 20
+            "posicion": 11,
+            "puntos": 28
           },
           {
             "temporadaId": 103,
@@ -13335,12 +13373,12 @@
         "teamId": "varela-universitario",
         "nombre": "Varela Universitario",
         "campeonatos": 1,
-        "temporadas": 18,
-        "totalPuntos": 420,
-        "totalPJ": 324,
-        "totalGF": 541,
-        "totalGC": 600,
-        "promedioPuntos": 23.333333333333332,
+        "temporadas": 19,
+        "totalPuntos": 442,
+        "totalPJ": 346,
+        "totalGF": 581,
+        "totalGC": 659,
+        "promedioPuntos": 23.263157894736842,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -13396,6 +13434,12 @@
             "divisional": "H",
             "posicion": 8,
             "puntos": 33
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 14,
+            "puntos": 22
           },
           {
             "temporadaId": 103,
@@ -13576,13 +13620,13 @@
       "union-s-r-s": {
         "teamId": "union-s-r-s",
         "nombre": "Union S.r.s.",
-        "campeonatos": 3,
+        "campeonatos": 2,
         "temporadas": 15,
-        "totalPuntos": 509,
-        "totalPJ": 297,
-        "totalGF": 536,
-        "totalGC": 375,
-        "promedioPuntos": 33.93333333333333,
+        "totalPuntos": 517,
+        "totalPJ": 301,
+        "totalGF": 543,
+        "totalGC": 379,
+        "promedioPuntos": 34.46666666666667,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -13642,8 +13686,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 1,
-            "puntos": 35
+            "posicion": 2,
+            "puntos": 43
           },
           {
             "temporadaId": 102,
@@ -13821,13 +13865,13 @@
         "teamId": "el-pozo",
         "nombre": "El Pozo",
         "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 274,
-        "totalPJ": 235,
-        "totalGF": 353,
-        "totalGC": 455,
-        "promedioPuntos": 24.90909090909091,
-        "mejorPosicion": 3,
+        "temporadas": 12,
+        "totalPuntos": 322,
+        "totalPJ": 257,
+        "totalGF": 414,
+        "totalGC": 474,
+        "promedioPuntos": 26.833333333333332,
+        "mejorPosicion": 2,
         "divisionalHistory": [
           {
             "temporadaId": 92,
@@ -13884,6 +13928,12 @@
             "puntos": 27
           },
           {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 2,
+            "puntos": 48
+          },
+          {
             "temporadaId": 103,
             "divisional": "F",
             "posicion": 14,
@@ -13902,11 +13952,11 @@
         "nombre": "Deportivo Salto",
         "campeonatos": 0,
         "temporadas": 20,
-        "totalPuntos": 621,
-        "totalPJ": 417,
-        "totalGF": 678,
-        "totalGC": 637,
-        "promedioPuntos": 31.05,
+        "totalPuntos": 628,
+        "totalPJ": 424,
+        "totalGF": 688,
+        "totalGC": 648,
+        "promedioPuntos": 31.4,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -13966,8 +14016,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 10,
-            "puntos": 17
+            "posicion": 13,
+            "puntos": 24
           },
           {
             "temporadaId": 103,
@@ -14035,12 +14085,12 @@
         "teamId": "ut-serviam",
         "nombre": "Ut Serviam",
         "campeonatos": 0,
-        "temporadas": 20,
-        "totalPuntos": 531,
-        "totalPJ": 407,
-        "totalGF": 645,
-        "totalGC": 675,
-        "promedioPuntos": 26.55,
+        "temporadas": 21,
+        "totalPuntos": 559,
+        "totalPJ": 429,
+        "totalGF": 676,
+        "totalGC": 727,
+        "promedioPuntos": 26.61904761904762,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -14096,6 +14146,12 @@
             "divisional": "G",
             "posicion": 12,
             "puntos": 26
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 9,
+            "puntos": 28
           },
           {
             "temporadaId": 102,
@@ -14169,12 +14225,12 @@
         "teamId": "latino-futbol-club",
         "nombre": "Latino Futbol Club",
         "campeonatos": 0,
-        "temporadas": 21,
-        "totalPuntos": 535,
-        "totalPJ": 400,
-        "totalGF": 628,
-        "totalGC": 669,
-        "promedioPuntos": 25.476190476190474,
+        "temporadas": 22,
+        "totalPuntos": 583,
+        "totalPJ": 422,
+        "totalGF": 679,
+        "totalGC": 693,
+        "promedioPuntos": 26.5,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -14236,6 +14292,12 @@
             "divisional": "I",
             "posicion": 11,
             "puntos": 14
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 2,
+            "puntos": 48
           },
           {
             "temporadaId": 102,
@@ -14309,12 +14371,12 @@
         "teamId": "goes-universitario",
         "nombre": "Goes Universitario",
         "campeonatos": 1,
-        "temporadas": 9,
-        "totalPuntos": 275,
-        "totalPJ": 187,
-        "totalGF": 341,
-        "totalGC": 296,
-        "promedioPuntos": 30.555555555555557,
+        "temporadas": 10,
+        "totalPuntos": 297,
+        "totalPJ": 209,
+        "totalGF": 384,
+        "totalGC": 355,
+        "promedioPuntos": 29.7,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -14370,6 +14432,12 @@
             "divisional": "H",
             "posicion": 4,
             "puntos": 37
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 13,
+            "puntos": 22
           }
         ]
       },
@@ -14377,12 +14445,12 @@
         "teamId": "el-rejunte",
         "nombre": "El Rejunte",
         "campeonatos": 2,
-        "temporadas": 14,
-        "totalPuntos": 413,
-        "totalPJ": 283,
-        "totalGF": 497,
-        "totalGC": 454,
-        "promedioPuntos": 29.5,
+        "temporadas": 16,
+        "totalPuntos": 468,
+        "totalPJ": 316,
+        "totalGF": 562,
+        "totalGC": 515,
+        "promedioPuntos": 29.25,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -14422,6 +14490,12 @@
             "puntos": 24
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 12,
+            "puntos": 15
+          },
+          {
             "temporadaId": 99,
             "divisional": "I",
             "posicion": 1,
@@ -14432,6 +14506,12 @@
             "divisional": "H",
             "posicion": 1,
             "puntos": 52
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 4,
+            "puntos": 40
           },
           {
             "temporadaId": 103,
@@ -14475,12 +14555,12 @@
         "teamId": "pu-ca-fu",
         "nombre": "Pu.ca.fu.",
         "campeonatos": 1,
-        "temporadas": 13,
-        "totalPuntos": 293,
-        "totalPJ": 255,
-        "totalGF": 382,
-        "totalGC": 508,
-        "promedioPuntos": 22.53846153846154,
+        "temporadas": 14,
+        "totalPuntos": 315,
+        "totalPJ": 277,
+        "totalGF": 415,
+        "totalGC": 546,
+        "promedioPuntos": 22.5,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -14538,6 +14618,12 @@
             "puntos": 26
           },
           {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 13,
+            "puntos": 22
+          },
+          {
             "temporadaId": 102,
             "divisional": "I",
             "posicion": 1,
@@ -14566,14 +14652,14 @@
       "liverpool-universitario": {
         "teamId": "liverpool-universitario",
         "nombre": "Liverpool Universitario",
-        "campeonatos": 1,
+        "campeonatos": 0,
         "temporadas": 18,
-        "totalPuntos": 540,
-        "totalPJ": 371,
-        "totalGF": 567,
-        "totalGC": 536,
-        "promedioPuntos": 30,
-        "mejorPosicion": 1,
+        "totalPuntos": 550,
+        "totalPJ": 378,
+        "totalGF": 579,
+        "totalGC": 550,
+        "promedioPuntos": 30.555555555555557,
+        "mejorPosicion": 2,
         "divisionalHistory": [
           {
             "temporadaId": 92,
@@ -14632,8 +14718,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 1,
-            "puntos": 33
+            "posicion": 3,
+            "puntos": 43
           },
           {
             "temporadaId": 103,
@@ -14690,11 +14776,11 @@
         "nombre": "Casa Armenia",
         "campeonatos": 1,
         "temporadas": 9,
-        "totalPuntos": 305,
-        "totalPJ": 191,
-        "totalGF": 389,
-        "totalGC": 302,
-        "promedioPuntos": 33.888888888888886,
+        "totalPuntos": 311,
+        "totalPJ": 198,
+        "totalGF": 396,
+        "totalGC": 313,
+        "promedioPuntos": 34.55555555555556,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -14749,7 +14835,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 7,
-            "puntos": 25
+            "puntos": 31
           }
         ]
       },
@@ -14891,12 +14977,12 @@
         "teamId": "el-chorro-futbol-club",
         "nombre": "El Chorro Futbol Club",
         "campeonatos": 1,
-        "temporadas": 20,
-        "totalPuntos": 587,
-        "totalPJ": 402,
-        "totalGF": 707,
-        "totalGC": 674,
-        "promedioPuntos": 29.35,
+        "temporadas": 21,
+        "totalPuntos": 622,
+        "totalPJ": 424,
+        "totalGF": 749,
+        "totalGC": 706,
+        "promedioPuntos": 29.61904761904762,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -14952,6 +15038,12 @@
             "divisional": "G",
             "posicion": 3,
             "puntos": 37
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 5,
+            "puntos": 35
           },
           {
             "temporadaId": 102,
@@ -15024,13 +15116,13 @@
       "escuela-militar": {
         "teamId": "escuela-militar",
         "nombre": "Escuela Militar",
-        "campeonatos": 2,
-        "temporadas": 18,
-        "totalPuntos": 565,
-        "totalPJ": 376,
-        "totalGF": 685,
-        "totalGC": 556,
-        "promedioPuntos": 31.38888888888889,
+        "campeonatos": 3,
+        "temporadas": 19,
+        "totalPuntos": 624,
+        "totalPJ": 398,
+        "totalGF": 767,
+        "totalGC": 567,
+        "promedioPuntos": 32.8421052631579,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -15080,6 +15172,12 @@
             "divisional": "G",
             "posicion": 5,
             "puntos": 36
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 1,
+            "puntos": 59
           },
           {
             "temporadaId": 103,
@@ -15147,12 +15245,12 @@
         "teamId": "matecha",
         "nombre": "Matecha",
         "campeonatos": 2,
-        "temporadas": 17,
-        "totalPuntos": 437,
-        "totalPJ": 332,
-        "totalGF": 537,
-        "totalGC": 570,
-        "promedioPuntos": 25.705882352941178,
+        "temporadas": 18,
+        "totalPuntos": 483,
+        "totalPJ": 357,
+        "totalGF": 599,
+        "totalGC": 602,
+        "promedioPuntos": 26.833333333333332,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -15208,6 +15306,12 @@
             "divisional": "H",
             "posicion": 11,
             "puntos": 23
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 4,
+            "puntos": 46
           },
           {
             "temporadaId": 102,
@@ -15301,12 +15405,12 @@
         "teamId": "perry-sexta-universitario",
         "nombre": "Perry Sexta Universitario",
         "campeonatos": 0,
-        "temporadas": 19,
-        "totalPuntos": 572,
-        "totalPJ": 397,
-        "totalGF": 711,
-        "totalGC": 652,
-        "promedioPuntos": 30.105263157894736,
+        "temporadas": 20,
+        "totalPuntos": 597,
+        "totalPJ": 419,
+        "totalGF": 747,
+        "totalGC": 710,
+        "promedioPuntos": 29.85,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -15362,6 +15466,12 @@
             "divisional": "G",
             "posicion": 9,
             "puntos": 30
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 12,
+            "puntos": 25
           },
           {
             "temporadaId": 103,
@@ -15430,11 +15540,11 @@
         "nombre": "La Escapada Universitario",
         "campeonatos": 0,
         "temporadas": 14,
-        "totalPuntos": 418,
-        "totalPJ": 286,
-        "totalGF": 457,
-        "totalGC": 411,
-        "promedioPuntos": 29.857142857142858,
+        "totalPuntos": 432,
+        "totalPJ": 293,
+        "totalGF": 471,
+        "totalGC": 418,
+        "promedioPuntos": 30.857142857142858,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -15494,8 +15604,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 5,
-            "puntos": 26
+            "posicion": 4,
+            "puntos": 40
           },
           {
             "temporadaId": 103,
@@ -15527,12 +15637,12 @@
         "teamId": "body-factory",
         "nombre": "Body Factory",
         "campeonatos": 2,
-        "temporadas": 20,
-        "totalPuntos": 579,
-        "totalPJ": 395,
-        "totalGF": 774,
-        "totalGC": 675,
-        "promedioPuntos": 28.95,
+        "temporadas": 21,
+        "totalPuntos": 606,
+        "totalPJ": 417,
+        "totalGF": 810,
+        "totalGC": 714,
+        "promedioPuntos": 28.857142857142858,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -15588,6 +15698,12 @@
             "divisional": "I",
             "posicion": 10,
             "puntos": 15
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 15,
+            "puntos": 27
           },
           {
             "temporadaId": 102,
@@ -15661,12 +15777,12 @@
         "teamId": "nuestra-senora-de-lourdes",
         "nombre": "Nuestra Señora De Lourdes",
         "campeonatos": 0,
-        "temporadas": 18,
-        "totalPuntos": 490,
-        "totalPJ": 363,
-        "totalGF": 562,
-        "totalGC": 577,
-        "promedioPuntos": 27.22222222222222,
+        "temporadas": 16,
+        "totalPuntos": 433,
+        "totalPJ": 331,
+        "totalGF": 495,
+        "totalGC": 539,
+        "promedioPuntos": 27.0625,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -15698,18 +15814,6 @@
             "divisional": "I",
             "posicion": 9,
             "puntos": 28
-          },
-          {
-            "temporadaId": 98,
-            "divisional": "I",
-            "posicion": 6,
-            "puntos": 13
-          },
-          {
-            "temporadaId": 99,
-            "divisional": "I",
-            "posicion": 3,
-            "puntos": 44
           },
           {
             "temporadaId": 100,
@@ -15783,12 +15887,12 @@
         "teamId": "paralamas-universitario",
         "nombre": "Paralamas Universitario",
         "campeonatos": 0,
-        "temporadas": 16,
-        "totalPuntos": 423,
-        "totalPJ": 320,
-        "totalGF": 546,
-        "totalGC": 580,
-        "promedioPuntos": 26.4375,
+        "temporadas": 17,
+        "totalPuntos": 453,
+        "totalPJ": 342,
+        "totalGF": 578,
+        "totalGC": 617,
+        "promedioPuntos": 26.647058823529413,
         "mejorPosicion": 5,
         "divisionalHistory": [
           {
@@ -15846,6 +15950,12 @@
             "puntos": 12
           },
           {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 9,
+            "puntos": 30
+          },
+          {
             "temporadaId": 102,
             "divisional": "G",
             "posicion": 12,
@@ -15894,11 +16004,11 @@
         "nombre": "Paysandu Unversitario",
         "campeonatos": 0,
         "temporadas": 20,
-        "totalPuntos": 588,
-        "totalPJ": 412,
-        "totalGF": 696,
-        "totalGC": 666,
-        "promedioPuntos": 29.4,
+        "totalPuntos": 595,
+        "totalPJ": 419,
+        "totalGF": 705,
+        "totalGC": 678,
+        "promedioPuntos": 29.75,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -15958,8 +16068,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 3,
-            "puntos": 28
+            "posicion": 5,
+            "puntos": 35
           },
           {
             "temporadaId": 103,
@@ -16026,14 +16136,14 @@
       "club-atletico-brazo-oriental": {
         "teamId": "club-atletico-brazo-oriental",
         "nombre": "Club Atletico Brazo Oriental",
-        "campeonatos": 1,
+        "campeonatos": 0,
         "temporadas": 14,
-        "totalPuntos": 369,
-        "totalPJ": 276,
-        "totalGF": 435,
-        "totalGC": 445,
-        "promedioPuntos": 26.357142857142858,
-        "mejorPosicion": 1,
+        "totalPuntos": 374,
+        "totalPJ": 283,
+        "totalGF": 436,
+        "totalGC": 465,
+        "promedioPuntos": 26.714285714285715,
+        "mejorPosicion": 4,
         "divisionalHistory": [
           {
             "temporadaId": 92,
@@ -16074,8 +16184,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 1,
-            "puntos": 26
+            "posicion": 8,
+            "puntos": 21
           },
           {
             "temporadaId": 99,
@@ -16093,7 +16203,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 6,
-            "puntos": 27
+            "puntos": 37
           },
           {
             "temporadaId": 103,
@@ -16125,12 +16235,12 @@
         "teamId": "jean-piaget",
         "nombre": "Jean Piaget",
         "campeonatos": 1,
-        "temporadas": 20,
-        "totalPuntos": 545,
-        "totalPJ": 388,
-        "totalGF": 674,
-        "totalGC": 657,
-        "promedioPuntos": 27.25,
+        "temporadas": 21,
+        "totalPuntos": 593,
+        "totalPJ": 409,
+        "totalGF": 720,
+        "totalGC": 675,
+        "promedioPuntos": 28.238095238095237,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -16172,8 +16282,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 9,
-            "puntos": 6
+            "posicion": 5,
+            "puntos": 24
           },
           {
             "temporadaId": 99,
@@ -16186,6 +16296,12 @@
             "divisional": "H",
             "posicion": 16,
             "puntos": 17
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 13,
+            "puntos": 30
           },
           {
             "temporadaId": 102,
@@ -16258,14 +16374,14 @@
       "medicina": {
         "teamId": "medicina",
         "nombre": "Medicina",
-        "campeonatos": 0,
-        "temporadas": 14,
-        "totalPuntos": 338,
-        "totalPJ": 256,
-        "totalGF": 510,
-        "totalGC": 553,
-        "promedioPuntos": 24.142857142857142,
-        "mejorPosicion": 2,
+        "campeonatos": 1,
+        "temporadas": 15,
+        "totalPuntos": 402,
+        "totalPJ": 280,
+        "totalGF": 565,
+        "totalGC": 564,
+        "promedioPuntos": 26.8,
+        "mejorPosicion": 1,
         "divisionalHistory": [
           {
             "temporadaId": 92,
@@ -16306,8 +16422,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 10,
-            "puntos": 6
+            "posicion": 9,
+            "puntos": 19
           },
           {
             "temporadaId": 99,
@@ -16320,6 +16436,12 @@
             "divisional": "I",
             "posicion": 6,
             "puntos": 20
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 1,
+            "puntos": 51
           },
           {
             "temporadaId": 102,
@@ -16358,11 +16480,11 @@
         "nombre": "Pampero",
         "campeonatos": 0,
         "temporadas": 20,
-        "totalPuntos": 471,
-        "totalPJ": 351,
-        "totalGF": 608,
-        "totalGC": 610,
-        "promedioPuntos": 23.55,
+        "totalPuntos": 489,
+        "totalPJ": 358,
+        "totalGF": 630,
+        "totalGC": 621,
+        "promedioPuntos": 24.45,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -16428,8 +16550,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 15,
-            "puntos": 7
+            "posicion": 12,
+            "puntos": 25
           },
           {
             "temporadaId": 102,
@@ -16653,12 +16775,12 @@
         "teamId": "la-10-universitario",
         "nombre": "La 10 Universitario",
         "campeonatos": 0,
-        "temporadas": 12,
-        "totalPuntos": 172,
-        "totalPJ": 218,
-        "totalGF": 292,
-        "totalGC": 586,
-        "promedioPuntos": 14.333333333333334,
+        "temporadas": 14,
+        "totalPuntos": 203,
+        "totalPJ": 249,
+        "totalGF": 344,
+        "totalGC": 656,
+        "promedioPuntos": 14.5,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -16698,6 +16820,12 @@
             "puntos": 17
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 13,
+            "puntos": 13
+          },
+          {
             "temporadaId": 99,
             "divisional": "I",
             "posicion": 15,
@@ -16708,6 +16836,12 @@
             "divisional": "I",
             "posicion": 22,
             "puntos": 4
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 21,
+            "puntos": 18
           },
           {
             "temporadaId": 103,
@@ -16740,11 +16874,11 @@
         "nombre": "Centro Israelita Sef. Del Uru.",
         "campeonatos": 1,
         "temporadas": 12,
-        "totalPuntos": 379,
-        "totalPJ": 252,
-        "totalGF": 407,
-        "totalGC": 326,
-        "promedioPuntos": 31.583333333333332,
+        "totalPuntos": 389,
+        "totalPJ": 259,
+        "totalGF": 421,
+        "totalGC": 337,
+        "promedioPuntos": 32.416666666666664,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -16793,7 +16927,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 5,
-            "puntos": 28
+            "puntos": 38
           },
           {
             "temporadaId": 103,
@@ -16930,11 +17064,11 @@
         "nombre": "A.e.b.u",
         "campeonatos": 1,
         "temporadas": 18,
-        "totalPuntos": 566,
-        "totalPJ": 375,
-        "totalGF": 785,
-        "totalGC": 692,
-        "promedioPuntos": 31.444444444444443,
+        "totalPuntos": 583,
+        "totalPJ": 382,
+        "totalGF": 799,
+        "totalGC": 698,
+        "promedioPuntos": 32.388888888888886,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -16982,8 +17116,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 14,
-            "puntos": 16
+            "posicion": 4,
+            "puntos": 33
           },
           {
             "temporadaId": 103,
@@ -17051,12 +17185,12 @@
         "teamId": "paramonte",
         "nombre": "Paramonte",
         "campeonatos": 1,
-        "temporadas": 15,
-        "totalPuntos": 408,
-        "totalPJ": 296,
-        "totalGF": 549,
-        "totalGC": 561,
-        "promedioPuntos": 27.2,
+        "temporadas": 16,
+        "totalPuntos": 435,
+        "totalPJ": 318,
+        "totalGF": 582,
+        "totalGC": 597,
+        "promedioPuntos": 27.1875,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -17099,6 +17233,12 @@
             "temporadaId": 100,
             "divisional": "G",
             "posicion": 11,
+            "puntos": 27
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 10,
             "puntos": 27
           },
           {
@@ -17155,12 +17295,12 @@
         "teamId": "deportivo-mitre",
         "nombre": "Deportivo Mitre",
         "campeonatos": 0,
-        "temporadas": 18,
-        "totalPuntos": 448,
-        "totalPJ": 343,
-        "totalGF": 549,
-        "totalGC": 594,
-        "promedioPuntos": 24.88888888888889,
+        "temporadas": 19,
+        "totalPuntos": 469,
+        "totalPJ": 365,
+        "totalGF": 584,
+        "totalGC": 644,
+        "promedioPuntos": 24.68421052631579,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -17204,6 +17344,12 @@
             "divisional": "H",
             "posicion": 13,
             "puntos": 23
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 15,
+            "puntos": 21
           },
           {
             "temporadaId": 102,
@@ -17328,11 +17474,11 @@
         "nombre": "Old Sampa Club",
         "campeonatos": 1,
         "temporadas": 17,
-        "totalPuntos": 468,
-        "totalPJ": 336,
-        "totalGF": 566,
-        "totalGC": 567,
-        "promedioPuntos": 27.529411764705884,
+        "totalPuntos": 484,
+        "totalPJ": 343,
+        "totalGF": 591,
+        "totalGC": 585,
+        "promedioPuntos": 28.470588235294116,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -17356,8 +17502,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 4,
-            "puntos": 19
+            "posicion": 7,
+            "puntos": 21
           },
           {
             "temporadaId": 99,
@@ -17375,7 +17521,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 2,
-            "puntos": 31
+            "puntos": 45
           },
           {
             "temporadaId": 103,
@@ -17443,13 +17589,13 @@
         "teamId": "club-brasileiro",
         "nombre": "Club Brasileiro",
         "campeonatos": 0,
-        "temporadas": 9,
-        "totalPuntos": 183,
-        "totalPJ": 152,
-        "totalGF": 249,
-        "totalGC": 294,
-        "promedioPuntos": 20.333333333333332,
-        "mejorPosicion": 4,
+        "temporadas": 11,
+        "totalPuntos": 228,
+        "totalPJ": 184,
+        "totalGF": 304,
+        "totalGC": 349,
+        "promedioPuntos": 20.727272727272727,
+        "mejorPosicion": 3,
         "divisionalHistory": [
           {
             "temporadaId": 94,
@@ -17476,6 +17622,12 @@
             "puntos": 26
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 20,
+            "puntos": 5
+          },
+          {
             "temporadaId": 99,
             "divisional": "I",
             "posicion": 13,
@@ -17486,6 +17638,12 @@
             "divisional": "I",
             "posicion": 8,
             "puntos": 16
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 3,
+            "puntos": 40
           },
           {
             "temporadaId": 102,
@@ -17511,12 +17669,12 @@
         "teamId": "sindicato-medico-del-uruguay",
         "nombre": "Sindicato Medico Del Uruguay",
         "campeonatos": 0,
-        "temporadas": 17,
-        "totalPuntos": 310,
-        "totalPJ": 260,
-        "totalGF": 386,
-        "totalGC": 514,
-        "promedioPuntos": 18.235294117647058,
+        "temporadas": 18,
+        "totalPuntos": 359,
+        "totalPJ": 282,
+        "totalGF": 444,
+        "totalGC": 528,
+        "promedioPuntos": 19.944444444444443,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -17546,8 +17704,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 11,
-            "puntos": 5
+            "posicion": 6,
+            "puntos": 22
           },
           {
             "temporadaId": 99,
@@ -17560,6 +17718,12 @@
             "divisional": "I",
             "posicion": 7,
             "puntos": 20
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 12,
+            "puntos": 32
           },
           {
             "temporadaId": 102,
@@ -17697,12 +17861,12 @@
         "teamId": "boquense",
         "nombre": "Boquense",
         "campeonatos": 0,
-        "temporadas": 7,
-        "totalPuntos": 85,
-        "totalPJ": 89,
-        "totalGF": 124,
-        "totalGC": 187,
-        "promedioPuntos": 12.142857142857142,
+        "temporadas": 8,
+        "totalPuntos": 129,
+        "totalPJ": 111,
+        "totalGF": 178,
+        "totalGC": 214,
+        "promedioPuntos": 16.125,
         "mejorPosicion": 6,
         "divisionalHistory": [
           {
@@ -17720,8 +17884,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 7,
-            "puntos": 11
+            "posicion": 10,
+            "puntos": 19
           },
           {
             "temporadaId": 99,
@@ -17734,6 +17898,12 @@
             "divisional": "I",
             "posicion": 15,
             "puntos": 12
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 8,
+            "puntos": 36
           },
           {
             "temporadaId": 102,
@@ -17754,11 +17924,11 @@
         "nombre": "Club Bigua Villa Biarritz",
         "campeonatos": 2,
         "temporadas": 16,
-        "totalPuntos": 452,
-        "totalPJ": 337,
-        "totalGF": 503,
-        "totalGC": 587,
-        "promedioPuntos": 28.25,
+        "totalPuntos": 456,
+        "totalPJ": 342,
+        "totalGF": 514,
+        "totalGC": 601,
+        "promedioPuntos": 28.5,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -17800,8 +17970,8 @@
           {
             "temporadaId": 101,
             "divisional": "D",
-            "posicion": 7,
-            "puntos": 26
+            "posicion": 8,
+            "puntos": 30
           },
           {
             "temporadaId": 103,
@@ -17863,12 +18033,12 @@
         "teamId": "club-atletico-aguada",
         "nombre": "Club Atletico Aguada",
         "campeonatos": 1,
-        "temporadas": 12,
-        "totalPuntos": 303,
-        "totalPJ": 244,
-        "totalGF": 381,
-        "totalGC": 457,
-        "promedioPuntos": 25.25,
+        "temporadas": 13,
+        "totalPuntos": 350,
+        "totalPJ": 266,
+        "totalGF": 439,
+        "totalGC": 493,
+        "promedioPuntos": 26.923076923076923,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -17900,6 +18070,12 @@
             "divisional": "H",
             "posicion": 12,
             "puntos": 23
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 3,
+            "puntos": 47
           },
           {
             "temporadaId": 102,
@@ -17950,11 +18126,11 @@
         "nombre": "Old Brendans Club",
         "campeonatos": 0,
         "temporadas": 16,
-        "totalPuntos": 528,
-        "totalPJ": 339,
-        "totalGF": 640,
-        "totalGC": 536,
-        "promedioPuntos": 33,
+        "totalPuntos": 537,
+        "totalPJ": 346,
+        "totalGF": 647,
+        "totalGC": 542,
+        "promedioPuntos": 33.5625,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -17991,7 +18167,7 @@
             "temporadaId": 101,
             "divisional": "F",
             "posicion": 4,
-            "puntos": 30
+            "puntos": 39
           },
           {
             "temporadaId": 103,
@@ -18079,12 +18255,12 @@
         "teamId": "central-espanol-f-c",
         "nombre": "Central Español F.c.",
         "campeonatos": 0,
-        "temporadas": 5,
-        "totalPuntos": 171,
-        "totalPJ": 98,
-        "totalGF": 178,
-        "totalGC": 127,
-        "promedioPuntos": 34.2,
+        "temporadas": 2,
+        "totalPuntos": 73,
+        "totalPJ": 39,
+        "totalGF": 81,
+        "totalGC": 41,
+        "promedioPuntos": 36.5,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -18094,28 +18270,10 @@
             "puntos": 43
           },
           {
-            "temporadaId": 98,
-            "divisional": "H",
-            "posicion": 3,
-            "puntos": 40
-          },
-          {
-            "temporadaId": 99,
-            "divisional": "G",
-            "posicion": 2,
-            "puntos": 41
-          },
-          {
             "temporadaId": 100,
             "divisional": "F",
             "posicion": 8,
             "puntos": 30
-          },
-          {
-            "temporadaId": 101,
-            "divisional": "F",
-            "posicion": 11,
-            "puntos": 17
           }
         ]
       },
@@ -18123,12 +18281,12 @@
         "teamId": "scuola-meds",
         "nombre": "Scuola Meds",
         "campeonatos": 0,
-        "temporadas": 4,
-        "totalPuntos": 113,
-        "totalPJ": 71,
-        "totalGF": 129,
-        "totalGC": 101,
-        "promedioPuntos": 28.25,
+        "temporadas": 5,
+        "totalPuntos": 133,
+        "totalPJ": 92,
+        "totalGF": 155,
+        "totalGC": 148,
+        "promedioPuntos": 26.6,
         "mejorPosicion": 3,
         "divisionalHistory": [
           {
@@ -18154,6 +18312,12 @@
             "divisional": "I",
             "posicion": 12,
             "puntos": 14
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 20,
+            "puntos": 20
           }
         ]
       },
@@ -18161,12 +18325,12 @@
         "teamId": "resistencia",
         "nombre": "Resistencia",
         "campeonatos": 0,
-        "temporadas": 10,
-        "totalPuntos": 305,
-        "totalPJ": 209,
-        "totalGF": 343,
-        "totalGC": 281,
-        "promedioPuntos": 30.5,
+        "temporadas": 11,
+        "totalPuntos": 351,
+        "totalPJ": 231,
+        "totalGF": 401,
+        "totalGC": 316,
+        "promedioPuntos": 31.90909090909091,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -18192,6 +18356,12 @@
             "divisional": "G",
             "posicion": 8,
             "puntos": 31
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 3,
+            "puntos": 46
           },
           {
             "temporadaId": 103,
@@ -18236,11 +18406,11 @@
         "nombre": "Scuola Palermo",
         "campeonatos": 3,
         "temporadas": 15,
-        "totalPuntos": 496,
-        "totalPJ": 309,
-        "totalGF": 547,
-        "totalGC": 498,
-        "promedioPuntos": 33.06666666666667,
+        "totalPuntos": 500,
+        "totalPJ": 316,
+        "totalGF": 559,
+        "totalGC": 516,
+        "promedioPuntos": 33.333333333333336,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -18270,8 +18440,8 @@
           {
             "temporadaId": 101,
             "divisional": "E",
-            "posicion": 7,
-            "puntos": 24
+            "posicion": 10,
+            "puntos": 28
           },
           {
             "temporadaId": 103,
@@ -18339,12 +18509,12 @@
         "teamId": "cienfar-f-c",
         "nombre": "Cienfar F.c.",
         "campeonatos": 1,
-        "temporadas": 8,
-        "totalPuntos": 210,
-        "totalPJ": 144,
-        "totalGF": 304,
-        "totalGC": 282,
-        "promedioPuntos": 26.25,
+        "temporadas": 9,
+        "totalPuntos": 251,
+        "totalPJ": 166,
+        "totalGF": 355,
+        "totalGC": 319,
+        "promedioPuntos": 27.88888888888889,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -18370,6 +18540,12 @@
             "divisional": "I",
             "posicion": 17,
             "puntos": 9
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 6,
+            "puntos": 41
           },
           {
             "temporadaId": 102,
@@ -18401,12 +18577,12 @@
         "teamId": "danubio-futbol-club",
         "nombre": "Danubio Futbol Club",
         "campeonatos": 3,
-        "temporadas": 15,
-        "totalPuntos": 497,
-        "totalPJ": 289,
-        "totalGF": 522,
-        "totalGC": 358,
-        "promedioPuntos": 33.13333333333333,
+        "temporadas": 16,
+        "totalPuntos": 548,
+        "totalPJ": 312,
+        "totalGF": 601,
+        "totalGC": 400,
+        "promedioPuntos": 34.25,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -18418,8 +18594,8 @@
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 8,
-            "puntos": 6
+            "posicion": 3,
+            "puntos": 25
           },
           {
             "temporadaId": 99,
@@ -18432,6 +18608,12 @@
             "divisional": "H",
             "posicion": 5,
             "puntos": 36
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 7,
+            "puntos": 32
           },
           {
             "temporadaId": 102,
@@ -18505,13 +18687,13 @@
         "teamId": "perry-sexta-jrs",
         "nombre": "Perry Sexta Jrs.",
         "campeonatos": 0,
-        "temporadas": 5,
-        "totalPuntos": 41,
-        "totalPJ": 73,
-        "totalGF": 91,
-        "totalGC": 214,
-        "promedioPuntos": 8.2,
-        "mejorPosicion": 7,
+        "temporadas": 8,
+        "totalPuntos": 94,
+        "totalPJ": 121,
+        "totalGF": 162,
+        "totalGC": 311,
+        "promedioPuntos": 11.75,
+        "mejorPosicion": 6,
         "divisionalHistory": [
           {
             "temporadaId": 97,
@@ -18520,10 +18702,28 @@
             "puntos": 12
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 17,
+            "puntos": 10
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 6,
+            "puntos": 20
+          },
+          {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 21,
             "puntos": 4
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 17,
+            "puntos": 23
           },
           {
             "temporadaId": 104,
@@ -18548,13 +18748,13 @@
       "colegio-santa-elena": {
         "teamId": "colegio-santa-elena",
         "nombre": "Colegio Santa Elena",
-        "campeonatos": 3,
-        "temporadas": 13,
-        "totalPuntos": 409,
-        "totalPJ": 247,
-        "totalGF": 507,
-        "totalGC": 445,
-        "promedioPuntos": 31.46153846153846,
+        "campeonatos": 4,
+        "temporadas": 16,
+        "totalPuntos": 490,
+        "totalPJ": 296,
+        "totalGF": 612,
+        "totalGC": 536,
+        "promedioPuntos": 30.625,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
@@ -18564,10 +18764,28 @@
             "puntos": 8
           },
           {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 19,
+            "puntos": 7
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 1,
+            "puntos": 41
+          },
+          {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 3,
             "puntos": 22
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 6,
+            "puntos": 33
           },
           {
             "temporadaId": 102,
@@ -18640,20 +18858,20 @@
       "club-social-piedras-blancas": {
         "teamId": "club-social-piedras-blancas",
         "nombre": "Club Social Piedras Blancas",
-        "campeonatos": 0,
+        "campeonatos": 1,
         "temporadas": 14,
-        "totalPuntos": 420,
-        "totalPJ": 282,
-        "totalGF": 542,
-        "totalGC": 478,
-        "promedioPuntos": 30,
-        "mejorPosicion": 3,
+        "totalPuntos": 440,
+        "totalPJ": 289,
+        "totalGF": 554,
+        "totalGC": 485,
+        "promedioPuntos": 31.428571428571427,
+        "mejorPosicion": 1,
         "divisionalHistory": [
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 3,
-            "puntos": 23
+            "posicion": 4,
+            "puntos": 25
           },
           {
             "temporadaId": 99,
@@ -18670,8 +18888,8 @@
           {
             "temporadaId": 101,
             "divisional": "F",
-            "posicion": 3,
-            "puntos": 30
+            "posicion": 1,
+            "puntos": 48
           },
           {
             "temporadaId": 103,
@@ -18735,116 +18953,24 @@
           }
         ]
       },
-      "old-woodlands-club": {
-        "teamId": "old-woodlands-club",
-        "nombre": "Old Woodlands Club",
-        "campeonatos": 6,
-        "temporadas": 14,
-        "totalPuntos": 480,
-        "totalPJ": 261,
-        "totalGF": 533,
-        "totalGC": 310,
-        "promedioPuntos": 34.285714285714285,
+      "colegio-y-liceo-ingles": {
+        "teamId": "colegio-y-liceo-ingles",
+        "nombre": "Colegio Y Liceo Ingles",
+        "campeonatos": 2,
+        "temporadas": 15,
+        "totalPuntos": 465,
+        "totalPJ": 296,
+        "totalGF": 504,
+        "totalGC": 381,
+        "promedioPuntos": 31,
         "mejorPosicion": 1,
         "divisionalHistory": [
           {
             "temporadaId": 98,
             "divisional": "I",
-            "posicion": 5,
-            "puntos": 15
+            "posicion": 15,
+            "puntos": 10
           },
-          {
-            "temporadaId": 99,
-            "divisional": "I",
-            "posicion": 8,
-            "puntos": 32
-          },
-          {
-            "temporadaId": 100,
-            "divisional": "I",
-            "posicion": 4,
-            "puntos": 21
-          },
-          {
-            "temporadaId": 102,
-            "divisional": "G",
-            "posicion": 1,
-            "puntos": 19
-          },
-          {
-            "temporadaId": 103,
-            "divisional": "F",
-            "posicion": 1,
-            "puntos": 49
-          },
-          {
-            "temporadaId": 104,
-            "divisional": "E",
-            "posicion": 1,
-            "puntos": 48
-          },
-          {
-            "temporadaId": 105,
-            "divisional": "D",
-            "posicion": 1,
-            "puntos": 58
-          },
-          {
-            "temporadaId": 106,
-            "divisional": "C",
-            "posicion": 1,
-            "puntos": 47
-          },
-          {
-            "temporadaId": 107,
-            "divisional": "B",
-            "posicion": 1,
-            "puntos": 33
-          },
-          {
-            "temporadaId": 108,
-            "divisional": "A",
-            "posicion": 8,
-            "puntos": 31
-          },
-          {
-            "temporadaId": 109,
-            "divisional": "A",
-            "posicion": 8,
-            "puntos": 29
-          },
-          {
-            "temporadaId": 110,
-            "divisional": "A",
-            "posicion": 5,
-            "puntos": 36
-          },
-          {
-            "temporadaId": 111,
-            "divisional": "A",
-            "posicion": 10,
-            "puntos": 28
-          },
-          {
-            "temporadaId": 112,
-            "divisional": "A",
-            "posicion": 5,
-            "puntos": 34
-          }
-        ]
-      },
-      "colegio-y-liceo-ingles": {
-        "teamId": "colegio-y-liceo-ingles",
-        "nombre": "Colegio Y Liceo Ingles",
-        "campeonatos": 2,
-        "temporadas": 13,
-        "totalPuntos": 416,
-        "totalPJ": 264,
-        "totalGF": 460,
-        "totalGC": 338,
-        "promedioPuntos": 32,
-        "mejorPosicion": 1,
-        "divisionalHistory": [
           {
             "temporadaId": 99,
             "divisional": "I",
@@ -18856,6 +18982,12 @@
             "divisional": "H",
             "posicion": 6,
             "puntos": 34
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 4,
+            "puntos": 39
           },
           {
             "temporadaId": 102,
@@ -18929,14 +19061,20 @@
         "teamId": "club-atletico-bella-vista",
         "nombre": "Club Atletico Bella Vista",
         "campeonatos": 0,
-        "temporadas": 12,
-        "totalPuntos": 336,
-        "totalPJ": 242,
-        "totalGF": 421,
-        "totalGC": 397,
-        "promedioPuntos": 28,
+        "temporadas": 14,
+        "totalPuntos": 357,
+        "totalPJ": 274,
+        "totalGF": 464,
+        "totalGC": 485,
+        "promedioPuntos": 25.5,
         "mejorPosicion": 2,
         "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 14,
+            "puntos": 10
+          },
           {
             "temporadaId": 99,
             "divisional": "I",
@@ -18948,6 +19086,12 @@
             "divisional": "H",
             "posicion": 9,
             "puntos": 29
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 16,
+            "puntos": 11
           },
           {
             "temporadaId": 103,
@@ -19011,159 +19155,35 @@
           }
         ]
       },
-      "river-plate-universitario": {
-        "teamId": "river-plate-universitario",
-        "nombre": "River Plate Universitario",
-        "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 227,
-        "totalPJ": 179,
-        "totalGF": 330,
-        "totalGC": 328,
-        "promedioPuntos": 20.636363636363637,
-        "mejorPosicion": 3,
-        "divisionalHistory": [
-          {
-            "temporadaId": 99,
-            "divisional": "I",
-            "posicion": 14,
-            "puntos": 22
-          },
-          {
-            "temporadaId": 100,
-            "divisional": "I",
-            "posicion": 13,
-            "puntos": 14
-          },
-          {
-            "temporadaId": 102,
-            "divisional": "H",
-            "posicion": 9,
-            "puntos": 10
-          },
-          {
-            "temporadaId": 103,
-            "divisional": "I",
-            "posicion": 9,
-            "puntos": 20
-          },
-          {
-            "temporadaId": 104,
-            "divisional": "I",
-            "posicion": 3,
-            "puntos": 36
-          },
-          {
-            "temporadaId": 105,
-            "divisional": "H",
-            "posicion": 10,
-            "puntos": 31
-          },
-          {
-            "temporadaId": 106,
-            "divisional": "G",
-            "posicion": 16,
-            "puntos": 15
-          },
-          {
-            "temporadaId": 107,
-            "divisional": "H",
-            "posicion": 4,
-            "puntos": 0
-          },
-          {
-            "temporadaId": 108,
-            "divisional": "H",
-            "posicion": 5,
-            "puntos": 24
-          },
-          {
-            "temporadaId": 109,
-            "divisional": "G",
-            "posicion": 6,
-            "puntos": 30
-          },
-          {
-            "temporadaId": 110,
-            "divisional": "F",
-            "posicion": 12,
-            "puntos": 25
-          }
-        ]
-      },
-      "c-s-y-d-niagara": {
-        "teamId": "c-s-y-d-niagara",
-        "nombre": "C.s Y D. Niagara",
-        "campeonatos": 0,
-        "temporadas": 7,
-        "totalPuntos": 135,
-        "totalPJ": 127,
-        "totalGF": 183,
-        "totalGC": 267,
-        "promedioPuntos": 19.285714285714285,
-        "mejorPosicion": 7,
-        "divisionalHistory": [
-          {
-            "temporadaId": 99,
-            "divisional": "I",
-            "posicion": 16,
-            "puntos": 8
-          },
-          {
-            "temporadaId": 100,
-            "divisional": "I",
-            "posicion": 18,
-            "puntos": 7
-          },
-          {
-            "temporadaId": 102,
-            "divisional": "I",
-            "posicion": 8,
-            "puntos": 5
-          },
-          {
-            "temporadaId": 103,
-            "divisional": "H",
-            "posicion": 9,
-            "puntos": 29
-          },
-          {
-            "temporadaId": 104,
-            "divisional": "H",
-            "posicion": 7,
-            "puntos": 30
-          },
-          {
-            "temporadaId": 105,
-            "divisional": "H",
-            "posicion": 8,
-            "puntos": 33
-          },
-          {
-            "temporadaId": 106,
-            "divisional": "G",
-            "posicion": 14,
-            "puntos": 23
-          }
-        ]
-      },
       "deportivo-chozon": {
         "teamId": "deportivo-chozon",
         "nombre": "Deportivo Chozon",
-        "campeonatos": 1,
-        "temporadas": 9,
-        "totalPuntos": 253,
-        "totalPJ": 164,
-        "totalGF": 309,
-        "totalGC": 257,
-        "promedioPuntos": 28.11111111111111,
+        "campeonatos": 2,
+        "temporadas": 11,
+        "totalPuntos": 334,
+        "totalPJ": 202,
+        "totalGF": 384,
+        "totalGC": 292,
+        "promedioPuntos": 30.363636363636363,
         "mejorPosicion": 1,
         "divisionalHistory": [
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 3,
+            "puntos": 31
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 1,
             "puntos": 23
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 1,
+            "puntos": 50
           },
           {
             "temporadaId": 102,
@@ -19219,19 +19239,31 @@
         "teamId": "pallotti-universitario",
         "nombre": "Pallotti Universitario",
         "campeonatos": 1,
-        "temporadas": 12,
-        "totalPuntos": 358,
-        "totalPJ": 231,
-        "totalGF": 408,
-        "totalGC": 352,
-        "promedioPuntos": 29.833333333333332,
+        "temporadas": 14,
+        "totalPuntos": 427,
+        "totalPJ": 268,
+        "totalGF": 488,
+        "totalGC": 404,
+        "promedioPuntos": 30.5,
         "mejorPosicion": 1,
         "divisionalHistory": [
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 4,
+            "puntos": 26
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 2,
             "puntos": 23
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 5,
+            "puntos": 43
           },
           {
             "temporadaId": 102,
@@ -19301,23 +19333,145 @@
           }
         ]
       },
+      "old-woodlands-club": {
+        "teamId": "old-woodlands-club",
+        "nombre": "Old Woodlands Club",
+        "campeonatos": 7,
+        "temporadas": 15,
+        "totalPuntos": 540,
+        "totalPJ": 284,
+        "totalGF": 635,
+        "totalGC": 343,
+        "promedioPuntos": 36,
+        "mejorPosicion": 1,
+        "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 1,
+            "puntos": 30
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "I",
+            "posicion": 8,
+            "puntos": 32
+          },
+          {
+            "temporadaId": 100,
+            "divisional": "I",
+            "posicion": 4,
+            "puntos": 21
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 2,
+            "puntos": 45
+          },
+          {
+            "temporadaId": 102,
+            "divisional": "G",
+            "posicion": 1,
+            "puntos": 19
+          },
+          {
+            "temporadaId": 103,
+            "divisional": "F",
+            "posicion": 1,
+            "puntos": 49
+          },
+          {
+            "temporadaId": 104,
+            "divisional": "E",
+            "posicion": 1,
+            "puntos": 48
+          },
+          {
+            "temporadaId": 105,
+            "divisional": "D",
+            "posicion": 1,
+            "puntos": 58
+          },
+          {
+            "temporadaId": 106,
+            "divisional": "C",
+            "posicion": 1,
+            "puntos": 47
+          },
+          {
+            "temporadaId": 107,
+            "divisional": "B",
+            "posicion": 1,
+            "puntos": 33
+          },
+          {
+            "temporadaId": 108,
+            "divisional": "A",
+            "posicion": 8,
+            "puntos": 31
+          },
+          {
+            "temporadaId": 109,
+            "divisional": "A",
+            "posicion": 8,
+            "puntos": 29
+          },
+          {
+            "temporadaId": 110,
+            "divisional": "A",
+            "posicion": 5,
+            "puntos": 36
+          },
+          {
+            "temporadaId": 111,
+            "divisional": "A",
+            "posicion": 10,
+            "puntos": 28
+          },
+          {
+            "temporadaId": 112,
+            "divisional": "A",
+            "posicion": 5,
+            "puntos": 34
+          }
+        ]
+      },
       "clara-jackson-universitario": {
         "teamId": "clara-jackson-universitario",
         "nombre": "Clara Jackson Universitario",
         "campeonatos": 0,
-        "temporadas": 12,
-        "totalPuntos": 343,
-        "totalPJ": 229,
-        "totalGF": 416,
-        "totalGC": 370,
-        "promedioPuntos": 28.583333333333332,
+        "temporadas": 15,
+        "totalPuntos": 407,
+        "totalPJ": 278,
+        "totalGF": 514,
+        "totalGC": 471,
+        "promedioPuntos": 27.133333333333333,
         "mejorPosicion": 2,
         "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 21,
+            "puntos": 5
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 2,
+            "puntos": 32
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 5,
             "puntos": 21
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "H",
+            "posicion": 11,
+            "puntos": 27
           },
           {
             "temporadaId": 102,
@@ -19391,14 +19545,20 @@
         "teamId": "escuela-four-seasons",
         "nombre": "Escuela Four Seasons",
         "campeonatos": 0,
-        "temporadas": 1,
-        "totalPuntos": 15,
-        "totalPJ": 10,
-        "totalGF": 18,
-        "totalGC": 18,
-        "promedioPuntos": 15,
-        "mejorPosicion": 9,
+        "temporadas": 2,
+        "totalPuntos": 39,
+        "totalPJ": 26,
+        "totalGF": 55,
+        "totalGC": 45,
+        "promedioPuntos": 19.5,
+        "mejorPosicion": 5,
         "divisionalHistory": [
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 5,
+            "puntos": 24
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
@@ -19407,23 +19567,127 @@
           }
         ]
       },
+      "river-plate-universitario": {
+        "teamId": "river-plate-universitario",
+        "nombre": "River Plate Universitario",
+        "campeonatos": 0,
+        "temporadas": 13,
+        "totalPuntos": 260,
+        "totalPJ": 211,
+        "totalGF": 379,
+        "totalGC": 400,
+        "promedioPuntos": 20,
+        "mejorPosicion": 3,
+        "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 23,
+            "puntos": 4
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "I",
+            "posicion": 14,
+            "puntos": 22
+          },
+          {
+            "temporadaId": 100,
+            "divisional": "I",
+            "posicion": 13,
+            "puntos": 14
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 14,
+            "puntos": 29
+          },
+          {
+            "temporadaId": 102,
+            "divisional": "H",
+            "posicion": 9,
+            "puntos": 10
+          },
+          {
+            "temporadaId": 103,
+            "divisional": "I",
+            "posicion": 9,
+            "puntos": 20
+          },
+          {
+            "temporadaId": 104,
+            "divisional": "I",
+            "posicion": 3,
+            "puntos": 36
+          },
+          {
+            "temporadaId": 105,
+            "divisional": "H",
+            "posicion": 10,
+            "puntos": 31
+          },
+          {
+            "temporadaId": 106,
+            "divisional": "G",
+            "posicion": 16,
+            "puntos": 15
+          },
+          {
+            "temporadaId": 107,
+            "divisional": "H",
+            "posicion": 4,
+            "puntos": 0
+          },
+          {
+            "temporadaId": 108,
+            "divisional": "H",
+            "posicion": 5,
+            "puntos": 24
+          },
+          {
+            "temporadaId": 109,
+            "divisional": "G",
+            "posicion": 6,
+            "puntos": 30
+          },
+          {
+            "temporadaId": 110,
+            "divisional": "F",
+            "posicion": 12,
+            "puntos": 25
+          }
+        ]
+      },
       "poseidon-universitario": {
         "teamId": "poseidon-universitario",
         "nombre": "Poseidon Universitario",
         "campeonatos": 0,
-        "temporadas": 2,
-        "totalPuntos": 19,
-        "totalPJ": 32,
-        "totalGF": 44,
-        "totalGC": 101,
-        "promedioPuntos": 9.5,
-        "mejorPosicion": 12,
+        "temporadas": 4,
+        "totalPuntos": 29,
+        "totalPJ": 68,
+        "totalGF": 86,
+        "totalGC": 230,
+        "promedioPuntos": 7.25,
+        "mejorPosicion": 8,
         "divisionalHistory": [
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 8,
+            "puntos": 7
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 14,
             "puntos": 13
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 23,
+            "puntos": 3
           },
           {
             "temporadaId": 103,
@@ -19437,12 +19701,12 @@
         "teamId": "veterinaria-universitario",
         "nombre": "Veterinaria Universitario",
         "campeonatos": 0,
-        "temporadas": 12,
-        "totalPuntos": 305,
-        "totalPJ": 228,
-        "totalGF": 371,
-        "totalGC": 397,
-        "promedioPuntos": 25.416666666666668,
+        "temporadas": 13,
+        "totalPuntos": 325,
+        "totalPJ": 248,
+        "totalGF": 413,
+        "totalGC": 452,
+        "promedioPuntos": 25,
         "mejorPosicion": 4,
         "divisionalHistory": [
           {
@@ -19450,6 +19714,12 @@
             "divisional": "I",
             "posicion": 16,
             "puntos": 10
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 19,
+            "puntos": 20
           },
           {
             "temporadaId": 102,
@@ -19519,23 +19789,103 @@
           }
         ]
       },
+      "c-s-y-d-niagara": {
+        "teamId": "c-s-y-d-niagara",
+        "nombre": "C.s Y D. Niagara",
+        "campeonatos": 0,
+        "temporadas": 9,
+        "totalPuntos": 165,
+        "totalPJ": 159,
+        "totalGF": 237,
+        "totalGC": 337,
+        "promedioPuntos": 18.333333333333332,
+        "mejorPosicion": 7,
+        "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 16,
+            "puntos": 10
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "I",
+            "posicion": 16,
+            "puntos": 8
+          },
+          {
+            "temporadaId": 100,
+            "divisional": "I",
+            "posicion": 18,
+            "puntos": 7
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 18,
+            "puntos": 20
+          },
+          {
+            "temporadaId": 102,
+            "divisional": "I",
+            "posicion": 8,
+            "puntos": 5
+          },
+          {
+            "temporadaId": 103,
+            "divisional": "H",
+            "posicion": 9,
+            "puntos": 29
+          },
+          {
+            "temporadaId": 104,
+            "divisional": "H",
+            "posicion": 7,
+            "puntos": 30
+          },
+          {
+            "temporadaId": 105,
+            "divisional": "H",
+            "posicion": 8,
+            "puntos": 33
+          },
+          {
+            "temporadaId": 106,
+            "divisional": "G",
+            "posicion": 14,
+            "puntos": 23
+          }
+        ]
+      },
       "auriblanco-basketball-club": {
         "teamId": "auriblanco-basketball-club",
         "nombre": "Auriblanco Basketball Club",
         "campeonatos": 0,
-        "temporadas": 6,
-        "totalPuntos": 146,
-        "totalPJ": 105,
-        "totalGF": 189,
-        "totalGC": 160,
-        "promedioPuntos": 24.333333333333332,
+        "temporadas": 8,
+        "totalPuntos": 170,
+        "totalPJ": 142,
+        "totalGF": 241,
+        "totalGC": 262,
+        "promedioPuntos": 21.25,
         "mejorPosicion": 2,
         "divisionalHistory": [
+          {
+            "temporadaId": 99,
+            "divisional": "J",
+            "posicion": 9,
+            "puntos": 1
+          },
           {
             "temporadaId": 100,
             "divisional": "I",
             "posicion": 19,
             "puntos": 5
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 16,
+            "puntos": 23
           },
           {
             "temporadaId": 102,
@@ -19573,14 +19923,20 @@
         "teamId": "guichon-universitario",
         "nombre": "Guichon Universitario",
         "campeonatos": 1,
-        "temporadas": 7,
-        "totalPuntos": 213,
-        "totalPJ": 132,
-        "totalGF": 278,
-        "totalGC": 245,
-        "promedioPuntos": 30.428571428571427,
+        "temporadas": 8,
+        "totalPuntos": 250,
+        "totalPJ": 153,
+        "totalGF": 327,
+        "totalGC": 283,
+        "promedioPuntos": 31.25,
         "mejorPosicion": 1,
         "divisionalHistory": [
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 7,
+            "puntos": 37
+          },
           {
             "temporadaId": 102,
             "divisional": "I",
@@ -19629,14 +19985,20 @@
         "teamId": "la-cueva-del-lobizon",
         "nombre": "La Cueva Del Lobizon",
         "campeonatos": 0,
-        "temporadas": 11,
-        "totalPuntos": 305,
-        "totalPJ": 214,
-        "totalGF": 390,
-        "totalGC": 437,
-        "promedioPuntos": 27.727272727272727,
+        "temporadas": 12,
+        "totalPuntos": 340,
+        "totalPJ": 234,
+        "totalGF": 432,
+        "totalGC": 474,
+        "promedioPuntos": 28.333333333333332,
         "mejorPosicion": 3,
         "divisionalHistory": [
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 10,
+            "puntos": 35
+          },
           {
             "temporadaId": 102,
             "divisional": "I",
@@ -20497,13 +20859,13 @@
         "teamId": "pe-arol-universitario",
         "nombre": "PeñArol Universitario",
         "campeonatos": 0,
-        "temporadas": 2,
-        "totalPuntos": 28,
-        "totalPJ": 29,
-        "totalGF": 35,
-        "totalGC": 49,
-        "promedioPuntos": 14,
-        "mejorPosicion": 13,
+        "temporadas": 5,
+        "totalPuntos": 135,
+        "totalPJ": 95,
+        "totalGF": 131,
+        "totalGC": 119,
+        "promedioPuntos": 27,
+        "mejorPosicion": 2,
         "divisionalHistory": [
           {
             "temporadaId": 90,
@@ -20516,6 +20878,24 @@
             "divisional": "A",
             "posicion": 13,
             "puntos": 24
+          },
+          {
+            "temporadaId": 98,
+            "divisional": "A",
+            "posicion": 2,
+            "puntos": 40
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "A",
+            "posicion": 4,
+            "puntos": 38
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "A",
+            "posicion": 8,
+            "puntos": 29
           }
         ]
       },
@@ -20523,12 +20903,12 @@
         "teamId": "estudiantes-espa-oles",
         "nombre": "Estudiantes EspañOles",
         "campeonatos": 0,
-        "temporadas": 2,
-        "totalPuntos": 24,
-        "totalPJ": 29,
-        "totalGF": 43,
-        "totalGC": 83,
-        "promedioPuntos": 12,
+        "temporadas": 5,
+        "totalPuntos": 64,
+        "totalPJ": 94,
+        "totalGF": 116,
+        "totalGC": 243,
+        "promedioPuntos": 12.8,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -20542,6 +20922,24 @@
             "divisional": "B",
             "posicion": 16,
             "puntos": 10
+          },
+          {
+            "temporadaId": 98,
+            "divisional": "D",
+            "posicion": 15,
+            "puntos": 15
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "E",
+            "posicion": 14,
+            "puntos": 19
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 16,
+            "puntos": 6
           }
         ]
       },
@@ -20569,12 +20967,12 @@
         "teamId": "estudiantil-salte-o",
         "nombre": "Estudiantil SalteñO",
         "campeonatos": 0,
-        "temporadas": 2,
-        "totalPuntos": 58,
-        "totalPJ": 29,
-        "totalGF": 80,
-        "totalGC": 45,
-        "promedioPuntos": 29,
+        "temporadas": 5,
+        "totalPuntos": 119,
+        "totalPJ": 95,
+        "totalGF": 165,
+        "totalGC": 183,
+        "promedioPuntos": 23.8,
         "mejorPosicion": 2,
         "divisionalHistory": [
           {
@@ -20588,6 +20986,24 @@
             "divisional": "F",
             "posicion": 3,
             "puntos": 44
+          },
+          {
+            "temporadaId": 98,
+            "divisional": "B",
+            "posicion": 10,
+            "puntos": 26
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "B",
+            "posicion": 13,
+            "puntos": 24
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "C",
+            "posicion": 16,
+            "puntos": 11
           }
         ]
       },
@@ -20615,19 +21031,37 @@
         "teamId": "nuestra-se-ora-de-lourdes",
         "nombre": "Nuestra SeñOra De Lourdes",
         "campeonatos": 0,
-        "temporadas": 1,
-        "totalPuntos": 38,
-        "totalPJ": 18,
-        "totalGF": 44,
-        "totalGC": 33,
-        "promedioPuntos": 38,
-        "mejorPosicion": 5,
+        "temporadas": 4,
+        "totalPuntos": 134,
+        "totalPJ": 72,
+        "totalGF": 149,
+        "totalGC": 95,
+        "promedioPuntos": 33.5,
+        "mejorPosicion": 3,
         "divisionalHistory": [
           {
             "temporadaId": 92,
             "divisional": "H",
             "posicion": 5,
             "puntos": 38
+          },
+          {
+            "temporadaId": 98,
+            "divisional": "I",
+            "posicion": 11,
+            "puntos": 17
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "I",
+            "posicion": 3,
+            "puntos": 44
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "G",
+            "posicion": 6,
+            "puntos": 35
           }
         ]
       },
@@ -20648,6 +21082,58 @@
             "divisional": "H",
             "posicion": 12,
             "puntos": 21
+          }
+        ]
+      },
+      "central-espa-ol-f-c": {
+        "teamId": "central-espa-ol-f-c",
+        "nombre": "Central EspañOl F.C.",
+        "campeonatos": 0,
+        "temporadas": 3,
+        "totalPuntos": 111,
+        "totalPJ": 66,
+        "totalGF": 111,
+        "totalGC": 98,
+        "promedioPuntos": 37,
+        "mejorPosicion": 2,
+        "divisionalHistory": [
+          {
+            "temporadaId": 98,
+            "divisional": "H",
+            "posicion": 3,
+            "puntos": 40
+          },
+          {
+            "temporadaId": 99,
+            "divisional": "G",
+            "posicion": 2,
+            "puntos": 41
+          },
+          {
+            "temporadaId": 101,
+            "divisional": "F",
+            "posicion": 8,
+            "puntos": 30
+          }
+        ]
+      },
+      "el-zurdo-futbol-club": {
+        "teamId": "el-zurdo-futbol-club",
+        "nombre": "El Zurdo Futbol Club",
+        "campeonatos": 0,
+        "temporadas": 1,
+        "totalPuntos": 32,
+        "totalPJ": 21,
+        "totalGF": 56,
+        "totalGC": 35,
+        "promedioPuntos": 32,
+        "mejorPosicion": 11,
+        "divisionalHistory": [
+          {
+            "temporadaId": 101,
+            "divisional": "I",
+            "posicion": 11,
+            "puntos": 32
           }
         ]
       }
@@ -20748,6 +21234,10 @@
       {
         "teamId": "central-espanol-f-c",
         "nombre": "Central Español F.c."
+      },
+      {
+        "teamId": "central-espa-ol-f-c",
+        "nombre": "Central EspañOl F.C."
       },
       {
         "teamId": "centro-cristobal-colon",
@@ -20948,6 +21438,10 @@
       {
         "teamId": "el-rejunte",
         "nombre": "El Rejunte"
+      },
+      {
+        "teamId": "el-zurdo-futbol-club",
+        "nombre": "El Zurdo Futbol Club"
       },
       {
         "teamId": "elbio-fernandez",
@@ -21496,7 +21990,8 @@
       "F",
       "G",
       "H",
-      "I"
+      "I",
+      "J"
     ],
     "torneos": [
       "Mayores Masculino"

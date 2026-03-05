@@ -130,55 +130,58 @@ function extractDivisional(serieName: string, useNumbers: boolean): string {
   // misspelled "DIVISONAL" it matches "DIV" at position 0 and then greedily captures the
   // following "I" as the divisional letter (false positive).
 
+  // All letter patterns use [A-Z] to handle divisions beyond I (e.g. J in T99/2012).
+  // The surrounding context (DIVISIONAL keyword, quotes, etc.) prevents false positives.
+
   // 1. DIVISIONAL / DIVISONAL / DIViSIONAL — full-word match, handles common API typos.
   //    Pattern: DIVIS + 1-2 chars from [IO] + NAL, then optional non-quote chars, then quoted letter.
-  let m = serieName.match(/DIVIS[IO]{1,2}NAL[^"]*"(?:PS)?\s*([A-I])/i);
+  let m = serieName.match(/DIVIS[IO]{1,2}NAL[^"]*"(?:PS)?\s*([A-Z])/i);
   if (m) return m[1].toUpperCase();
 
   // 2. DIV.X (no quotes around letter) — e.g. "S20DIV.C.SERIE" where C is the divisional.
   //    Must come before the SERIE check so that DIV.C.SERIE"A" returns C, not A.
   //    No \b here: "S20DIV" has a digit before DIV so \b wouldn't fire.
-  m = serieName.match(/DIV\.([A-I])[\s".]/i);
+  m = serieName.match(/DIV\.([A-Z])[\s".]/i);
   if (m) return m[1].toUpperCase();
 
   // 3. DIV."X" — abbreviated with mandatory period + quotes — e.g. 'DIV."C" COPA'.
-  m = serieName.match(/\bDIV\.\s*"([A-I])/i);
+  m = serieName.match(/\bDIV\.\s*"([A-Z])/i);
   if (m) return m[1].toUpperCase();
 
   // 3b. DIV "X" — no dot, space before the quoted letter.
   //     e.g. 'DIV "G" TIT Y ASC', 'DIV "A" TITULO Y ASCENSO', 'DIV "F" PERM Y DESC'.
   //     These appear in T90 (2003) and T92 (2005) seasons.
-  m = serieName.match(/\bDIV\s+"([A-I])"/i);
+  m = serieName.match(/\bDIV\s+"([A-Z])"/i);
   if (m) return m[1].toUpperCase();
 
   // 4. CLASIFICATORIO "PSX" (Pre Senior format) or CLASIFICATORIO "X" (Mayores).
-  m = serieName.match(/CLASIFICATORIO[^"]*"(?:PS)?\s*([A-I])/i);
+  m = serieName.match(/CLASIFICATORIO[^"]*"(?:PS)?\s*([A-Z])/i);
   if (m) return m[1].toUpperCase();
 
   // 5. Serie " A " / Pre-Senior Serie " A " (early seasons T94-T95).
   //    Only reached when none of the DIVISIONAL/DIV patterns matched above.
-  m = serieName.match(/\bSERIE\s*"\s*([A-I])\s*"/i);
+  m = serieName.match(/\bSERIE\s*"\s*([A-Z])\s*"/i);
   if (m) return m[1].toUpperCase();
 
   // 6. Second/subsequent rounds — RUEDA before the quoted letter.
   //    e.g. "2ª RUEDA PRESENIOR "F""
-  m = serieName.match(/RUEDA[^"]*"([A-I])"/i);
+  m = serieName.match(/RUEDA[^"]*"([A-Z])"/i);
   if (m) return m[1].toUpperCase();
 
   // 7. Second/subsequent rounds — RUEDA or R.N after the quoted letter.
   //    e.g. "PRESENIOR "F" 2ª RUEDA" or "PRESENIOR "E" SERIE 1 R.2"
-  m = serieName.match(/"([A-I])".*?(?:RUEDA|R\.\d)/i);
+  m = serieName.match(/"([A-Z])".*?(?:RUEDA|R\.\d)/i);
   if (m) return m[1].toUpperCase();
 
   // 8. Phase-2 sub-series not prefixed by DIVISIONAL keyword.
   //    e.g. "PRESENIOR "A" TITULO", "PRESENIOR "B" TIT. y ASC.", "PRESENIOR "A" PERMANENCIA",
   //         "PRESENIOR "D" CAMP. ASC."
   //    These represent continued play within the same divisional (championship or relegation phase).
-  m = serieName.match(/"([A-I])"\s*(?:TITULO|TIT\.|PERMANENCIA|PER\.|ASCENSO|ASC\.|CAMP\.)/i);
+  m = serieName.match(/"([A-Z])"\s*(?:TITULO|TIT\b|PERMANENCIA|PERM\b|PER\.|ASCENSO|ASC\b|CAMP\.)/i);
   if (m) return m[1].toUpperCase();
 
   // 9. Simple "A-" format (very early seasons).
-  const simple = serieName.match(/^([A-I])-$/i);
+  const simple = serieName.match(/^([A-Z])-$/i);
   if (simple) return simple[1].toUpperCase();
 
   return '';
@@ -198,7 +201,8 @@ function shouldIncludeSerie(serieName: string, useNumbers: boolean): boolean {
 function getSerieWeight(name: string): number {
   // PERMANENCIA / PERM (T90/T92 short form) / PER. (Pre Senior form)
   if (/PERMANENCIA|PERM\b|PER\./i.test(name)) return 5;
-  if (/COPA|PLATA/i.test(name)) return 4;
+  // ORO/BRONCE are also cup competitions (T98 uses "DIV I ORO", "DIV I BRONCE" format).
+  if (/COPA|PLATA|\bORO\b|\bBRONCE\b/i.test(name)) return 4;
   if (/CAMPEON\b/i.test(name)) return 3;
   // TITULO / TIT (word boundary covers TIT Y ASC, TIT. y ASC.) / ASCENSO / ASC (word boundary)
   if (/TITULO|TIT\b|ASCENSO|ASC\b/i.test(name)) return 2;
