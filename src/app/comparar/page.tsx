@@ -219,17 +219,18 @@ function CompararContent() {
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-4 text-sm">
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-full bg-[#2dd4bf]" />
+                <span className="inline-block w-3 h-3 rounded-full bg-[#3b82f6]" />
                 <span className="font-medium text-white">{team1.nombre}</span>
               </span>
               <span className="text-gray-500">vs</span>
               <span className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-full bg-[#db2777]" />
+                <span className="inline-block w-3 h-3 rounded-full bg-[#f97316]" />
                 <span className="font-medium text-white">{team2.nombre}</span>
               </span>
             </div>
             <WhatsAppShare
               text={`Comparativa histórica: ${team1.nombre} vs ${team2.nombre} en ${displayName} — Liga Universitaria`}
+              url={typeof window !== 'undefined' ? window.location.href : ''}
             />
           </div>
 
@@ -264,10 +265,10 @@ function CompararContent() {
               <thead>
                 <tr className="border-b border-[#1e293b]">
                   <th className="px-4 py-3 text-left text-gray-400 font-medium">Métrica</th>
-                  <th className="px-4 py-3 text-center font-medium" style={{ color: '#2dd4bf' }}>
+                  <th className="px-4 py-3 text-center font-medium" style={{ color: '#3b82f6' }}>
                     {team1.nombre}
                   </th>
-                  <th className="px-4 py-3 text-center font-medium" style={{ color: '#db2777' }}>
+                  <th className="px-4 py-3 text-center font-medium" style={{ color: '#f97316' }}>
                     {team2.nombre}
                   </th>
                 </tr>
@@ -284,13 +285,13 @@ function CompararContent() {
                         {k.icon} {k.label}
                       </td>
                       <td
-                        className={`px-4 py-3 text-center font-semibold ${better1 ? 'text-[#2dd4bf]' : 'text-gray-300'}`}
+                        className={`px-4 py-3 text-center font-semibold ${better1 ? 'text-[#3b82f6]' : 'text-gray-300'}`}
                       >
                         {fmt(k.v1)}
                         {better1 && <span className="ml-1 text-xs">▲</span>}
                       </td>
                       <td
-                        className={`px-4 py-3 text-center font-semibold ${better2 ? 'text-[#db2777]' : 'text-gray-300'}`}
+                        className={`px-4 py-3 text-center font-semibold ${better2 ? 'text-[#f97316]' : 'text-gray-300'}`}
                       >
                         {fmt(k.v2)}
                         {better2 && <span className="ml-1 text-xs">▲</span>}

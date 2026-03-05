@@ -2,12 +2,14 @@
 
 import { usePathname } from 'next/navigation';
 
-export function WhatsAppShare({ text }: { text?: string }) {
+export function WhatsAppShare({ text, url: urlProp }: { text?: string; url?: string }) {
   const pathname = usePathname();
 
   function handleShare() {
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-    const url = `${baseUrl}${pathname}`;
+    // Use explicit url prop if provided (e.g. to include query params), otherwise build from pathname
+    const url = urlProp ?? (typeof window !== 'undefined'
+      ? `${window.location.origin}${pathname}`
+      : '');
     const msg = text ? `${text}\n${url}` : `Mirá las estadísticas históricas de la Liga Universitaria\n${url}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
   }

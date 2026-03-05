@@ -26,8 +26,8 @@ interface Props {
   color2?: string;
 }
 
-const COLOR1 = '#2dd4bf';
-const COLOR2 = '#db2777';
+const COLOR1 = '#3b82f6'; // blue
+const COLOR2 = '#f97316'; // orange
 
 export function ComparisonRadarChart({
   team1,
