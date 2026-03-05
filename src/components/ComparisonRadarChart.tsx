@@ -36,28 +36,36 @@ export function ComparisonRadarChart({
   color1 = COLOR1,
   color2 = COLOR2,
 }: Props) {
-  // Normalize each metric to 0-1 relative to the max of both teams.
-  // For "lowerIsBetter" metrics, invert after normalization.
+  // Ratio-based normalization: winner always gets 100, loser gets (min/max)*100.
+  // This preserves real proportions — e.g. GC/PJ 0.93 vs 1.13 → 100 vs 82, not 100 vs 0.
+  // When both values are equal, both get 100. When both are 0, both get 50.
   const data = kpis.map((k) => {
-    const max = Math.max(k.v1, k.v2) || 1;
-    let n1 = k.v1 / max;
-    let n2 = k.v2 / max;
-    if (k.lowerIsBetter) {
-      // Flip: if v1=0.3 and v2=1.0, lower is better so v1 should score higher
-      n1 = 1 - n1 + (1 - n2); // simplest: invert relative to each other
-      n2 = 0;
-      // Better approach: if min of both = best, map [min,max] → [1,0]
-      const minV = Math.min(k.v1, k.v2);
-      const maxV = Math.max(k.v1, k.v2);
-      const range = maxV - minV || 1;
-      n1 = 1 - (k.v1 - minV) / range;
-      n2 = 1 - (k.v2 - minV) / range;
+    const lo = Math.min(k.v1, k.v2);
+    const hi = Math.max(k.v1, k.v2);
+
+    let n1: number, n2: number;
+
+    if (hi === 0) {
+      // Both zero — show as equal and mid-sized
+      n1 = 50; n2 = 50;
+    } else {
+      const ratio = (lo / hi) * 100; // e.g. 82.3
+
+      if (k.lowerIsBetter) {
+        // Lower raw value = better → the team with lo wins
+        n1 = k.v1 <= k.v2 ? 100 : ratio;
+        n2 = k.v2 <= k.v1 ? 100 : ratio;
+      } else {
+        // Higher raw value = better → the team with hi wins
+        n1 = k.v1 >= k.v2 ? 100 : ratio;
+        n2 = k.v2 >= k.v1 ? 100 : ratio;
+      }
     }
 
     return {
       metric: `${k.icon} ${k.label}`,
-      [team1]: parseFloat((n1 * 100).toFixed(1)),
-      [team2]: parseFloat((n2 * 100).toFixed(1)),
+      [team1]: parseFloat(n1.toFixed(1)),
+      [team2]: parseFloat(n2.toFixed(1)),
     };
   });
 
