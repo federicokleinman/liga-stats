@@ -164,7 +164,14 @@ function extractDivisional(serieName: string, useNumbers: boolean): string {
   m = serieName.match(/"([A-I])".*?(?:RUEDA|R\.\d)/i);
   if (m) return m[1].toUpperCase();
 
-  // 8. Simple "A-" format (very early seasons).
+  // 8. Phase-2 sub-series not prefixed by DIVISIONAL keyword.
+  //    e.g. "PRESENIOR "A" TITULO", "PRESENIOR "B" TIT. y ASC.", "PRESENIOR "A" PERMANENCIA",
+  //         "PRESENIOR "D" CAMP. ASC."
+  //    These represent continued play within the same divisional (championship or relegation phase).
+  m = serieName.match(/"([A-I])"\s*(?:TITULO|TIT\.|PERMANENCIA|PER\.|ASCENSO|ASC\.|CAMP\.)/i);
+  if (m) return m[1].toUpperCase();
+
+  // 9. Simple "A-" format (very early seasons).
   const simple = serieName.match(/^([A-I])-$/i);
   if (simple) return simple[1].toUpperCase();
 
@@ -292,13 +299,28 @@ export async function ingestAll(onProgress?: ProgressCallback): Promise<CachedDa
   const groups: ComboGroup[] = [];
   for (const g of Array.from(groupMap.values())) {
     let selected: Combo[];
+    // Weights:
+    //   0 = principal (regular season rounds)
+    //   2 = TITULO / ASCENSO — phase-2 championship/promotion (same divisional teams)
+    //   3 = CAMPEON — championship final (rarely used, skip)
+    //   4 = COPA / PLATA — separate cup competition (exclude)
+    //   5 = PERMANENCIA — phase-2 relegation (same divisional teams)
+    //   6 = SERIE sub-group
+    // Strategy: merge weight-0 with their phase-2 continuations (weight 2 & 5).
+    // Exclude weight-3 (championship finals) and weight-4 (cup competitions).
     if (g.hasZero) {
-      selected = g.combos.filter((c) => c.weight === 0);
+      selected = g.combos.filter((c) => c.weight === 0 || c.weight === 2 || c.weight === 5);
     } else if (g.hasSix) {
-      selected = g.combos.filter((c) => c.weight === 6);
+      selected = g.combos.filter((c) => c.weight === 6 || c.weight === 2 || c.weight === 5);
     } else {
-      const minW = Math.min(...g.combos.map((c) => c.weight));
-      selected = g.combos.filter((c) => c.weight === minW);
+      // Fallback: exclude cups (weight 4) and championship finals (weight 3) only
+      const candidates = g.combos.filter((c) => c.weight !== 4 && c.weight !== 3);
+      if (candidates.length > 0) {
+        selected = candidates;
+      } else {
+        const minW = Math.min(...g.combos.map((c) => c.weight));
+        selected = g.combos.filter((c) => c.weight === minW);
+      }
     }
     const first = selected[0];
     groups.push({
