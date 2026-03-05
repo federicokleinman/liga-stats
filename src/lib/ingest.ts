@@ -154,7 +154,17 @@ function extractDivisional(serieName: string, useNumbers: boolean): string {
   m = serieName.match(/\bSERIE\s*"\s*([A-I])\s*"/i);
   if (m) return m[1].toUpperCase();
 
-  // 6. Simple "A-" format (very early seasons).
+  // 6. Second/subsequent rounds — RUEDA before the quoted letter.
+  //    e.g. "2ª RUEDA PRESENIOR "F""
+  m = serieName.match(/RUEDA[^"]*"([A-I])"/i);
+  if (m) return m[1].toUpperCase();
+
+  // 7. Second/subsequent rounds — RUEDA or R.N after the quoted letter.
+  //    e.g. "PRESENIOR "F" 2ª RUEDA" or "PRESENIOR "E" SERIE 1 R.2"
+  m = serieName.match(/"([A-I])".*?(?:RUEDA|R\.\d)/i);
+  if (m) return m[1].toUpperCase();
+
+  // 8. Simple "A-" format (very early seasons).
   const simple = serieName.match(/^([A-I])-$/i);
   if (simple) return simple[1].toUpperCase();
 
@@ -263,33 +273,67 @@ export async function ingestAll(onProgress?: ProgressCallback): Promise<CachedDa
     }
   }
 
-  // Deduplicate: prefer principal (weight 0) per torneo+temporada+divisional
-  const best = new Map<string, Combo>();
+  // Group combos by torneo+temporada+divisional and select which series to merge.
+  // - Weight 0 (principal/rounds): merge ALL — handles "1ª RUEDA" + "2ª RUEDA" cases.
+  // - Weight 6 (SERIE sub-groups): merge ALL when no weight-0 series exist.
+  // - Weight 2-5 (TITULO, COPA, PERMANENCIA, etc.): skip when better series exist.
+  type ComboGroup = { torneo: string; temporada: string; divisional: string; useNumbers: boolean; series: string[] };
+
+  const groupMap = new Map<string, { combos: Combo[]; hasZero: boolean; hasSix: boolean }>();
   for (const c of allCombos) {
     const k = `${c.torneo}|${c.temporada}|${c.divisional}`;
-    const ex = best.get(k);
-    if (!ex || c.weight < ex.weight) best.set(k, c);
+    if (!groupMap.has(k)) groupMap.set(k, { combos: [], hasZero: false, hasSix: false });
+    const g = groupMap.get(k)!;
+    g.combos.push(c);
+    if (c.weight === 0) g.hasZero = true;
+    if (c.weight === 6) g.hasSix = true;
   }
-  const combos = Array.from(best.values());
 
-  // Phase 2 — fetch matches for all combos with controlled concurrency
+  const groups: ComboGroup[] = [];
+  for (const g of Array.from(groupMap.values())) {
+    let selected: Combo[];
+    if (g.hasZero) {
+      selected = g.combos.filter((c) => c.weight === 0);
+    } else if (g.hasSix) {
+      selected = g.combos.filter((c) => c.weight === 6);
+    } else {
+      const minW = Math.min(...g.combos.map((c) => c.weight));
+      selected = g.combos.filter((c) => c.weight === minW);
+    }
+    const first = selected[0];
+    groups.push({
+      torneo: first.torneo,
+      temporada: first.temporada,
+      divisional: first.divisional,
+      useNumbers: first.useNumbers,
+      series: selected.map((c) => c.serie),
+    });
+  }
+
+  // Phase 2 — fetch matches for all groups with controlled concurrency.
+  // Each group may include multiple series (rounds/sub-groups) whose matches are merged.
   const allRows: StandingRow[] = [];
   const divisionalSet = new Set<string>();
   const torneoSet = new Set<string>();
   let done = 0;
-  const total = combos.length;
+  const total = groups.length;
   const COMBO_CONCURRENCY = 3;
 
-  onProgress?.(0, total, `${total} series a descargar (${ALL_TORNEOS.length} categorías)`);
+  onProgress?.(0, total, `${total} divisionales a descargar (${ALL_TORNEOS.length} categorías)`);
 
-  async function processCombo(combo: Combo): Promise<StandingRow[]> {
-    const { torneo, temporada, serie, divisional } = combo;
+  async function processGroup(group: ComboGroup): Promise<StandingRow[]> {
+    const { torneo, temporada, divisional, series } = group;
     const tempNum = parseInt(temporada, 10);
+    const allMatches: RawMatch[] = [];
 
-    const fechas = await fetchFechas(temporada, torneo, serie);
-    if (fechas.length === 0) return [];
+    for (const serie of series) {
+      const fechas = await fetchFechas(temporada, torneo, serie);
+      if (fechas.length > 0) {
+        const matches = await fetchAllPartidosBatch(temporada, torneo, serie, fechas);
+        allMatches.push(...matches);
+      }
+    }
 
-    const allMatches = await fetchAllPartidosBatch(temporada, torneo, serie, fechas);
     if (allMatches.length === 0) return [];
 
     const standings = buildStandings(allMatches);
@@ -310,30 +354,31 @@ export async function ingestAll(onProgress?: ProgressCallback): Promise<CachedDa
         gf: s.gf, gc: s.gc,
         puntos,
         diferencia: s.gf - s.gc,
-        extras: { matchesPlayed: allMatches.length, fechas: fechas.length, serieOriginal: serie },
+        extras: { matchesPlayed: allMatches.length, fechas: -1, serieOriginal: series[0] },
       });
     }
     return rows;
   }
 
-  for (let i = 0; i < combos.length; i += COMBO_CONCURRENCY) {
-    const batch = combos.slice(i, i + COMBO_CONCURRENCY);
+  for (let i = 0; i < groups.length; i += COMBO_CONCURRENCY) {
+    const batch = groups.slice(i, i + COMBO_CONCURRENCY);
     const results = await Promise.allSettled(
-      batch.map(async (combo) => {
-        torneoSet.add(combo.torneo);
-        divisionalSet.add(combo.divisional);
+      batch.map(async (group) => {
+        torneoSet.add(group.torneo);
+        divisionalSet.add(group.divisional);
         try {
-          const rows = await processCombo(combo);
+          const rows = await processGroup(group);
           done++;
-          const label = combo.useNumbers ? `Serie ${combo.divisional}` : `Div${combo.divisional}`;
+          const label = group.useNumbers ? `Serie ${group.divisional}` : `Div${group.divisional}`;
+          const seriesNote = group.series.length > 1 ? ` (${group.series.length} rondas)` : '';
           const msg = rows.length > 0
-            ? `T${combo.temporada} [${combo.torneo}] ${label}: ${rows.length} equipos`
-            : `T${combo.temporada} [${combo.torneo}] ${label}: sin datos`;
+            ? `T${group.temporada} [${group.torneo}] ${label}${seriesNote}: ${rows.length} equipos`
+            : `T${group.temporada} [${group.torneo}] ${label}: sin datos`;
           onProgress?.(done, total, msg);
           return rows;
         } catch {
           done++;
-          onProgress?.(done, total, `T${combo.temporada} [${combo.torneo}]: error`);
+          onProgress?.(done, total, `T${group.temporada} [${group.torneo}]: error`);
           return [];
         }
       })
