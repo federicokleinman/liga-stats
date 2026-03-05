@@ -65,7 +65,15 @@ function TeamDetailContent({ teamId }: { teamId: string }) {
           <h1 className="text-3xl font-bold">{team.nombre}</h1>
           <p className="text-gray-400 mt-1">{team.temporadas} temporadas en {displayName}</p>
         </div>
-        <WhatsAppShare text={`Mirá las estadísticas de ${team.nombre} en ${displayName} — Liga Universitaria`} />
+        <div className="flex items-center gap-2 flex-wrap">
+          <Link
+            href={`/comparar?equipo1=${teamId}&torneo=${encodeURIComponent(torneo)}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1e293b] hover:bg-[#334155] text-gray-200 text-sm font-medium rounded-lg transition-colors border border-[#334155]"
+          >
+            ⚔️ Comparar
+          </Link>
+          <WhatsAppShare text={`Mirá las estadísticas de ${team.nombre} en ${displayName} — Liga Universitaria`} />
+        </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">

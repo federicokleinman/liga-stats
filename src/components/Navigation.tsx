@@ -8,6 +8,7 @@ const links = [
   { href: '/', label: 'Inicio' },
   { href: '/equipos', label: 'Equipos' },
   { href: '/temporadas', label: 'Temporadas' },
+  { href: '/comparar', label: 'Comparar' },
   { href: '/metodologia', label: 'Metodología' },
   { href: '/contacto', label: 'Contacto' },
 ];
