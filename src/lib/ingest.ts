@@ -145,6 +145,12 @@ function extractDivisional(serieName: string, useNumbers: boolean): string {
   m = serieName.match(/\bDIV\.\s*"([A-I])/i);
   if (m) return m[1].toUpperCase();
 
+  // 3b. DIV "X" — no dot, space before the quoted letter.
+  //     e.g. 'DIV "G" TIT Y ASC', 'DIV "A" TITULO Y ASCENSO', 'DIV "F" PERM Y DESC'.
+  //     These appear in T90 (2003) and T92 (2005) seasons.
+  m = serieName.match(/\bDIV\s+"([A-I])"/i);
+  if (m) return m[1].toUpperCase();
+
   // 4. CLASIFICATORIO "PSX" (Pre Senior format) or CLASIFICATORIO "X" (Mayores).
   m = serieName.match(/CLASIFICATORIO[^"]*"(?:PS)?\s*([A-I])/i);
   if (m) return m[1].toUpperCase();
@@ -190,10 +196,12 @@ function shouldIncludeSerie(serieName: string, useNumbers: boolean): boolean {
 }
 
 function getSerieWeight(name: string): number {
-  if (/PERMANENCIA|PER\./i.test(name)) return 5;
+  // PERMANENCIA / PERM (T90/T92 short form) / PER. (Pre Senior form)
+  if (/PERMANENCIA|PERM\b|PER\./i.test(name)) return 5;
   if (/COPA|PLATA/i.test(name)) return 4;
   if (/CAMPEON\b/i.test(name)) return 3;
-  if (/TITULO|TIT\.|ASCENSO|ASC\./i.test(name)) return 2;
+  // TITULO / TIT (word boundary covers TIT Y ASC, TIT. y ASC.) / ASCENSO / ASC (word boundary)
+  if (/TITULO|TIT\b|ASCENSO|ASC\b/i.test(name)) return 2;
   if (/SERIE/i.test(name)) return 6;
   return 0; // principal
 }
