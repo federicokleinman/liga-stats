@@ -32,7 +32,13 @@ export function ComparisonBarChart({
       {kpis.map((k) => {
         const fmt = k.format ?? ((v: number) => String(v));
         const lib = k.lowerIsBetter ?? false;
-        const max = Math.max(k.v1, k.v2) || 1;
+        const rawMax = Math.max(k.v1, k.v2) || 1;
+        const rawMin = Math.min(k.v1, k.v2) || 1;
+
+        // For "lower is better" metrics, invert bar width so the winner (lower value)
+        // gets the longest bar. We use the same ratio logic as the radar chart.
+        const barPct = (v: number) =>
+          lib ? (rawMin / (v || 1)) * 100 : (v / rawMax) * 100;
 
         const winner1 = lib ? k.v1 <= k.v2 : k.v1 >= k.v2;
         const winner2 = lib ? k.v2 <= k.v1 : k.v2 >= k.v1;
@@ -51,7 +57,7 @@ export function ComparisonBarChart({
                 <div
                   className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-500"
                   style={{
-                    width: `${(k.v1 / max) * 100}%`,
+                    width: `${barPct(k.v1)}%`,
                     backgroundColor: color1,
                     opacity: tie ? 1 : winner1 ? 1 : 0.55,
                   }}
@@ -68,7 +74,7 @@ export function ComparisonBarChart({
                 <div
                   className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-500"
                   style={{
-                    width: `${(k.v2 / max) * 100}%`,
+                    width: `${barPct(k.v2)}%`,
                     backgroundColor: color2,
                     opacity: tie ? 1 : winner2 ? 1 : 0.55,
                   }}
