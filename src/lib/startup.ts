@@ -58,16 +58,15 @@ async function tryLoadFromDisk(): Promise<boolean> {
   const data = await loadCachedData();
   if (!data || data.rows.length === 0) return false;
 
-  let allMetrics = await loadAllMetrics();
-  if (!allMetrics) {
-    progress.message = 'Recalculando métricas...';
-    allMetrics = {};
-    const torneos = data.torneos?.length ? data.torneos : [TORNEO_NAMES.MAYORES];
-    for (const torneo of torneos) {
-      allMetrics[torneo] = computeAllMetrics(data, torneo);
-    }
-    await saveAllMetrics(allMetrics);
+  // Always recompute metrics from standings to ensure they stay in sync
+  // (loading a stale metrics.json after standings.json was patched caused wrong champions).
+  progress.message = 'Recalculando métricas...';
+  const allMetrics: Record<string, ComputedMetrics> = {};
+  const torneos = data.torneos?.length ? data.torneos : [TORNEO_NAMES.MAYORES];
+  for (const torneo of torneos) {
+    allMetrics[torneo] = computeAllMetrics(data, torneo);
   }
+  await saveAllMetrics(allMetrics);
 
   setMemoryCache(data, allMetrics);
   progress.status = 'ready';
