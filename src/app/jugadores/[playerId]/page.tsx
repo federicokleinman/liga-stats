@@ -58,7 +58,7 @@ function ShareButton({ player, year }: { player: PlayerSeason; year: number }) {
     const name = normalizeName(player.nombre);
     const team = normalizeName(player.equipo);
     const lines = [
-      `${name} (${team}) — ${year} Mayores Div A`,
+      `${name} (${team}) — ${year} Mayores`,
       `${player.pj} PJ | ${player.minutos} min | ${player.goles} goles | ${player.amarillas} TA | ${player.rojas} TR`,
       '',
       url,
@@ -88,7 +88,7 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/players?temporada=112&divisional=A')
+    fetch('/api/players?temporada=112&divisional=TODAS')
       .then((r) => {
         if (!r.ok) throw new Error('No disponible');
         return r.json();
@@ -149,7 +149,7 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
           </Link>
           <h1 className="text-3xl font-bold">{normalizeName(player.nombre)}</h1>
           <p className="text-gray-400 mt-1">
-            {normalizeName(player.equipo)} — {year} Mayores Div A
+            {normalizeName(player.equipo)} — {year} Mayores
           </p>
         </div>
         <ShareButton player={player} year={year} />

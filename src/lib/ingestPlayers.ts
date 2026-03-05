@@ -468,3 +468,92 @@ export async function loadPlayerCache(
   }
 }
 
+export async function listAvailableDivisionals(
+  temporadaId: number,
+): Promise<string[]> {
+  try {
+    const cacheDir = path.join(process.cwd(), '.cache');
+    if (!existsSync(cacheDir)) return [];
+    const { readdirSync } = await import('fs');
+    const prefix = `players-t${temporadaId}-`;
+    const files = readdirSync(cacheDir).filter(
+      (f) => f.startsWith(prefix) && f.endsWith('.json'),
+    );
+    return files
+      .map((f) => f.slice(prefix.length, -5).toUpperCase())
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
+export async function loadMergedPlayerCache(
+  temporadaId: number,
+): Promise<PlayerCache | null> {
+  const divisionals = await listAvailableDivisionals(temporadaId);
+  if (divisionals.length === 0) return null;
+
+  const allPlayers: PlayerSeason[] = [];
+  let latestFetchedAt = '';
+
+  for (const div of divisionals) {
+    const cache = await loadPlayerCache(temporadaId, div);
+    if (!cache) continue;
+    allPlayers.push(...cache.players);
+    if (cache.fetchedAt > latestFetchedAt) latestFetchedAt = cache.fetchedAt;
+  }
+
+  const byKey = new Map<string, PlayerSeason>();
+  for (const p of allPlayers) {
+    const key = p.carne ? `carne:${p.carne}` : `id:${p.playerId}`;
+    const existing = byKey.get(key);
+    if (!existing) {
+      byKey.set(key, p);
+    } else {
+      // Same player across divisionals — merge appearances
+      const mergedPartidos = [...existing.partidos];
+      const existingMatchIds = new Set(existing.partidos.map((m) => m.matchId));
+      for (const m of p.partidos) {
+        if (!existingMatchIds.has(m.matchId)) mergedPartidos.push(m);
+      }
+      const equipos = Array.from(new Set([...existing.equipos, ...p.equipos]));
+      const teamCounts = new Map<string, number>();
+      for (const m of mergedPartidos) {
+        teamCounts.set(m.equipo, (teamCounts.get(m.equipo) || 0) + 1);
+      }
+      const primaryTeam = Array.from(teamCounts.entries()).sort(
+        (a, b) => b[1] - a[1],
+      )[0][0];
+
+      byKey.set(key, {
+        ...existing,
+        equipo: primaryTeam,
+        equipos,
+        pj: mergedPartidos.length,
+        titular: mergedPartidos.filter((m) => m.titular).length,
+        suplente: mergedPartidos.filter((m) => !m.titular).length,
+        minutos: mergedPartidos.reduce((s, m) => s + m.minutosJugados, 0),
+        goles: mergedPartidos.reduce((s, m) => s + m.goles, 0),
+        golesEnContra: mergedPartidos.reduce((s, m) => s + m.golesEnContra, 0),
+        amarillas: mergedPartidos.filter((m) => m.amarilla).length,
+        rojas: mergedPartidos.filter((m) => m.roja).length,
+        partidos: mergedPartidos,
+      });
+    }
+  }
+
+  const players = Array.from(byKey.values());
+  players.sort(
+    (a, b) =>
+      b.goles - a.goles || b.minutos - a.minutos || a.nombre.localeCompare(b.nombre),
+  );
+
+  return {
+    temporadaId,
+    torneo: 'Mayores Masculino',
+    divisional: 'TODAS',
+    fetchedAt: latestFetchedAt,
+    players,
+  };
+}
+

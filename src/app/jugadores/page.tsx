@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState, useEffect, useMemo } from 'react';
+import { Suspense, useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import type { PlayerCache } from '@/lib/playerTypes';
 import { temporadaToYear } from '@/lib/types';
@@ -32,9 +32,13 @@ function JugadoresContent() {
   const [activeTab, setActiveTab] = useState<SortKey>('goles');
   const [sortKey, setSortKey] = useState<SortKey>('goles');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [divisionals, setDivisionals] = useState<string[]>([]);
+  const [selectedDiv, setSelectedDiv] = useState('A');
 
-  useEffect(() => {
-    fetch('/api/players?temporada=112&divisional=A')
+  const fetchPlayers = useCallback((div: string) => {
+    setLoading(true);
+    setError(null);
+    fetch(`/api/players?temporada=112&divisional=${div}`)
       .then((r) => {
         if (!r.ok) throw new Error('No disponible');
         return r.json();
@@ -43,6 +47,21 @@ function JugadoresContent() {
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    fetch('/api/players/divisionals?temporada=112')
+      .then((r) => r.json())
+      .then((d: { divisionals: string[] }) => {
+        if (d.divisionals.length > 0) setDivisionals(d.divisionals);
+      })
+      .catch(() => {});
+    fetchPlayers('A');
+  }, [fetchPlayers]);
+
+  const handleDivChange = (div: string) => {
+    setSelectedDiv(div);
+    fetchPlayers(div);
+  };
 
   const handleTabChange = (key: SortKey) => {
     setActiveTab(key);
@@ -108,11 +127,41 @@ function JugadoresContent() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Jugadores</h1>
-        <p className="text-gray-400 mt-1">
-          {data.players.length} jugadores — {temporadaToYear(data.temporadaId)} Mayores Divisional {data.divisional}
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold">Jugadores</h1>
+          <p className="text-gray-400 mt-1">
+            {data.players.length} jugadores — {temporadaToYear(data.temporadaId)} Mayores
+            {selectedDiv === 'TODAS' ? ' (todas las divisionales)' : ` Divisional ${data.divisional}`}
+          </p>
+        </div>
+        {divisionals.length > 1 && (
+          <div className="flex items-center gap-2 flex-wrap">
+            {divisionals.map((div) => (
+              <button
+                key={div}
+                onClick={() => handleDivChange(div)}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  selectedDiv === div
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
+                }`}
+              >
+                Div {div}
+              </button>
+            ))}
+            <button
+              onClick={() => handleDivChange('TODAS')}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                selectedDiv === 'TODAS'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
+              }`}
+            >
+              Todas
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Search */}
