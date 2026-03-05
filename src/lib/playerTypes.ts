@@ -1,0 +1,39 @@
+export interface PlayerMatchAppearance {
+  matchId: string;
+  fecha: string;
+  equipo: string;
+  rival: string;
+  esLocal: boolean;
+  resultado: string; // "2-1"
+  titular: boolean;
+  minutosJugados: number;
+  goles: number;
+  golesEnContra: number;
+  amarilla: boolean;
+  roja: boolean;
+}
+
+export interface PlayerSeason {
+  playerId: string;
+  nombre: string;
+  carne: string;
+  equipo: string; // primary team (most appearances)
+  equipos: string[];
+  pj: number;
+  titular: number;
+  suplente: number;
+  minutos: number;
+  goles: number;
+  golesEnContra: number;
+  amarillas: number;
+  rojas: number;
+  partidos: PlayerMatchAppearance[];
+}
+
+export interface PlayerCache {
+  temporadaId: number;
+  torneo: string;
+  divisional: string;
+  fetchedAt: string;
+  players: PlayerSeason[];
+}
