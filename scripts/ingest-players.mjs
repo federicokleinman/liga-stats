@@ -126,7 +126,7 @@ function processMatch(detail) {
     for (const g of gols) {
       const k = norm(g.Nombre);
       const p = golesMap.get(k) || { goles: 0, ec: 0 };
-      if (String(g.EnContra) === '1') p.ec++; else p.goles++;
+      p.goles++;
       golesMap.set(k, p);
     }
     for (const t of tits) {

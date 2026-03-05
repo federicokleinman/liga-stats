@@ -261,8 +261,7 @@ function processMatchWithNames(detail: MatchDetail): PlayerAppearanceWithName[] 
     for (const g of golesDet) {
       const key = norm(g.Nombre);
       const prev = golesMap.get(key) || { goles: 0, ec: 0 };
-      if (String(g.EnContra) === '1') prev.ec++;
-      else prev.goles++;
+      prev.goles++;
       golesMap.set(key, prev);
     }
 
