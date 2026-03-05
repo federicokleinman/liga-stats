@@ -5,6 +5,7 @@ import { useMetrics, useStandings, useTorneo } from '@/lib/hooks';
 import { SortableTable, Column } from '@/components/SortableTable';
 import { WhatsAppShare } from '@/components/WhatsAppShare';
 import { TorneoSelector } from '@/components/TorneoSelector';
+import { temporadaToYear } from '@/lib/types';
 import type { StandingRow } from '@/lib/types';
 import Link from 'next/link';
 
@@ -78,8 +79,10 @@ function TemporadasContent() {
             onChange={(e) => { setSelectedTemp(e.target.value ? parseInt(e.target.value) : null); setSelectedDiv(null); }}
             className="w-full px-3 py-2 bg-[#111827] border border-[#1e293b] rounded-lg text-white focus:outline-none focus:border-blue-500"
           >
-            <option value="">Seleccionar temporada...</option>
-            {temps.map((t) => <option key={t} value={t}>Temporada {t}</option>)}
+            <option value="">Seleccionar año...</option>
+            {[...temps].sort((a, b) => b - a).map((t) => (
+              <option key={t} value={t}>{temporadaToYear(t)}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -102,10 +105,10 @@ function TemporadasContent() {
           {standingsLoading ? (
             <div className="flex justify-center py-8"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>
           ) : rows.length === 0 ? (
-            <p className="text-center text-gray-500 py-8">No hay datos para Temporada {selectedTemp}{selectedDiv ? ` — ${divLabel(selectedDiv)}` : ''}.</p>
+            <p className="text-center text-gray-500 py-8">No hay datos para {temporadaToYear(selectedTemp)}{selectedDiv ? ` — ${divLabel(selectedDiv)}` : ''}.</p>
           ) : selectedDiv ? (
             <section>
-              <h2 className="text-lg font-bold mb-3">Temporada {selectedTemp} — {divLabel(selectedDiv)}</h2>
+              <h2 className="text-lg font-bold mb-3">{temporadaToYear(selectedTemp)} — {divLabel(selectedDiv)}</h2>
               <SortableTable data={rows.map((r) => ({ ...r, _key: `${r.teamId}-${r.divisional}` }))} columns={standingsCols} keyField="_key" defaultSort="posicion" defaultDir="asc" />
             </section>
           ) : (
@@ -114,7 +117,7 @@ function TemporadasContent() {
               if (divRows.length === 0) return null;
               return (
                 <section key={d} className="mb-8">
-                  <h2 className="text-lg font-bold mb-3">{divLabel(d)}</h2>
+                  <h2 className="text-lg font-bold mb-3">{temporadaToYear(selectedTemp!)} — {divLabel(d)}</h2>
                   <SortableTable data={divRows.map((r) => ({ ...r, _key: `${r.teamId}-${r.divisional}` }))} columns={standingsCols} keyField="_key" defaultSort="posicion" defaultDir="asc" />
                 </section>
               );

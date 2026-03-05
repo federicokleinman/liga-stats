@@ -7,7 +7,7 @@ import { IngestProgress } from '@/components/IngestProgress';
 import { SortableTable, Column } from '@/components/SortableTable';
 import { WhatsAppShare } from '@/components/WhatsAppShare';
 import { TorneoSelector } from '@/components/TorneoSelector';
-import { TORNEO_DISPLAY } from '@/lib/types';
+import { TORNEO_DISPLAY, temporadaToYear } from '@/lib/types';
 import Link from 'next/link';
 
 function HomeContent() {
@@ -57,7 +57,7 @@ function HomeContent() {
   const bestSeasonCols: Column<(typeof metrics.bestSeasons)[0] & { _rank: number }>[] = [
     { key: '_rank', label: '#', align: 'center', sortable: false },
     { key: 'nombre', label: 'Equipo', render: (row) => <Link href={`/equipos/${row.teamId}?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:text-blue-300 hover:underline">{row.nombre}</Link> },
-    { key: 'temporadaId', label: 'Temp.', align: 'center' },
+    { key: 'temporadaId', label: 'Año', align: 'center', render: (row) => <span>{temporadaToYear(row.temporadaId)}</span> },
     { key: 'divisional', label: 'Div.', align: 'center' },
     { key: 'puntos', label: 'Pts', align: 'right' },
     { key: 'pj', label: 'PJ', align: 'right' },
@@ -74,7 +74,7 @@ function HomeContent() {
   const attackCols: Column<(typeof metrics.bestAttack)[0] & { _rank: number }>[] = [
     { key: '_rank', label: '#', align: 'center', sortable: false },
     { key: 'nombre', label: 'Equipo', render: (row) => <Link href={`/equipos/${row.teamId}?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:text-blue-300 hover:underline">{row.nombre}</Link> },
-    { key: 'temporadaId', label: 'Temp.', align: 'center' },
+    { key: 'temporadaId', label: 'Año', align: 'center', render: (row) => <span>{temporadaToYear(row.temporadaId)}</span> },
     { key: 'divisional', label: 'Div.', align: 'center' },
     { key: 'value', label: 'GF/PJ', align: 'right', render: (row) => <span>{row.value.toFixed(2)}</span> },
     { key: 'gf', label: 'GF', align: 'right' },
@@ -84,7 +84,7 @@ function HomeContent() {
   const defenseCols: Column<(typeof metrics.bestDefense)[0] & { _rank: number }>[] = [
     { key: '_rank', label: '#', align: 'center', sortable: false },
     { key: 'nombre', label: 'Equipo', render: (row) => <Link href={`/equipos/${row.teamId}?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:text-blue-300 hover:underline">{row.nombre}</Link> },
-    { key: 'temporadaId', label: 'Temp.', align: 'center' },
+    { key: 'temporadaId', label: 'Año', align: 'center', render: (row) => <span>{temporadaToYear(row.temporadaId)}</span> },
     { key: 'divisional', label: 'Div.', align: 'center' },
     { key: 'value', label: 'GC/PJ', align: 'right', render: (row) => <span>{row.value.toFixed(2)}</span> },
     { key: 'gc', label: 'GC', align: 'right' },

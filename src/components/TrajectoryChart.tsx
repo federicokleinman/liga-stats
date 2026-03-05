@@ -9,6 +9,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from 'recharts';
+import { temporadaToYear } from '@/lib/types';
 
 interface DataPoint {
   temporadaId: number;
@@ -21,7 +22,7 @@ const DIV_MAP: Record<string, number> = { A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G:
 
 export function TrajectoryChart({ data }: { data: DataPoint[] }) {
   const chartData = data.map((d) => ({
-    temporada: `T${d.temporadaId}`,
+    temporada: temporadaToYear(d.temporadaId),
     divisionalNum: DIV_MAP[d.divisional] || 8,
     divisional: d.divisional,
     posicion: d.posicion,
@@ -31,7 +32,7 @@ export function TrajectoryChart({ data }: { data: DataPoint[] }) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-semibold text-gray-400 mb-2">Divisional por Temporada (A=mejor, G=peor)</h3>
+        <h3 className="text-sm font-semibold text-gray-400 mb-2">Divisional por Año (A=mejor, G=peor)</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
@@ -60,7 +61,7 @@ export function TrajectoryChart({ data }: { data: DataPoint[] }) {
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-gray-400 mb-2">Puntos por Temporada</h3>
+        <h3 className="text-sm font-semibold text-gray-400 mb-2">Puntos por Año</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>

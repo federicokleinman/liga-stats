@@ -7,7 +7,7 @@ import { SortableTable, Column } from '@/components/SortableTable';
 import { TrajectoryChart } from '@/components/TrajectoryChart';
 import { WhatsAppShare } from '@/components/WhatsAppShare';
 import { TorneoSelector } from '@/components/TorneoSelector';
-import { TORNEO_DISPLAY } from '@/lib/types';
+import { TORNEO_DISPLAY, temporadaToYear } from '@/lib/types';
 import Link from 'next/link';
 
 interface HistoryRow {
@@ -42,7 +42,12 @@ function TeamDetailContent({ teamId }: { teamId: string }) {
   }
 
   const historyCols: Column<HistoryRow>[] = [
-    { key: 'temporadaId', label: 'Temporada', align: 'center' },
+    {
+      key: 'temporadaId',
+      label: 'Año',
+      align: 'center',
+      render: (row) => <span>{temporadaToYear(row.temporadaId as number)}</span>,
+    },
     { key: 'divisional', label: 'Div.', align: 'center' },
     { key: 'posicion', label: 'Posición', align: 'center' },
     { key: 'puntos', label: 'Puntos', align: 'right' },

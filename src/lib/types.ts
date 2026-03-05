@@ -1,3 +1,9 @@
+/** Converts an internal temporada ID to the calendar year shown to users.
+ *  T112 = 2025, T111 = 2024, T90 = 2003, etc. */
+export function temporadaToYear(temporadaId: number): number {
+  return temporadaId + 1913;
+}
+
 export interface StandingRow {
   temporadaId: number;
   torneo: string;
