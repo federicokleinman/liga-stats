@@ -33,7 +33,7 @@ function JugadoresContent() {
   const [sortKey, setSortKey] = useState<SortKey>('goles');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
   const [divisionals, setDivisionals] = useState<string[]>([]);
-  const [selectedDiv, setSelectedDiv] = useState('A');
+  const [selectedDiv, setSelectedDiv] = useState('TODAS');
   const [torneos, setTorneos] = useState<string[]>([]);
   const [selectedTorneo, setSelectedTorneo] = useState('Mayores Masculino');
 
@@ -62,12 +62,12 @@ function JugadoresContent() {
 
   useEffect(() => {
     fetchDivisionals(selectedTorneo);
-    fetchPlayers('A', selectedTorneo);
+    fetchPlayers('TODAS', selectedTorneo);
   }, [fetchDivisionals, fetchPlayers, selectedTorneo]);
 
   const handleTorneoChange = (torneo: string) => {
     setSelectedTorneo(torneo);
-    setSelectedDiv('A');
+    setSelectedDiv('TODAS');
     setDivisionals([]);
   };
 
@@ -138,6 +138,9 @@ function JugadoresContent() {
     return <span className="text-blue-400 ml-1">{sortDir === 'desc' ? '↓' : '↑'}</span>;
   };
 
+  const selectClass =
+    'bg-[#111827] border border-[#1e293b] rounded-lg text-white text-sm px-3 py-2 pr-8 focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer';
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -145,54 +148,43 @@ function JugadoresContent() {
           <h1 className="text-3xl font-bold">Jugadores</h1>
           <p className="text-gray-400 mt-1">
             {data.players.length} jugadores — {temporadaToYear(data.temporadaId)} {selectedTorneo}
-            {selectedDiv === 'TODAS' ? ' (todas las divisionales)' : ` Divisional ${data.divisional}`}
+            {selectedDiv === 'TODAS' ? '' : ` Div ${data.divisional}`}
           </p>
         </div>
-        <div className="flex flex-col items-start sm:items-end gap-3">
+        <div className="flex items-center gap-2">
           {torneos.length > 1 && (
-            <div className="flex items-center gap-2 flex-wrap">
-              {torneos.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => handleTorneoChange(t)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    selectedTorneo === t
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
+            <div className="relative">
+              <select
+                value={selectedTorneo}
+                onChange={(e) => handleTorneoChange(e.target.value)}
+                className={selectClass}
+              >
+                {torneos.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </div>
             </div>
           )}
-        {divisionals.length > 1 && (
-          <div className="flex items-center gap-2 flex-wrap">
-            {divisionals.map((div) => (
-              <button
-                key={div}
-                onClick={() => handleDivChange(div)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  selectedDiv === div
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
-                }`}
+          {divisionals.length > 0 && (
+            <div className="relative">
+              <select
+                value={selectedDiv}
+                onChange={(e) => handleDivChange(e.target.value)}
+                className={selectClass}
               >
-                Div {div}
-              </button>
-            ))}
-            <button
-              onClick={() => handleDivChange('TODAS')}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                selectedDiv === 'TODAS'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
-              }`}
-            >
-              Todas
-            </button>
-          </div>
-        )}
+                <option value="TODAS">Todas las divisionales</option>
+                {divisionals.map((div) => (
+                  <option key={div} value={div}>Divisional {div}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
