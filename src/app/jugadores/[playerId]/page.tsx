@@ -88,7 +88,9 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/players?temporada=112&divisional=TODAS')
+    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+    const torneo = params.get('torneo') || 'Mayores Masculino';
+    fetch(`/api/players?temporada=112&divisional=TODAS&torneo=${encodeURIComponent(torneo)}`)
       .then((r) => {
         if (!r.ok) throw new Error('No disponible');
         return r.json();

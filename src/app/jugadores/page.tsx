@@ -34,11 +34,13 @@ function JugadoresContent() {
   const [sortDir, setSortDir] = useState<SortDir>('desc');
   const [divisionals, setDivisionals] = useState<string[]>([]);
   const [selectedDiv, setSelectedDiv] = useState('A');
+  const [torneos, setTorneos] = useState<string[]>([]);
+  const [selectedTorneo, setSelectedTorneo] = useState('Mayores Masculino');
 
-  const fetchPlayers = useCallback((div: string) => {
+  const fetchPlayers = useCallback((div: string, torneo: string) => {
     setLoading(true);
     setError(null);
-    fetch(`/api/players?temporada=112&divisional=${div}`)
+    fetch(`/api/players?temporada=112&divisional=${div}&torneo=${encodeURIComponent(torneo)}`)
       .then((r) => {
         if (!r.ok) throw new Error('No disponible');
         return r.json();
@@ -48,19 +50,30 @@ function JugadoresContent() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    fetch('/api/players/divisionals?temporada=112')
+  const fetchDivisionals = useCallback((torneo: string) => {
+    fetch(`/api/players/divisionals?temporada=112&torneo=${encodeURIComponent(torneo)}`)
       .then((r) => r.json())
-      .then((d: { divisionals: string[] }) => {
+      .then((d: { divisionals: string[]; torneos: string[] }) => {
         if (d.divisionals.length > 0) setDivisionals(d.divisionals);
+        if (d.torneos.length > 0) setTorneos(d.torneos);
       })
       .catch(() => {});
-    fetchPlayers('A');
-  }, [fetchPlayers]);
+  }, []);
+
+  useEffect(() => {
+    fetchDivisionals(selectedTorneo);
+    fetchPlayers('A', selectedTorneo);
+  }, [fetchDivisionals, fetchPlayers, selectedTorneo]);
+
+  const handleTorneoChange = (torneo: string) => {
+    setSelectedTorneo(torneo);
+    setSelectedDiv('A');
+    setDivisionals([]);
+  };
 
   const handleDivChange = (div: string) => {
     setSelectedDiv(div);
-    fetchPlayers(div);
+    fetchPlayers(div, selectedTorneo);
   };
 
   const handleTabChange = (key: SortKey) => {
@@ -131,10 +144,28 @@ function JugadoresContent() {
         <div>
           <h1 className="text-3xl font-bold">Jugadores</h1>
           <p className="text-gray-400 mt-1">
-            {data.players.length} jugadores — {temporadaToYear(data.temporadaId)} Mayores
+            {data.players.length} jugadores — {temporadaToYear(data.temporadaId)} {selectedTorneo}
             {selectedDiv === 'TODAS' ? ' (todas las divisionales)' : ` Divisional ${data.divisional}`}
           </p>
         </div>
+        <div className="flex flex-col items-start sm:items-end gap-3">
+          {torneos.length > 1 && (
+            <div className="flex items-center gap-2 flex-wrap">
+              {torneos.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => handleTorneoChange(t)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    selectedTorneo === t
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-[#111827] text-gray-300 hover:text-white hover:bg-gray-700 border border-[#1e293b]'
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          )}
         {divisionals.length > 1 && (
           <div className="flex items-center gap-2 flex-wrap">
             {divisionals.map((div) => (
@@ -162,6 +193,7 @@ function JugadoresContent() {
             </button>
           </div>
         )}
+        </div>
       </div>
 
       {/* Search */}
@@ -257,7 +289,7 @@ function JugadoresContent() {
                   <td className="px-4 py-3 text-gray-500">{i + 1}</td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/jugadores/${player.playerId}`}
+                      href={`/jugadores/${player.playerId}${selectedTorneo !== 'Mayores Masculino' ? `?torneo=${encodeURIComponent(selectedTorneo)}` : ''}`}
                       className="text-white hover:text-blue-400 font-medium transition-colors"
                     >
                       {normalizeName(player.nombre)}

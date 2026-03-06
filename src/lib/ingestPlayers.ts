@@ -451,13 +451,45 @@ export async function ingestPlayerData(
   return cache;
 }
 
+const TORNEO_PREFIX_MAP: Record<string, string> = {
+  'Mayores Masculino': '',
+  'Pre Senior': 'ps-',
+  'Sub 20': 'sub20-',
+  'Sub 18': 'sub18-',
+};
+
+const PREFIX_TORNEO_MAP: Record<string, string> = Object.fromEntries(
+  Object.entries(TORNEO_PREFIX_MAP).map(([k, v]) => [v, k]),
+);
+
+function torneoToPrefix(torneo: string): string {
+  return TORNEO_PREFIX_MAP[torneo] ?? torneo.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-';
+}
+
+function parseCacheFileName(
+  fileName: string,
+  temporadaId: number,
+): { torneo: string; divisional: string } | null {
+  const base = `players-t${temporadaId}-`;
+  if (!fileName.startsWith(base) || !fileName.endsWith('.json')) return null;
+  const rest = fileName.slice(base.length, -5);
+  for (const [prefix, torneo] of Object.entries(PREFIX_TORNEO_MAP)) {
+    if (prefix && rest.startsWith(prefix)) {
+      return { torneo, divisional: rest.slice(prefix.length).toUpperCase() };
+    }
+  }
+  return { torneo: 'Mayores Masculino', divisional: rest.toUpperCase() };
+}
+
 export async function loadPlayerCache(
   temporadaId: number,
   divisional: string,
+  torneo = 'Mayores Masculino',
 ): Promise<PlayerCache | null> {
   try {
     const cacheDir = path.join(process.cwd(), '.cache');
-    const fileName = `players-t${temporadaId}-${divisional.toLowerCase()}.json`;
+    const prefix = torneoToPrefix(torneo);
+    const fileName = `players-t${temporadaId}-${prefix}${divisional.toLowerCase()}.json`;
     const filePath = path.join(cacheDir, fileName);
     if (!existsSync(filePath)) return null;
     const raw = await readFile(filePath, 'utf-8');
@@ -467,19 +499,42 @@ export async function loadPlayerCache(
   }
 }
 
-export async function listAvailableDivisionals(
+export async function listAvailableTorneos(
   temporadaId: number,
 ): Promise<string[]> {
   try {
     const cacheDir = path.join(process.cwd(), '.cache');
     if (!existsSync(cacheDir)) return [];
     const { readdirSync } = await import('fs');
-    const prefix = `players-t${temporadaId}-`;
     const files = readdirSync(cacheDir).filter(
-      (f) => f.startsWith(prefix) && f.endsWith('.json'),
+      (f) => f.startsWith(`players-t${temporadaId}-`) && f.endsWith('.json'),
+    );
+    const torneos = new Set<string>();
+    for (const f of files) {
+      const parsed = parseCacheFileName(f, temporadaId);
+      if (parsed) torneos.add(parsed.torneo);
+    }
+    return Array.from(torneos).sort();
+  } catch {
+    return [];
+  }
+}
+
+export async function listAvailableDivisionals(
+  temporadaId: number,
+  torneo = 'Mayores Masculino',
+): Promise<string[]> {
+  try {
+    const cacheDir = path.join(process.cwd(), '.cache');
+    if (!existsSync(cacheDir)) return [];
+    const { readdirSync } = await import('fs');
+    const prefix = torneoToPrefix(torneo);
+    const filePrefix = `players-t${temporadaId}-${prefix}`;
+    const files = readdirSync(cacheDir).filter(
+      (f) => f.startsWith(filePrefix) && f.endsWith('.json'),
     );
     return files
-      .map((f) => f.slice(prefix.length, -5).toUpperCase())
+      .map((f) => f.slice(filePrefix.length, -5).toUpperCase())
       .sort();
   } catch {
     return [];
@@ -488,15 +543,16 @@ export async function listAvailableDivisionals(
 
 export async function loadMergedPlayerCache(
   temporadaId: number,
+  torneo = 'Mayores Masculino',
 ): Promise<PlayerCache | null> {
-  const divisionals = await listAvailableDivisionals(temporadaId);
+  const divisionals = await listAvailableDivisionals(temporadaId, torneo);
   if (divisionals.length === 0) return null;
 
   const allPlayers: PlayerSeason[] = [];
   let latestFetchedAt = '';
 
   for (const div of divisionals) {
-    const cache = await loadPlayerCache(temporadaId, div);
+    const cache = await loadPlayerCache(temporadaId, div, torneo);
     if (!cache) continue;
     allPlayers.push(...cache.players);
     if (cache.fetchedAt > latestFetchedAt) latestFetchedAt = cache.fetchedAt;
@@ -509,7 +565,6 @@ export async function loadMergedPlayerCache(
     if (!existing) {
       byKey.set(key, p);
     } else {
-      // Same player across divisionals — merge appearances
       const mergedPartidos = [...existing.partidos];
       const existingMatchIds = new Set(existing.partidos.map((m) => m.matchId));
       for (const m of p.partidos) {
@@ -549,7 +604,7 @@ export async function loadMergedPlayerCache(
 
   return {
     temporadaId,
-    torneo: 'Mayores Masculino',
+    torneo,
     divisional: 'TODAS',
     fetchedAt: latestFetchedAt,
     players,

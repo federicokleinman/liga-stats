@@ -1,11 +1,10 @@
 /**
  * Standalone script to ingest player data for a specific temporada/divisional.
- * Usage: node scripts/ingest-players.mjs [temporadaId] [divisional]
- * Default: T112, Div A (2025 Mayores Masculino)
+ * Usage: node scripts/ingest-players.mjs [temporadaId] [divisional] [torneo]
+ * Default: T112, Div A, Mayores Masculino
  */
 
 const API_BASE = 'https://ligauniversitaria.org.uy/detallefechas/api.php';
-const TORNEO = 'Mayores Masculino';
 const RATE_LIMIT_MS = 200;
 let lastRequest = 0;
 
@@ -32,8 +31,8 @@ async function fetchJson(params) {
   } catch { return null; }
 }
 
-async function collectMatchIds(temporada, divisional) {
-  const allSeries = await fetchJson({ action: 'cargarSeries', temporada: String(temporada), deporte: 'FÚTBOL', torneo: TORNEO });
+async function collectMatchIds(temporada, divisional, torneo) {
+  const allSeries = await fetchJson({ action: 'cargarSeries', temporada: String(temporada), deporte: 'FÚTBOL', torneo });
   if (!Array.isArray(allSeries)) return [];
 
   const divRegex = new RegExp(`"\\s*${divisional}\\s*"`, 'i');
@@ -43,10 +42,10 @@ async function collectMatchIds(temporada, divisional) {
   const ids = [];
   const seen = new Set();
   for (const serie of matching) {
-    const fechas = await fetchJson({ action: 'cargarFechas', temporada: String(temporada), deporte: 'FÚTBOL', torneo: TORNEO, serie });
+    const fechas = await fetchJson({ action: 'cargarFechas', temporada: String(temporada), deporte: 'FÚTBOL', torneo, serie });
     if (!Array.isArray(fechas)) continue;
     for (const f of fechas) {
-      const ms = await fetchJson({ action: 'cargarPartidos', temporada: String(temporada), deporte: 'FÚTBOL', torneo: TORNEO, serie, fecha: f.fecha });
+      const ms = await fetchJson({ action: 'cargarPartidos', temporada: String(temporada), deporte: 'FÚTBOL', torneo, serie, fecha: f.fecha });
       if (!Array.isArray(ms)) continue;
       for (const m of ms) {
         if (m.ID && !seen.has(m.ID)) { seen.add(m.ID); ids.push(m.ID); }
@@ -185,12 +184,24 @@ function aggregate(allApps) {
   return players;
 }
 
+const TORNEO_PREFIXES = {
+  'Mayores Masculino': '',
+  'Pre Senior': 'ps-',
+  'Sub 20': 'sub20-',
+  'Sub 18': 'sub18-',
+};
+
+function torneoPrefix(torneo) {
+  return TORNEO_PREFIXES[torneo] ?? torneo.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-';
+}
+
 async function main() {
   const temporadaId = parseInt(process.argv[2]) || 112;
   const divisional = (process.argv[3] || 'A').toUpperCase();
-  console.log(`\n=== Ingesting player data: T${temporadaId} (${temporadaId + 1913}) ${TORNEO} Div ${divisional} ===\n`);
+  const torneo = process.argv[4] || 'Mayores Masculino';
+  console.log(`\n=== Ingesting player data: T${temporadaId} (${temporadaId + 1913}) ${torneo} Div ${divisional} ===\n`);
 
-  const matchIds = await collectMatchIds(temporadaId, divisional);
+  const matchIds = await collectMatchIds(temporadaId, divisional, torneo);
   console.log(`\nFound ${matchIds.length} unique matches\n`);
 
   const allApps = [];
@@ -219,13 +230,14 @@ async function main() {
   });
 
   const cache = {
-    temporadaId, torneo: TORNEO, divisional,
+    temporadaId, torneo, divisional,
     fetchedAt: new Date().toISOString(),
     players,
   };
 
   if (!existsSync('.cache')) mkdirSync('.cache', { recursive: true });
-  const fileName = `.cache/players-t${temporadaId}-${divisional.toLowerCase()}.json`;
+  const prefix = torneoPrefix(torneo);
+  const fileName = `.cache/players-t${temporadaId}-${prefix}${divisional.toLowerCase()}.json`;
   writeFileSync(fileName, JSON.stringify(cache));
   console.log(`\nSaved to ${fileName}`);
 }
