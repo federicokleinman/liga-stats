@@ -95,15 +95,32 @@ async function fetchMatchDetail(id) {
 function calcMinutes(playerName, isTitular, cambios) {
   const norm = s => s.trim().toUpperCase();
   const pName = norm(playerName);
-  if (isTitular) {
-    const out = cambios.find(c => norm(c.Jug_Sale) === pName);
-    return out ? Math.max(parseInt(out.minutos) || 0, 1) : 90;
+
+  const events = [];
+  for (const c of cambios) {
+    const min = parseInt(c.minutos) || 0;
+    if (norm(c.Jug_Sale) === pName) events.push({ min, type: 'out' });
+    if (norm(c.Jug_Entra) === pName) events.push({ min, type: 'in' });
   }
-  const inn = cambios.find(c => norm(c.Jug_Entra) === pName);
-  if (!inn) return 0;
-  const enteredAt = parseInt(inn.minutos) || 0;
-  const out2 = cambios.find(c => norm(c.Jug_Sale) === pName && parseInt(c.minutos) > enteredAt);
-  return out2 ? (parseInt(out2.minutos) || 90) - enteredAt : 90 - enteredAt;
+  events.sort((a, b) => a.min - b.min || (a.type === 'out' ? -1 : 1));
+
+  let onField = isTitular;
+  let lastEntry = isTitular ? 0 : 0;
+  let total = 0;
+
+  for (const e of events) {
+    if (e.type === 'out' && onField) {
+      total += e.min - lastEntry;
+      onField = false;
+    } else if (e.type === 'in' && !onField) {
+      lastEntry = e.min;
+      onField = true;
+    }
+  }
+  if (onField) total += 90 - lastEntry;
+
+  if (!isTitular && events.every(e => e.type !== 'in')) return 0;
+  return Math.max(total, isTitular ? 1 : 0);
 }
 
 function processMatch(detail) {

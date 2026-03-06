@@ -216,19 +216,31 @@ function calcMinutes(
   const norm = (s: string) => s.trim().toUpperCase();
   const pName = norm(playerName);
 
-  if (isTitular) {
-    const subOut = cambios.find((c) => norm(c.Jug_Sale) === pName);
-    return subOut ? Math.max(parseInt(subOut.minutos) || 0, 1) : 90;
+  const events: { min: number; type: 'in' | 'out' }[] = [];
+  for (const c of cambios) {
+    const min = parseInt(c.minutos) || 0;
+    if (norm(c.Jug_Sale) === pName) events.push({ min, type: 'out' });
+    if (norm(c.Jug_Entra) === pName) events.push({ min, type: 'in' });
   }
+  events.sort((a, b) => a.min - b.min || (a.type === 'out' ? -1 : 1));
 
-  const subIn = cambios.find((c) => norm(c.Jug_Entra) === pName);
-  if (!subIn) return 0;
-  const enteredAt = parseInt(subIn.minutos) || 0;
+  let onField = isTitular;
+  let lastEntry = isTitular ? 0 : 0;
+  let total = 0;
 
-  const subOut = cambios.find(
-    (c) => norm(c.Jug_Sale) === pName && parseInt(c.minutos) > enteredAt,
-  );
-  return subOut ? (parseInt(subOut.minutos) || 90) - enteredAt : 90 - enteredAt;
+  for (const e of events) {
+    if (e.type === 'out' && onField) {
+      total += e.min - lastEntry;
+      onField = false;
+    } else if (e.type === 'in' && !onField) {
+      lastEntry = e.min;
+      onField = true;
+    }
+  }
+  if (onField) total += 90 - lastEntry;
+
+  if (!isTitular && events.every((e) => e.type !== 'in')) return 0;
+  return Math.max(total, isTitular ? 1 : 0);
 }
 
 // ── Aggregate appearances into PlayerSeason ──────────────────────────────────
