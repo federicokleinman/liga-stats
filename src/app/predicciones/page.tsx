@@ -127,6 +127,10 @@ export default function PrediccionesPage() {
         </p>
         <p className="mt-2 text-xs text-gray-500 bg-[#1e293b] inline-block px-3 py-1 rounded-full">
           Modelo estadístico con fines recreativos — No es una predicción oficial
+          <span className="mx-1.5">·</span>
+          <Link href="/predicciones/metodologia" className="text-blue-400/70 hover:text-blue-300 underline underline-offset-2">
+            Cómo se calcula
+          </Link>
         </p>
       </div>
 
