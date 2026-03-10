@@ -74,7 +74,8 @@ export async function GET(request: NextRequest) {
       });
 
     case 'predictions': {
-      const predictions = computePredictions(data.rows);
+      const div = searchParams.get('divisional') || 'A';
+      const predictions = computePredictions(data.rows, div);
       return NextResponse.json(predictions);
     }
 

@@ -174,7 +174,7 @@ export function useStandings(temporada: number | null, divisional: string | null
   return { rows, loading };
 }
 
-export function usePredictions() {
+export function usePredictions(divisional: string = 'A') {
   const [predictions, setPredictions] = useState<PredictionOutput | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -182,8 +182,10 @@ export function usePredictions() {
   useEffect(() => {
     async function load() {
       setLoading(true);
+      setError(null);
       try {
-        const res = await fetch('/api/data?view=predictions');
+        const params = new URLSearchParams({ view: 'predictions', divisional });
+        const res = await fetch(`/api/data?${params}`);
         if (res.status === 202) {
           setError('Los datos se están cargando. Volvé en unos momentos.');
           return;
@@ -201,7 +203,7 @@ export function usePredictions() {
       }
     }
     load();
-  }, []);
+  }, [divisional]);
 
   return { predictions, loading, error };
 }

@@ -3,12 +3,13 @@ import { StandingRow, PredictionResult, PredictionOutput, temporadaToYear } from
 // ── Config ──────────────────────────────────────────────────────────────
 const DECAY = 0.7;
 const SIMULATIONS = 10_000;
-const DIV_B_PENALTY = 0.6;
+const LOWER_DIV_PENALTY = 0.6; // penalty for teams promoted from below
 const DEFAULT_STD_DEV = 0.8;
 const MIN_SEASONS_FOR_VARIANCE = 3;
 const PROMOTION_SLOTS = 4;
 const RELEGATION_SLOTS = 4;
 const TORNEO = 'Mayores Masculino';
+const DIVS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 // ── Seeded PRNG (mulberry32) for reproducible results ───────────────────
 function mulberry32(seed: number) {
@@ -28,44 +29,83 @@ function normalRandom(rng: () => number): number {
   return Math.sqrt(-2 * Math.log(u1 || 1e-10)) * Math.cos(2 * Math.PI * u2);
 }
 
-// ── Step 1: Determine T(latest+1) Div A roster ─────────────────────────
+// ── Step 1: Determine next season roster for a given divisional ─────────
 interface RosterTeam {
   teamId: string;
   nombre: string;
-  fromDivB: boolean;
+  origin: 'stay' | 'promoted' | 'relegated';
+  sourceDiv: string;
 }
 
-function determineDivARoster(rows: StandingRow[], latestTemp: number): RosterTeam[] {
-  const divA = rows
-    .filter((r) => r.torneo === TORNEO && r.divisional === 'A' && r.temporadaId === latestTemp)
+function determineRoster(rows: StandingRow[], latestTemp: number, targetDiv: string): RosterTeam[] {
+  const divIndex = DIVS.indexOf(targetDiv);
+  const upperDiv = divIndex > 0 ? DIVS[divIndex - 1] : null;
+  const lowerDiv = divIndex < DIVS.length - 1 ? DIVS[divIndex + 1] : null;
+
+  const currentRows = rows
+    .filter((r) => r.torneo === TORNEO && r.divisional === targetDiv && r.temporadaId === latestTemp)
     .sort((a, b) => a.posicion - b.posicion);
 
-  const divB = rows
-    .filter((r) => r.torneo === TORNEO && r.divisional === 'B' && r.temporadaId === latestTemp)
-    .sort((a, b) => a.posicion - b.posicion);
+  // Determine which teams stay (not promoted up, not relegated down)
+  let stayStart = 0;
+  let stayEnd = currentRows.length;
 
-  // Teams that stay (not bottom 4)
-  const stay = divA.slice(0, -RELEGATION_SLOTS).map((r) => ({
+  if (upperDiv) stayStart = PROMOTION_SLOTS; // top N get promoted to upper div
+  if (lowerDiv) stayEnd = currentRows.length - RELEGATION_SLOTS; // bottom N relegated to lower div
+
+  // Guard against small divisionals
+  stayStart = Math.min(stayStart, currentRows.length);
+  stayEnd = Math.max(stayEnd, stayStart);
+
+  const stay = currentRows.slice(stayStart, stayEnd).map((r) => ({
     teamId: r.teamId,
     nombre: r.equipoNombreNormalizado,
-    fromDivB: false,
+    origin: 'stay' as const,
+    sourceDiv: targetDiv,
   }));
 
-  // Teams promoted from Div B (top 4)
-  const promoted = divB.slice(0, PROMOTION_SLOTS).map((r) => ({
-    teamId: r.teamId,
-    nombre: r.equipoNombreNormalizado,
-    fromDivB: true,
-  }));
+  // Teams relegated from upper div (bottom N of upper div come down)
+  const relegated: RosterTeam[] = [];
+  if (upperDiv) {
+    const upperRows = rows
+      .filter((r) => r.torneo === TORNEO && r.divisional === upperDiv && r.temporadaId === latestTemp)
+      .sort((a, b) => a.posicion - b.posicion);
+    const relCount = Math.min(RELEGATION_SLOTS, upperRows.length);
+    relegated.push(
+      ...upperRows.slice(-relCount).map((r) => ({
+        teamId: r.teamId,
+        nombre: r.equipoNombreNormalizado,
+        origin: 'relegated' as const,
+        sourceDiv: upperDiv,
+      })),
+    );
+  }
 
-  return [...stay, ...promoted];
+  // Teams promoted from lower div (top N of lower div come up)
+  const promoted: RosterTeam[] = [];
+  if (lowerDiv) {
+    const lowerRows = rows
+      .filter((r) => r.torneo === TORNEO && r.divisional === lowerDiv && r.temporadaId === latestTemp)
+      .sort((a, b) => a.posicion - b.posicion);
+    const promCount = Math.min(PROMOTION_SLOTS, lowerRows.length);
+    promoted.push(
+      ...lowerRows.slice(0, promCount).map((r) => ({
+        teamId: r.teamId,
+        nombre: r.equipoNombreNormalizado,
+        origin: 'promoted' as const,
+        sourceDiv: lowerDiv,
+      })),
+    );
+  }
+
+  return [...relegated, ...stay, ...promoted];
 }
 
 // ── Step 2: Compute power ratings ───────────────────────────────────────
 interface PowerRating {
   teamId: string;
   nombre: string;
-  fromDivB: boolean;
+  origin: 'stay' | 'promoted' | 'relegated';
   rating: number;
   stdDev: number;
 }
@@ -75,21 +115,13 @@ function computePowerRatings(
   roster: RosterTeam[],
   latestTemp: number,
 ): PowerRating[] {
-  // Get all Div A seasons for z-score normalization
-  const divARows = rows.filter((r) => r.torneo === TORNEO && r.divisional === 'A');
-  const divBRows = rows.filter((r) => r.torneo === TORNEO && r.divisional === 'B');
-
-  // Group by temporada for z-score computation
-  const byTemp = new Map<number, StandingRow[]>();
-  for (const r of divARows) {
-    if (!byTemp.has(r.temporadaId)) byTemp.set(r.temporadaId, []);
-    byTemp.get(r.temporadaId)!.push(r);
-  }
-
-  const byTempB = new Map<number, StandingRow[]>();
-  for (const r of divBRows) {
-    if (!byTempB.has(r.temporadaId)) byTempB.set(r.temporadaId, []);
-    byTempB.get(r.temporadaId)!.push(r);
+  // Group rows by divisional and then by temporada for z-score computation
+  const byDivTemp = new Map<string, Map<number, StandingRow[]>>();
+  for (const r of rows.filter((r) => r.torneo === TORNEO)) {
+    if (!byDivTemp.has(r.divisional)) byDivTemp.set(r.divisional, new Map());
+    const divMap = byDivTemp.get(r.divisional)!;
+    if (!divMap.has(r.temporadaId)) divMap.set(r.temporadaId, []);
+    divMap.get(r.temporadaId)!.push(r);
   }
 
   // Compute z-scores for a set of rows within a season
@@ -128,19 +160,23 @@ function computePowerRatings(
     let weightSum = 0;
     const zValues: number[] = [];
 
-    const source = team.fromDivB ? byTempB : byTemp;
-    const penalty = team.fromDivB ? DIV_B_PENALTY : 1;
+    // Use historical data from the team's source divisional
+    const source = byDivTemp.get(team.sourceDiv);
+    // Promoted teams get a penalty (coming from weaker division)
+    const penalty = team.origin === 'promoted' ? LOWER_DIV_PENALTY : 1;
 
-    source.forEach((seasonRows, tempId) => {
-      const zScores = zScoresForSeason(seasonRows);
-      const z = zScores.get(team.teamId);
-      if (z !== undefined) {
-        const weight = Math.pow(DECAY, latestTemp - tempId) * penalty;
-        weightedSum += z * weight;
-        weightSum += weight;
-        zValues.push(z * penalty);
-      }
-    });
+    if (source) {
+      source.forEach((seasonRows, tempId) => {
+        const zScores = zScoresForSeason(seasonRows);
+        const z = zScores.get(team.teamId);
+        if (z !== undefined) {
+          const weight = Math.pow(DECAY, latestTemp - tempId) * penalty;
+          weightedSum += z * weight;
+          weightSum += weight;
+          zValues.push(z * penalty);
+        }
+      });
+    }
 
     const rating = weightSum > 0 ? weightedSum / weightSum : 0;
 
@@ -155,7 +191,7 @@ function computePowerRatings(
     return {
       teamId: team.teamId,
       nombre: team.nombre,
-      fromDivB: team.fromDivB,
+      origin: team.origin,
       rating,
       stdDev,
     };
@@ -163,23 +199,21 @@ function computePowerRatings(
 }
 
 // ── Step 3: Monte Carlo simulation ──────────────────────────────────────
-function runSimulation(ratings: PowerRating[]): Map<string, { champion: number; top4: number; bottom4: number; posSum: number }> {
+function runSimulation(ratings: PowerRating[], seed: number): Map<string, { champion: number; top4: number; bottom4: number; posSum: number }> {
   const counts = new Map<string, { champion: number; top4: number; bottom4: number; posSum: number }>();
   for (const r of ratings) {
     counts.set(r.teamId, { champion: 0, top4: 0, bottom4: 0, posSum: 0 });
   }
 
-  const rng = mulberry32(2026); // fixed seed for reproducibility
+  const rng = mulberry32(seed);
   const n = ratings.length;
 
   for (let sim = 0; sim < SIMULATIONS; sim++) {
-    // Sample performance for each team
     const sampled = ratings.map((r) => ({
       teamId: r.teamId,
       performance: r.rating + r.stdDev * normalRandom(rng),
     }));
 
-    // Rank by performance (higher = better)
     sampled.sort((a, b) => b.performance - a.performance);
 
     for (let pos = 0; pos < n; pos++) {
@@ -196,20 +230,24 @@ function runSimulation(ratings: PowerRating[]): Map<string, { champion: number; 
 }
 
 // ── Orchestrator ────────────────────────────────────────────────────────
-export function computePredictions(rows: StandingRow[]): PredictionOutput {
+export function computePredictions(rows: StandingRow[], divisional: string = 'A'): PredictionOutput {
   const mayoresRows = rows.filter((r) => r.torneo === TORNEO);
   const latestTemp = Math.max(...mayoresRows.map((r) => r.temporadaId));
 
-  const roster = determineDivARoster(rows, latestTemp);
+  const roster = determineRoster(rows, latestTemp, divisional);
   const ratings = computePowerRatings(rows, roster, latestTemp);
-  const simResults = runSimulation(ratings);
+
+  // Use a different seed per divisional for varied but reproducible results
+  const divIndex = DIVS.indexOf(divisional);
+  const seed = 2026 + divIndex * 1000;
+  const simResults = runSimulation(ratings, seed);
 
   const teams: PredictionResult[] = ratings.map((r) => {
     const sim = simResults.get(r.teamId)!;
     return {
       teamId: r.teamId,
       nombre: r.nombre,
-      fromDivB: r.fromDivB,
+      origin: r.origin,
       powerRating: Math.round(r.rating * 100) / 100,
       pChampion: Math.round((sim.champion / SIMULATIONS) * 1000) / 1000,
       pTop4: Math.round((sim.top4 / SIMULATIONS) * 1000) / 1000,
@@ -218,13 +256,13 @@ export function computePredictions(rows: StandingRow[]): PredictionOutput {
     };
   });
 
-  // Sort by champion probability descending, then avgPosition ascending
   teams.sort((a, b) => b.pChampion - a.pChampion || a.avgPosition - b.avgPosition);
 
   return {
     targetTemporada: latestTemp + 1,
     targetYear: temporadaToYear(latestTemp + 1),
     basedOnTemporada: latestTemp,
+    divisional,
     teams,
   };
 }

@@ -20,7 +20,7 @@ export default function MetodologiaPrediccionesPage() {
           El modelo estima la probabilidad de cada equipo de ser <strong>campeón</strong> (1°),
           quedar en el <strong>Top 4</strong>, o <strong>descender</strong> (últimos 4) en la
           próxima temporada de la Divisional A de Mayores Masculino. Usa datos de las temporadas
-          T90 a T112 (2003–2025) y pondera con mayor fuerza las más recientes.
+          2003 a 2025 y pondera con mayor fuerza las más recientes.
         </p>
       </section>
 
@@ -92,12 +92,12 @@ export default function MetodologiaPrediccionesPage() {
               </tr>
             </thead>
             <tbody className="text-gray-300 font-mono text-xs">
-              <tr><td className="py-1 pr-6">T112 (última)</td><td className="py-1 text-right">1.000</td></tr>
-              <tr><td className="py-1 pr-6">T111</td><td className="py-1 text-right">0.700</td></tr>
-              <tr><td className="py-1 pr-6">T110</td><td className="py-1 text-right">0.490</td></tr>
-              <tr><td className="py-1 pr-6">T109</td><td className="py-1 text-right">0.343</td></tr>
-              <tr><td className="py-1 pr-6">T105</td><td className="py-1 text-right">0.082</td></tr>
-              <tr><td className="py-1 pr-6">T100</td><td className="py-1 text-right">0.014</td></tr>
+              <tr><td className="py-1 pr-6">2025 (última)</td><td className="py-1 text-right">1.000</td></tr>
+              <tr><td className="py-1 pr-6">2024</td><td className="py-1 text-right">0.700</td></tr>
+              <tr><td className="py-1 pr-6">2023</td><td className="py-1 text-right">0.490</td></tr>
+              <tr><td className="py-1 pr-6">2022</td><td className="py-1 text-right">0.343</td></tr>
+              <tr><td className="py-1 pr-6">2018</td><td className="py-1 text-right">0.082</td></tr>
+              <tr><td className="py-1 pr-6">2013</td><td className="py-1 text-right">0.014</td></tr>
             </tbody>
           </table>
         </div>

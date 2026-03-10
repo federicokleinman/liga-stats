@@ -142,7 +142,7 @@ export const ALL_TORNEOS = Object.values(TORNEO_NAMES);
 export interface PredictionResult {
   teamId: string;
   nombre: string;
-  fromDivB: boolean;
+  origin: 'stay' | 'promoted' | 'relegated';
   powerRating: number;
   pChampion: number;
   pTop4: number;
@@ -154,5 +154,6 @@ export interface PredictionOutput {
   targetTemporada: number;
   targetYear: number;
   basedOnTemporada: number;
+  divisional: string;
   teams: PredictionResult[];
 }

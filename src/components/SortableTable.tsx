@@ -59,10 +59,10 @@ export function SortableTable<T extends Record<string, unknown>>({
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-[#1e293b]">
+    <div className="overflow-x-auto rounded-lg border border-liga-border">
       <table className="w-full text-sm">
         <thead>
-          <tr className="bg-[#1e293b]">
+          <tr className="bg-[#142240]">
             {columns.map((col) => (
               <th
                 key={col.key}
@@ -83,7 +83,7 @@ export function SortableTable<T extends Record<string, unknown>>({
           {sorted.map((row, i) => (
             <tr
               key={String(row[keyField] ?? i)}
-              className="border-t border-[#1e293b] hover:bg-[#1a2332] transition-colors"
+              className="border-t border-liga-border hover:bg-liga-blue/10 transition-colors"
             >
               {columns.map((col) => (
                 <td

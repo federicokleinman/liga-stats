@@ -30,12 +30,12 @@ function TeamDetailContent({ teamId }: { teamId: string }) {
     return (
       <div className="space-y-6">
         <div className="flex items-center gap-4">
-          <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
+          <Link href={`/historico/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
         </div>
         <TorneoSelector />
         <div className="text-center py-12">
           <p className="text-gray-400">{error || 'Equipo no encontrado en esta categoría.'}</p>
-          <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:underline mt-4 inline-block">← Volver a Equipos</Link>
+          <Link href={`/historico/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:underline mt-4 inline-block">← Volver a Equipos</Link>
         </div>
       </div>
     );
@@ -60,7 +60,7 @@ function TeamDetailContent({ teamId }: { teamId: string }) {
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-4">
-        <Link href={`/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
+        <Link href={`/historico/equipos?torneo=${encodeURIComponent(torneo)}`} className="text-gray-400 hover:text-white transition-colors">← Equipos</Link>
       </div>
 
       <TorneoSelector />

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePredictions } from '@/lib/hooks';
 import { SortableTable, Column } from '@/components/SortableTable';
@@ -7,6 +8,8 @@ import { PredictionChart } from '@/components/PredictionChart';
 import type { PredictionResult } from '@/lib/types';
 
 type Row = PredictionResult & Record<string, unknown>;
+
+const DIVISIONALS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 function pct(v: number): string {
   const p = Math.round(v * 100);
@@ -31,6 +34,24 @@ function pctColor(v: number, type: 'champion' | 'top4' | 'bottom4'): string {
   return 'text-red-500/70';
 }
 
+function originBadge(origin: PredictionResult['origin']) {
+  if (origin === 'promoted') {
+    return (
+      <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-green-900/50 text-green-400 font-medium">
+        ASCENDIDO
+      </span>
+    );
+  }
+  if (origin === 'relegated') {
+    return (
+      <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-red-900/50 text-red-400 font-medium">
+        DESCENDIDO
+      </span>
+    );
+  }
+  return null;
+}
+
 const columns: Column<Row>[] = [
   {
     key: 'avgPosition',
@@ -50,11 +71,7 @@ const columns: Column<Row>[] = [
     render: (row) => (
       <Link href={`/equipos/${row.teamId}`} className="hover:text-blue-400 transition-colors">
         {row.nombre}
-        {row.fromDivB && (
-          <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-green-900/50 text-green-400 font-medium">
-            ASCENDIDO
-          </span>
-        )}
+        {originBadge(row.origin)}
       </Link>
     ),
   },
@@ -98,32 +115,17 @@ const columns: Column<Row>[] = [
 ];
 
 export default function PrediccionesPage() {
-  const { predictions, loading, error } = usePredictions();
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[40vh]">
-        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return <div className="text-center text-red-400 py-12">{error}</div>;
-  }
-
-  if (!predictions) return null;
-
-  const tableData = predictions.teams as Row[];
+  const [activeDiv, setActiveDiv] = useState('A');
+  const { predictions, loading, error } = usePredictions(activeDiv);
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">
-          Predicciones T{predictions.targetTemporada} ({predictions.targetYear})
+          Predicciones T {predictions?.targetYear ?? '2026'}
         </h1>
         <p className="text-gray-400 mt-1">
-          Division A — Basado en {predictions.basedOnTemporada - 89} temporadas históricas con ponderación exponencial
+          Basado en {predictions ? predictions.basedOnTemporada - 89 : '—'} temporadas históricas con ponderación exponencial
         </p>
         <p className="mt-2 text-xs text-gray-500 bg-[#1e293b] inline-block px-3 py-1 rounded-full">
           Modelo estadístico con fines recreativos — No es una predicción oficial
@@ -134,15 +136,41 @@ export default function PrediccionesPage() {
         </p>
       </div>
 
-      <SortableTable
-        data={tableData}
-        columns={columns}
-        keyField="teamId"
-        defaultSort="avgPosition"
-        defaultDir="asc"
-      />
+      {/* Divisional tabs */}
+      <div className="flex gap-1 overflow-x-auto pb-1">
+        {DIVISIONALS.map((d) => (
+          <button
+            key={d}
+            onClick={() => setActiveDiv(d)}
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+              activeDiv === d
+                ? 'bg-liga-blue text-white'
+                : 'bg-liga-card text-gray-400 hover:text-white hover:bg-liga-border'
+            }`}
+          >
+            Div {d}
+          </button>
+        ))}
+      </div>
 
-      <PredictionChart teams={predictions.teams} />
+      {loading ? (
+        <div className="flex items-center justify-center min-h-[40vh]">
+          <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" />
+        </div>
+      ) : error ? (
+        <div className="text-center text-red-400 py-12">{error}</div>
+      ) : predictions ? (
+        <>
+          <SortableTable
+            data={predictions.teams as Row[]}
+            columns={columns}
+            keyField="teamId"
+            defaultSort="avgPosition"
+            defaultDir="asc"
+          />
+          <PredictionChart teams={predictions.teams} />
+        </>
+      ) : null}
     </div>
   );
 }

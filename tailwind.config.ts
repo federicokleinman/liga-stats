@@ -11,6 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        liga: {
+          blue: '#1459b4',
+          sky: '#72bcde',
+          dark: '#0c1220',
+          card: '#131d2e',
+          border: '#1e3050',
+        },
       },
     },
   },

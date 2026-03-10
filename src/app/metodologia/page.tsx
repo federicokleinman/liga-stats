@@ -22,8 +22,8 @@ export default function MetodologiaPage() {
           eso armamos las tablas de posiciones.
         </p>
         <p className="text-gray-300 leading-relaxed">
-          Actualmente tenemos datos desde la <strong>temporada 90</strong> hasta la{' '}
-          <strong>temporada 112</strong>, que son todas las que tienen información cargada en el
+          Actualmente tenemos datos desde <strong>2003</strong> hasta{' '}
+          <strong>2025</strong>, que son todas las temporadas que tienen información cargada en el
           sitio de la Liga. Solo se consideran partidos de <strong>Fútbol, categoría Mayores Masculino</strong>.
         </p>
       </section>
@@ -66,7 +66,7 @@ export default function MetodologiaPage() {
         <p className="text-gray-300 leading-relaxed">
           Cuando un equipo sale campeón de la misma divisional varias temporadas seguidas, eso
           se cuenta como &quot;racha&quot;. Por ejemplo, si un equipo gana la Divisional A en las
-          temporadas 103, 104 y 105, tiene una racha de 3 campeonatos consecutivos.
+          temporadas 2016, 2017 y 2018, tiene una racha de 3 campeonatos consecutivos.
         </p>
       </section>
 
@@ -96,7 +96,7 @@ export default function MetodologiaPage() {
         <p className="text-gray-300 leading-relaxed">
           Se detecta un ascenso cuando un equipo pasa de una divisional a una mejor (más
           cercana a la A) de una temporada a la siguiente. Por ejemplo, si un equipo jugó en
-          la Divisional C en la temporada 100 y en la Divisional B en la temporada 101, se
+          la Divisional C en 2013 y en la Divisional B en 2014, se
           cuenta como un ascenso.
         </p>
         <p className="text-gray-300 leading-relaxed">

@@ -17,13 +17,13 @@ function TemporadasContent() {
   const { rows, loading: standingsLoading } = useStandings(selectedTemp, selectedDiv, torneo);
 
   if (metricsLoading) {
-    return <div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>;
+    return <div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full" /></div>;
   }
 
   if (progress && progress.status !== 'ready') {
     return (
       <div className="text-center py-12 text-gray-400">
-        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
+        <div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full mx-auto mb-4" />
         <p>Cargando datos... {progress.total > 0 ? `${Math.round((progress.done / progress.total) * 100)}%` : ''}</p>
       </div>
     );
@@ -44,7 +44,7 @@ function TemporadasContent() {
       key: 'equipoNombreNormalizado',
       label: 'Equipo',
       render: (row) => (
-        <Link href={`/equipos/${row.teamId}?torneo=${encodeURIComponent(torneo)}`} className="text-blue-400 hover:text-blue-300 hover:underline">
+        <Link href={`/equipos/${row.teamId}?torneo=${encodeURIComponent(torneo)}`} className="text-liga-sky hover:text-white hover:underline">
           {row.equipoNombreNormalizado}
         </Link>
       ),
@@ -77,7 +77,7 @@ function TemporadasContent() {
           <select
             value={selectedTemp ?? ''}
             onChange={(e) => { setSelectedTemp(e.target.value ? parseInt(e.target.value) : null); setSelectedDiv(null); }}
-            className="w-full px-3 py-2 bg-[#111827] border border-[#1e293b] rounded-lg text-white focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 bg-liga-card border border-liga-border rounded-lg text-white focus:outline-none focus:border-liga-blue"
           >
             <option value="">Seleccionar año...</option>
             {[...temps].sort((a, b) => b - a).map((t) => (
@@ -89,11 +89,11 @@ function TemporadasContent() {
 
       {selectedTemp && (
         <div className="flex gap-2 flex-wrap">
-          <button onClick={() => setSelectedDiv(null)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedDiv === null ? 'bg-blue-600 text-white' : 'bg-[#1e293b] text-gray-300 hover:text-white'}`}>
+          <button onClick={() => setSelectedDiv(null)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedDiv === null ? 'bg-liga-blue text-white' : 'bg-liga-border text-gray-300 hover:text-white'}`}>
             Todas
           </button>
           {divs.map((d) => (
-            <button key={d} onClick={() => setSelectedDiv(d)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedDiv === d ? 'bg-blue-600 text-white' : 'bg-[#1e293b] text-gray-300 hover:text-white'}`}>
+            <button key={d} onClick={() => setSelectedDiv(d)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedDiv === d ? 'bg-liga-blue text-white' : 'bg-liga-border text-gray-300 hover:text-white'}`}>
               {divLabel(d)}
             </button>
           ))}
@@ -103,7 +103,7 @@ function TemporadasContent() {
       {selectedTemp && (
         <div>
           {standingsLoading ? (
-            <div className="flex justify-center py-8"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>
+            <div className="flex justify-center py-8"><div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full" /></div>
           ) : rows.length === 0 ? (
             <p className="text-center text-gray-500 py-8">No hay datos para {temporadaToYear(selectedTemp)}{selectedDiv ? ` — ${divLabel(selectedDiv)}` : ''}.</p>
           ) : selectedDiv ? (
@@ -131,7 +131,7 @@ function TemporadasContent() {
 
 export default function TemporadasPage() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>}>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full" /></div>}>
       <TemporadasContent />
     </Suspense>
   );

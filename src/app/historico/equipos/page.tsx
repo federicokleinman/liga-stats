@@ -17,13 +17,13 @@ function EquiposContent() {
   }, [metrics, search]);
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>;
+    return <div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full" /></div>;
   }
 
   if (progress && progress.status !== 'ready') {
     return (
       <div className="text-center py-12 text-gray-400">
-        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4" />
+        <div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full mx-auto mb-4" />
         <p>Cargando datos... {progress.total > 0 ? `${Math.round((progress.done / progress.total) * 100)}%` : ''}</p>
       </div>
     );
@@ -48,7 +48,7 @@ function EquiposContent() {
           placeholder="Buscar equipo..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-4 py-3 bg-[#111827] border border-[#1e293b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+          className="w-full px-4 py-3 bg-liga-card border border-liga-border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-liga-blue transition-colors"
         />
         <svg className="absolute right-3 top-3.5 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -62,9 +62,9 @@ function EquiposContent() {
             <Link
               key={team.teamId}
               href={`/equipos/${team.teamId}?torneo=${encodeURIComponent(torneo)}`}
-              className="bg-[#111827] border border-[#1e293b] rounded-lg p-4 hover:border-blue-500/40 transition-colors group"
+              className="bg-liga-card border border-liga-border rounded-lg p-4 hover:border-liga-blue/40 transition-colors group"
             >
-              <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">{team.nombre}</h3>
+              <h3 className="font-semibold text-white group-hover:text-liga-sky transition-colors">{team.nombre}</h3>
               {summary && (
                 <div className="flex gap-4 mt-2 text-sm text-gray-400">
                   <span>{summary.temporadas} temp.</span>
@@ -84,7 +84,7 @@ function EquiposContent() {
 
 export default function EquiposPage() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>}>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[40vh]"><div className="animate-spin h-8 w-8 border-4 border-liga-blue border-t-transparent rounded-full" /></div>}>
       <EquiposContent />
     </Suspense>
   );
