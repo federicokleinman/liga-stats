@@ -152,7 +152,8 @@ function JugadoresContent() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {torneos.length > 1 && (
+          {/* Hidden: torneo switching disabled, hardcoded to Mayores */}
+          {false && torneos.length > 1 && (
             <div className="relative">
               <select
                 value={selectedTorneo}

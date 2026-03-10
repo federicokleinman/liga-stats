@@ -1,9 +1,15 @@
 'use client';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ALL_TORNEOS, TORNEO_DISPLAY } from '@/lib/types';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useTorneo } from '@/lib/hooks';
 
 export function TorneoSelector() {
+  // Hidden: torneo selection disabled, hardcoded to Mayores Masculino
+  return null;
+
+  /* Original implementation:
   const [torneo, setTorneo] = useTorneo();
 
   return (
@@ -23,4 +29,5 @@ export function TorneoSelector() {
       ))}
     </div>
   );
+  */
 }

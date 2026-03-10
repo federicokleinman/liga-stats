@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import type { ComputedMetrics, TeamSummary, StandingRow } from './types';
 import { TORNEO_NAMES } from './types';
@@ -13,6 +14,13 @@ export interface IngestProgress {
 }
 
 export function useTorneo(): [string, (t: string) => void] {
+  // TODO: re-enable torneo switching when multi-category UX is redesigned
+  const torneo = TORNEO_NAMES.MAYORES;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const setTorneo = useCallback((_t: string) => {}, []);
+  return [torneo, setTorneo];
+
+  /* Original implementation:
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -26,6 +34,7 @@ export function useTorneo(): [string, (t: string) => void] {
   }, [searchParams, router, pathname]);
 
   return [torneo, setTorneo];
+  */
 }
 
 export function useMetrics(torneo?: string) {

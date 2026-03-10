@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import type { PlayerCache, PlayerSeason, PlayerMatchAppearance } from '@/lib/playerTypes';
 import { temporadaToYear } from '@/lib/types';
+import { computeRecord } from '@/lib/playerKPIs';
 
 function normalizeName(name: string) {
   return name
@@ -27,19 +28,6 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string 
       {sub && <div className="text-xs text-gray-500 mt-0.5">{sub}</div>}
     </div>
   );
-}
-
-function computeRecord(partidos: PlayerMatchAppearance[]) {
-  let w = 0, d = 0, l = 0;
-  for (const p of partidos) {
-    const [gL, gV] = p.resultado.split('-').map(Number);
-    const ge = p.esLocal ? gL : gV;
-    const gr = p.esLocal ? gV : gL;
-    if (ge > gr) w++;
-    else if (ge === gr) d++;
-    else l++;
-  }
-  return { w, d, l };
 }
 
 function computeGoalStreak(partidos: PlayerMatchAppearance[]) {

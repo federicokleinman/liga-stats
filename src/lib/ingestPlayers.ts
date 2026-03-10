@@ -542,8 +542,17 @@ export async function listAvailableDivisionals(
     const { readdirSync } = await import('fs');
     const prefix = torneoToPrefix(torneo);
     const filePrefix = `players-t${temporadaId}-${prefix}`;
+    // All known non-empty prefixes from other torneos, used to exclude
+    // them when prefix is empty (Mayores) since "players-t112-" also
+    // matches "players-t112-ps-a.json", "players-t112-sub20-a.json", etc.
+    const otherPrefixes = prefix === ''
+      ? Object.values(TORNEO_PREFIX_MAP).filter((p) => p !== '')
+      : [];
     const files = readdirSync(cacheDir).filter(
-      (f) => f.startsWith(filePrefix) && f.endsWith('.json'),
+      (f) =>
+        f.startsWith(filePrefix) &&
+        f.endsWith('.json') &&
+        !otherPrefixes.some((op) => f.startsWith(`players-t${temporadaId}-${op}`)),
     );
     return files
       .map((f) => f.slice(filePrefix.length, -5).toUpperCase())
