@@ -11,8 +11,6 @@ const links = [
   { href: '/comparar', label: 'Comparar' },
   { href: '/jugadores', label: 'Jugadores' },
   { href: '/predicciones', label: 'Predicciones' },
-  { href: '/metodologia', label: 'Metodología' },
-  { href: '/contacto', label: 'Contacto' },
 ];
 
 export function Navigation() {

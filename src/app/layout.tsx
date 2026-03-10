@@ -36,9 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </a>
               </p>
               <div className="flex gap-4">
-                <a href="/contacto" className="text-gray-400 hover:text-white transition-colors">Contacto</a>
-                <a href="/contacto" className="text-gray-400 hover:text-white transition-colors">Reportar error</a>
                 <a href="/metodologia" className="text-gray-400 hover:text-white transition-colors">Metodología</a>
+                <a href="/predicciones/metodologia" className="text-gray-400 hover:text-white transition-colors">Cómo se predicen</a>
+                <a href="/contacto" className="text-gray-400 hover:text-white transition-colors">Contacto</a>
               </div>
             </div>
           </div>
