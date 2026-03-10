@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import type { ComputedMetrics, TeamSummary, StandingRow } from './types';
+import type { ComputedMetrics, TeamSummary, StandingRow, PredictionOutput } from './types';
 import { TORNEO_NAMES } from './types';
 
 export interface IngestProgress {
@@ -172,4 +172,36 @@ export function useStandings(temporada: number | null, divisional: string | null
   }, [temporada, divisional, torneo]);
 
   return { rows, loading };
+}
+
+export function usePredictions() {
+  const [predictions, setPredictions] = useState<PredictionOutput | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await fetch('/api/data?view=predictions');
+        if (res.status === 202) {
+          setError('Los datos se están cargando. Volvé en unos momentos.');
+          return;
+        }
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          setError(body.error || `HTTP ${res.status}`);
+          return;
+        }
+        setPredictions(await res.json());
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error');
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  return { predictions, loading, error };
 }

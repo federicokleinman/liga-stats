@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ensureInitialized, getData, getProgress, isReady, getMetricsForTorneo, getAllTorneos } from '@/lib/startup';
 import { TORNEO_NAMES } from '@/lib/types';
+import { computePredictions } from '@/lib/predictions';
 
 const DEFAULT_TORNEO = TORNEO_NAMES.MAYORES;
 
@@ -71,6 +72,11 @@ export async function GET(request: NextRequest) {
         temporadaRange: [data.temporadaMin, data.temporadaMax],
         divisionales: data.divisionales,
       });
+
+    case 'predictions': {
+      const predictions = computePredictions(data.rows);
+      return NextResponse.json(predictions);
+    }
 
     default:
       return NextResponse.json({ error: `Unknown view: ${view}` }, { status: 400 });

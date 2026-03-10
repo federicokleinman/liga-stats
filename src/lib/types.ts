@@ -138,3 +138,21 @@ export const TORNEO_DISPLAY: Record<string, string> = {
 };
 
 export const ALL_TORNEOS = Object.values(TORNEO_NAMES);
+
+export interface PredictionResult {
+  teamId: string;
+  nombre: string;
+  fromDivB: boolean;
+  powerRating: number;
+  pChampion: number;
+  pTop4: number;
+  pBottom4: number;
+  avgPosition: number;
+}
+
+export interface PredictionOutput {
+  targetTemporada: number;
+  targetYear: number;
+  basedOnTemporada: number;
+  teams: PredictionResult[];
+}
