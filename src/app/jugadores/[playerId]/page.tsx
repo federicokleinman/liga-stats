@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import type { PlayerCache, PlayerSeason, PlayerMatchAppearance } from '@/lib/playerTypes';
+import type { PlayerCache, PlayerSeason, PlayerMatchAppearance, PlayerCareer } from '@/lib/playerTypes';
 import { temporadaToYear } from '@/lib/types';
 import { computeRecord } from '@/lib/playerKPIs';
 
@@ -74,6 +74,7 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
   const [year, setYear] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [career, setCareer] = useState<PlayerCareer | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
@@ -90,6 +91,11 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
         } else {
           setPlayer(found);
           setYear(temporadaToYear(data.temporadaId));
+          // Fetch career history in parallel
+          fetch(`/api/players/career?playerId=${encodeURIComponent(playerId)}&torneo=${encodeURIComponent(torneo)}&divisional=A`)
+            .then((r) => r.ok ? r.json() : null)
+            .then((c) => { if (c) setCareer(c); })
+            .catch(() => {});
         }
       })
       .catch((e) => setError(e.message))
@@ -182,6 +188,72 @@ export default function PlayerDetailPage({ params }: { params: { playerId: strin
           sub={`${player.titular} de ${player.pj}`}
         />
       </div>
+
+      {/* Career trajectory */}
+      {career && career.seasons.length > 1 && (
+        <div className="bg-[#1a2234] rounded-2xl border border-[#1e293b] overflow-hidden">
+          <h2 className="px-4 py-3 text-base font-semibold text-gray-200 border-b border-[#1e293b]">
+            Trayectoria — Divisional A
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#1e293b] text-gray-400">
+                  <th className="px-4 py-3 text-center">Año</th>
+                  <th className="px-4 py-3 text-left">Equipo</th>
+                  <th className="px-4 py-3 text-center">PJ</th>
+                  <th className="px-4 py-3 text-center">TIT</th>
+                  <th className="px-4 py-3 text-center">Min</th>
+                  <th className="px-4 py-3 text-center">⚽</th>
+                  <th className="px-4 py-3 text-center">🟨</th>
+                  <th className="px-4 py-3 text-center">🟥</th>
+                </tr>
+              </thead>
+              <tbody>
+                {career.seasons.map((s, i) => {
+                  const prev = i > 0 ? career.seasons[i - 1] : null;
+                  const changed = prev && prev.equipo !== s.equipo;
+                  return (
+                    <tr
+                      key={s.temporadaId}
+                      className={`border-b border-[#1e293b]/50 hover:bg-[#111827]/50 transition-colors ${changed ? 'border-t-2 border-t-blue-500/50' : ''}`}
+                    >
+                      <td className="px-4 py-2.5 text-center text-gray-400">{s.year}</td>
+                      <td className="px-4 py-2.5 text-white">
+                        {normalizeName(s.equipo)}
+                        {changed && <span className="ml-2 text-xs text-blue-400">PASE</span>}
+                      </td>
+                      <td className="px-4 py-2.5 text-center text-gray-300">{s.pj}</td>
+                      <td className="px-4 py-2.5 text-center text-gray-400">{s.titular}</td>
+                      <td className="px-4 py-2.5 text-center text-gray-300">{s.minutos}</td>
+                      <td className="px-4 py-2.5 text-center">
+                        {s.goles > 0 ? <span className="text-green-400 font-semibold">{s.goles}</span> : <span className="text-gray-600">-</span>}
+                      </td>
+                      <td className="px-4 py-2.5 text-center">
+                        {s.amarillas > 0 ? <span className="text-yellow-400">{s.amarillas}</span> : <span className="text-gray-600">-</span>}
+                      </td>
+                      <td className="px-4 py-2.5 text-center">
+                        {s.rojas > 0 ? <span className="text-red-400">{s.rojas}</span> : <span className="text-gray-600">-</span>}
+                      </td>
+                    </tr>
+                  );
+                })}
+                {/* Totals row */}
+                <tr className="border-t border-[#334155] font-semibold">
+                  <td className="px-4 py-2.5 text-center text-gray-400">{career.seasons.length} temp.</td>
+                  <td className="px-4 py-2.5 text-gray-400">{career.equipos.length} equipo{career.equipos.length > 1 ? 's' : ''}</td>
+                  <td className="px-4 py-2.5 text-center text-white">{career.totalPJ}</td>
+                  <td className="px-4 py-2.5 text-center text-gray-400">{career.seasons.reduce((s, e) => s + e.titular, 0)}</td>
+                  <td className="px-4 py-2.5 text-center text-white">{career.totalMinutos}</td>
+                  <td className="px-4 py-2.5 text-center text-green-400">{career.totalGoles}</td>
+                  <td className="px-4 py-2.5 text-center text-yellow-400">{career.seasons.reduce((s, e) => s + e.amarillas, 0)}</td>
+                  <td className="px-4 py-2.5 text-center text-red-400">{career.seasons.reduce((s, e) => s + e.rojas, 0)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Match-by-match table */}
       <div className="bg-[#1a2234] rounded-2xl border border-[#1e293b] overflow-hidden">

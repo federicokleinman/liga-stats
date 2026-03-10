@@ -37,3 +37,30 @@ export interface PlayerCache {
   fetchedAt: string;
   players: PlayerSeason[];
 }
+
+/** A single season entry in a player's career timeline */
+export interface CareerEntry {
+  temporadaId: number;
+  year: number;
+  equipo: string;
+  divisional: string;
+  pj: number;
+  titular: number;
+  suplente: number;
+  minutos: number;
+  goles: number;
+  amarillas: number;
+  rojas: number;
+}
+
+/** Full career data for a player across multiple seasons */
+export interface PlayerCareer {
+  playerId: string;
+  nombre: string;
+  carne: string;
+  seasons: CareerEntry[];
+  totalPJ: number;
+  totalGoles: number;
+  totalMinutos: number;
+  equipos: string[]; // unique teams in chronological order
+}

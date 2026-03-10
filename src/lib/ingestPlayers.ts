@@ -1,4 +1,4 @@
-import type { PlayerMatchAppearance, PlayerSeason, PlayerCache } from './playerTypes';
+import type { PlayerMatchAppearance, PlayerSeason, PlayerCache, CareerEntry, PlayerCareer } from './playerTypes';
 import { slugify } from './normalize';
 import { readFile, writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
@@ -632,3 +632,91 @@ export async function loadMergedPlayerCache(
   };
 }
 
+/**
+ * Load career history for a player across all cached temporadas.
+ * Searches by carne (stable player ID) or playerId fallback.
+ */
+export async function loadPlayerCareer(
+  playerId: string,
+  torneo = 'Mayores Masculino',
+  divisional = 'A',
+): Promise<PlayerCareer | null> {
+  const cacheDir = path.join(process.cwd(), '.cache');
+  if (!existsSync(cacheDir)) return null;
+
+  const { readdirSync } = await import('fs');
+  const prefix = torneoToPrefix(torneo);
+  const divLower = divisional.toLowerCase();
+
+  // Find all temporada cache files for this torneo+divisional
+  const otherPrefixes = prefix === ''
+    ? Object.values(TORNEO_PREFIX_MAP).filter((p) => p !== '')
+    : [];
+  const pattern = new RegExp(`^players-t(\\d+)-${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}${divLower}\\.json$`);
+  const files = readdirSync(cacheDir)
+    .filter((f) => pattern.test(f) && !otherPrefixes.some((op) => f.includes(`-${op}`)))
+    .sort();
+
+  if (files.length === 0) return null;
+
+  // Determine if searching by carne
+  const isCarne = playerId.startsWith('c-');
+  const carneValue = isCarne ? playerId.slice(2) : '';
+
+  let nombre = '';
+  let carne = '';
+  const seasons: CareerEntry[] = [];
+
+  for (const file of files) {
+    const match = file.match(/players-t(\d+)-/);
+    if (!match) continue;
+    const tempId = parseInt(match[1]);
+
+    const cache = await loadPlayerCache(tempId, divisional, torneo);
+    if (!cache) continue;
+
+    const player = cache.players.find((p) =>
+      isCarne ? p.carne === carneValue : p.playerId === playerId,
+    );
+    if (!player) continue;
+
+    if (!nombre) nombre = player.nombre;
+    if (!carne) carne = player.carne;
+
+    seasons.push({
+      temporadaId: tempId,
+      year: tempId + 1913,
+      equipo: player.equipo,
+      divisional,
+      pj: player.pj,
+      titular: player.titular,
+      suplente: player.suplente,
+      minutos: player.minutos,
+      goles: player.goles,
+      amarillas: player.amarillas,
+      rojas: player.rojas,
+    });
+  }
+
+  if (seasons.length === 0) return null;
+
+  // Sort by temporada ascending
+  seasons.sort((a, b) => a.temporadaId - b.temporadaId);
+
+  // Build unique teams in chronological order
+  const equiposOrdered: string[] = [];
+  for (const s of seasons) {
+    if (!equiposOrdered.includes(s.equipo)) equiposOrdered.push(s.equipo);
+  }
+
+  return {
+    playerId,
+    nombre,
+    carne,
+    seasons,
+    totalPJ: seasons.reduce((sum, s) => sum + s.pj, 0),
+    totalGoles: seasons.reduce((sum, s) => sum + s.goles, 0),
+    totalMinutos: seasons.reduce((sum, s) => sum + s.minutos, 0),
+    equipos: equiposOrdered,
+  };
+}
