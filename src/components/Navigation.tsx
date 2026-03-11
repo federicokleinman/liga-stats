@@ -8,6 +8,7 @@ import { WhatsAppShare } from './WhatsAppShare';
 const mainLinks = [
   { href: '/', label: 'Temporada 2025' },
   { href: '/jugadores', label: 'Jugadores' },
+  { href: '/planilla/login', label: 'Planilla Digital' },
 ];
 
 const archivoLinks = [

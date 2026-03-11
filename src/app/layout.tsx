@@ -40,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/predicciones" className="text-liga-sky/50 hover:text-white transition-colors">Predicciones</a>
                 <a href="/comparar" className="text-liga-sky/50 hover:text-white transition-colors">Comparar</a>
                 <a href="/contacto" className="text-liga-sky/50 hover:text-white transition-colors">Contacto</a>
+                <a href="/planilla/login" className="text-liga-sky/50 hover:text-white transition-colors">Planilla Digital</a>
               </div>
             </div>
           </div>
