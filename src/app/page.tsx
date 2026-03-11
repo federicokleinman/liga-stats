@@ -84,11 +84,6 @@ function HomeContent() {
     return { teams, matches, goals };
   }, [allT112Rows]);
 
-  const divALeader = useMemo(() => {
-    if (!standingsRows.length || activeDiv !== 'A') return null;
-    const sorted = [...standingsRows].sort((a, b) => a.posicion - b.posicion);
-    return sorted[0] || null;
-  }, [standingsRows, activeDiv]);
 
   if (progress && progress.status !== 'ready') {
     return (
